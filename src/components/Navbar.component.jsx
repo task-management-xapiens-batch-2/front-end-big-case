@@ -7,7 +7,6 @@ const NavigationBar = () => {
   const [isLogin, setLogin] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("name", "faris")
     if (localStorage.getItem("name") === "faris") {
       setLogin(true);
     }

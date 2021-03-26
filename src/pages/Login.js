@@ -23,7 +23,13 @@ const Login = () => {
           placeholder="Enter your password"
         />
         <div className="mb-3">
-          <ButtonComponent title="Login" />
+          <ButtonComponent
+            title="Login"
+            clicked={() => {
+              localStorage.setItem("name", "faris");
+              history.push('/dashboard')
+            }}
+          />
         </div>
       </form>
     </div>
