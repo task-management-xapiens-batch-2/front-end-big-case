@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import ButtonComponent from "../components/Button.component";
+import InputComponent from "../components/Input.component";
 
 const Login = () => {
   const history = useHistory();
@@ -11,22 +12,16 @@ const Login = () => {
     <div className="container">
       <h1>Login pages</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Email Address</label>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Masukkan email"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Masukkan password"
-          />
-        </div>
+        <InputComponent
+          type="text"
+          label="Email Address"
+          placeholder="Enter your email address"
+        />
+        <InputComponent
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+        />
         <div className="mb-3">
           <ButtonComponent title="Login" />
         </div>
