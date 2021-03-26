@@ -1,8 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router";
+import ButtonComponent from "../components/Button.component";
 import ProjectComponent from "../components/Project.component";
 import SideMenuComponent from "../components/SideMenu.component";
 
 const Dashboard = () => {
+  const history = useHistory();
   return (
     <div className="container-fluid">
       <div className="row">
@@ -16,7 +19,13 @@ const Dashboard = () => {
               <input type="text" placeholder="Search project..." />
             </div>
             <div className="mr-auto" />
-            <button>View All Project</button>
+            <div className="mr-3">
+              <ButtonComponent
+                onClick={() => history.push("/all-project")}
+                className="mr-3"
+                title="View All Project"
+              />
+            </div>
           </div>
           <div className="col">
             <ProjectComponent />

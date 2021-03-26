@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import ButtonComponent from "../components/Button.component";
 
 const Login = () => {
   const history = useHistory();
@@ -27,9 +28,7 @@ const Login = () => {
           />
         </div>
         <div className="mb-3">
-          <button className="btn btn-primary" type="submit">
-            Login
-          </button>
+          <ButtonComponent title="Login" />
         </div>
       </form>
     </div>
