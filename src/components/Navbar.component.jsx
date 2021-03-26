@@ -24,7 +24,7 @@ const NavigationBar = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto" />
         <Button
-          className={`mr-sm-2 rounded-circle ${isLogin ? "d-none" : ""}`}
+          className={`mr-sm-2 rounded-circle ${!isLogin ? "d-none" : ""}`}
           variant="outline-success"
         >
           <BsBell />
