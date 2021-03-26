@@ -15,6 +15,8 @@ const Dashboard = () => {
             <div className="ml-3">
               <input type="text" placeholder="Search project..." />
             </div>
+            <div className="mr-auto" />
+            <button>View All Project</button>
           </div>
           <div className="col">
             <ProjectComponent />

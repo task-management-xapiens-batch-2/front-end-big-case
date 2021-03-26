@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory();
+
+  const handleSubmit = () => {
+    history.push("/dashboard");
+  };
   return (
     <div className="container">
-      <ul>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-      </ul>
       <h1>Login pages</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Email Address</label>
           <input
