@@ -7,8 +7,8 @@ const Login = () => {
     history.push("/dashboard");
   };
   return (
-    <div className="container d-flex justify-content-center flex-column align-items-center">
-      <h1>Login pages</h1>
+    <div className="login-section container d-flex justify-content-center flex-column align-items-center">
+      <h1 className="mb-4">Login pages</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Email Address</label>

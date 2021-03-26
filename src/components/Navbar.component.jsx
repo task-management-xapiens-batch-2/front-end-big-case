@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { BsBell } from "react-icons/bs";
 
 const NavigationBar = () => {
+  const [isLogin, setLogin] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("name", "faris")
+    if (localStorage.getItem("name") === "faris") {
+      setLogin(true);
+    }
+  }, []);
+
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand>
@@ -13,8 +23,11 @@ const NavigationBar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto" />
-        <Button className="mr-sm-2" variant="outline-success">
-          Icon Notif
+        <Button
+          className={`mr-sm-2 rounded-circle ${isLogin ? "d-none" : ""}`}
+          variant="outline-success"
+        >
+          <BsBell />
         </Button>
       </Navbar.Collapse>
     </Navbar>
