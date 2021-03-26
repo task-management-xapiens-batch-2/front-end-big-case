@@ -1,21 +1,15 @@
 import React from "react";
+import ProjectComponent from "../components/Project.component";
+import SideMenuComponent from "../components/SideMenu.component";
 
 const Dashboard = () => {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-4">
-          <div>
-            <ul>
-              <li>Dashboard</li>
-              <li>Add New Project</li>
-            </ul>
-            <ul>
-              <li>Logout</li>
-            </ul>
-          </div>
+        <div className="col-sm-2">
+          <SideMenuComponent />
         </div>
-        <div className="col-sm-8">
+        <div className="col-sm-10">
           <div className="row">
             <h2>Task List</h2>
             <div className="ml-3">
@@ -23,18 +17,11 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col">
-            <div
-              style={{ backgroundColor: "#efefef", height: 100 }}
-              className="row mb-3"
-            />
-            <div
-              style={{ backgroundColor: "#efefef", height: 100 }}
-              className="row mb-3"
-            />
-            <div
-              style={{ backgroundColor: "#efefef", height: 100 }}
-              className="row mb-3"
-            />
+            <ProjectComponent />
+            <ProjectComponent />
+            <ProjectComponent />
+            <ProjectComponent />
+            <ProjectComponent />
           </div>
         </div>
       </div>
