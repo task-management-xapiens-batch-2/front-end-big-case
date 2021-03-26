@@ -1,20 +1,10 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery} from "@apollo/client";
 import React from "react";
 import { useHistory } from "react-router";
 import ProgressBar from "../components/ProgressBar.component";
 import TaskComponent from "../components/Task.component";
+import {GET_TASK_DETAIL} from '../graphql/queries'
 
-const GET_TASK_DETAIL = gql`
-  {
-    findTaskSPV {
-      id
-      assignee
-      title
-      description
-      attachment
-    }
-  }
-`;
 
 const DetailProject = () => {
   const history = useHistory();
