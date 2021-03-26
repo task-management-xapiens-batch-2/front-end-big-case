@@ -7,8 +7,15 @@ import {GET_TASK_DETAIL} from '../graphql/queries'
 
 
 const DetailProject = () => {
-  const history = useHistory();
   const { error, data } = useQuery(GET_TASK_DETAIL);
+
+  const getTaskDetail =  data.findTaskSPV.map(({ id, title, description }) => (
+    <div key={id}>
+      <TaskComponent desc={description} title={title} />
+    </div>
+  ))
+
+  const history = useHistory();
   console.log(data);
   if (error) return <div>Error bos...</div>;
   return (
@@ -23,11 +30,7 @@ const DetailProject = () => {
 
         <ProgressBar />
         <div className="col mt-3 sm-10">
-          {data.findTaskSPV.map(({ id, title, description }) => (
-            <div key={id}>
-              <TaskComponent desc={description} title={title} />
-            </div>
-          ))}
+         {getTaskDetail}
         </div>
       </div>
     </div>
