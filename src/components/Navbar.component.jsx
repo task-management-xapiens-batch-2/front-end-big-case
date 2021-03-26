@@ -3,8 +3,11 @@ import React from "react";
 const NavigationBar = () => {
   return (
     <div>
-      <div className="flex">
-        <h3>Ini navbar</h3>
+      <div className="container-fluid">
+        <div className="flex">
+          <div>xMan</div>
+          <div>Notif</div>
+        </div>
       </div>
     </div>
   );
