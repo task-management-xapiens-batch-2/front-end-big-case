@@ -6,7 +6,10 @@ const Login = () => {
   const history = useHistory();
 
   const handleSubmit = () => {
+    localStorage.setItem("username", "faris");
+    localStorage.setItem("password", "faris");
     history.push("/dashboard");
+    window.location.reload()
   };
   return (
     <div className="login-section container d-flex justify-content-center flex-column align-items-center">
@@ -23,13 +26,7 @@ const Login = () => {
           placeholder="Enter your password"
         />
         <div className="mb-3">
-          <ButtonComponent
-            title="Login"
-            onClick={() => {
-              localStorage.setItem("name", "faris");
-              history.push('/dashboard')
-            }}
-          />
+          <ButtonComponent title="Login" />
         </div>
       </form>
     </div>

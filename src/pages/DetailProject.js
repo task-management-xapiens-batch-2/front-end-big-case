@@ -8,15 +8,10 @@ import { GET_TASK_DETAIL } from "../graphql/queries";
 const DetailProject = () => {
   const { error, data, loading } = useQuery(GET_TASK_DETAIL);
 
-  console.log(error)
-
   const history = useHistory();
 
-  if (loading) return 'Loading...';
-
-  if (error) return 'Error bos...';
-
-  console.log(data);
+  if (loading) return "Loading...";
+  if (error) return "Error bos...";
 
   const getTaskDetail = data.findTaskSPV.map(({ id, title, description }) => {
     return (

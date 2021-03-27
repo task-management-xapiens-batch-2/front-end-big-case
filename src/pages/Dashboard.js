@@ -9,10 +9,8 @@ const Dashboard = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-2">
-          <SideMenuComponent />
-        </div>
-        <div className="col-sm-10">
+          {/* <SideMenuComponent /> */}
+        <div className="col-sm-12">
           <div className="row">
             <h2>Task List</h2>
             <div className="ml-3">
