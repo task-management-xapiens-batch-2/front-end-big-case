@@ -13,7 +13,7 @@ const Login = () => {
   };
   return (
     <div className="login-section container d-flex justify-content-center flex-column align-items-center">
-      <h1 className="mb-4">Login pages</h1>
+      <h1 className="mb-4">Login</h1>
       <form onSubmit={handleSubmit}>
         <InputComponent
           type="text"

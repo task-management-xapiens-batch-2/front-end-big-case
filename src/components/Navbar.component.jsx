@@ -10,6 +10,8 @@ import {
 import Logo from "../img/xapiens-logo.png"
 
 import "react-notifications/lib/notifications.css";
+import toaster from 'toasted-notes' 
+import 'toasted-notes/src/styles.css';
 
 const NavigationBar = () => {
   const [isLogin, setLogin] = useState(false);
@@ -62,11 +64,9 @@ const NavigationBar = () => {
         className={`${isLogin === false ? "d-none" : ""}`}
         sticky="top"
       >
-        <Navbar.Brand>
           <Nav.Link as={Link} to="/">
             <Image src={Logo} fluid/>
           </Nav.Link>
-        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
