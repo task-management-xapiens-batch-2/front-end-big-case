@@ -21,6 +21,8 @@ const DetailProject = () => {
     );
   });
 
+  console.log(data.findTaskSPV.length)
+
   return (
     <div className="container-fluid">
       <h1>Detail Project</h1>
@@ -30,8 +32,7 @@ const DetailProject = () => {
           <div className="mr-3">Tanggal 21 Oktober 1931</div>
           <input type="text" placeholder="Worker name" />
         </div>
-
-        <ProgressBar />
+        <ProgressBar totalTask={data.findTaskSPV.length}/>
         <div className="col mt-3 sm-10">{getTaskDetail}</div>
       </div>
     </div>

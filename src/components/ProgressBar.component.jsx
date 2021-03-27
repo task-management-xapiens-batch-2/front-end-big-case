@@ -1,17 +1,18 @@
 import React from "react";
 
-const ProgressBar = () => {
+const ProgressBar = ({totalTask}) => {
+  const convertToPercent = 100 / totalTask
   return (
     <div class="progress mt-3">
       <div
         class="progress-bar"
         role="progressbar"
-        style={{ width: "75%" }}
-        aria-valuenow="75"
+        style={{ width: `${convertToPercent}%` }}
+        aria-valuenow={convertToPercent}
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        75%
+        {convertToPercent}%
       </div>
     </div>
   );
