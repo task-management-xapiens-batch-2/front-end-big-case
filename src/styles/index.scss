@@ -31,6 +31,19 @@ li {
   }
 }
 
+.project__container {
+  display: flex;
+  flex-direction: column;
+  background-color: #efefef;
+  border-radius: 10px;
+  padding: 10px;
+
+  .project__date {
+    text-align: right;
+  }
+}
+
+
 @media screen and (max-width: 991px) {
 
 }
@@ -40,7 +53,12 @@ li {
 }
 
 @media screen and (max-width: 540px) {
-
+.board_task_title {
+    margin-bottom: 30px;
+    .mr-auto {
+      display: none;
+    }
+  }
 }
 
 @media screen and (max-width: 480px) {

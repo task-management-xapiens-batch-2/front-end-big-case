@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import "../styles/Project.scss";
 
 const ProjectComponent = ({ title, description, start_date, due_date }) => {
   const history = useHistory();

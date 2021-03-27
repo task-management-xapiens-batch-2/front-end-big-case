@@ -17,3 +17,15 @@ export const GET_TASK_DETAIL = gql`
     }
   }
 `;
+
+export const GET_ALL_PROJECT = gql`
+  query {
+    findTaskSPV {
+      id
+      title
+      description
+      start_date
+      due_date
+    }
+  }
+`;

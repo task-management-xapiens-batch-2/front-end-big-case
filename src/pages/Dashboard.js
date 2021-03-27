@@ -1,24 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import {GET_ALL_PROJECT} from '../graphql/queries'
 
 import ProjectComponent from "../components/Project.component";
 // import ButtonComponent from "../components/Button.component";
-import "../styles/Dashboard.scss";
 import JumbotronComponent from "../components/Jumbotron.component";
 import TableComponent from "../components/Table.component";
 
-const GET_ALL_PROJECT = gql`
-  query {
-    findTaskSPV {
-      id
-      title
-      description
-      start_date
-      due_date
-    }
-  }
-`;
 
 const Dashboard = () => {
   const history = useHistory();
