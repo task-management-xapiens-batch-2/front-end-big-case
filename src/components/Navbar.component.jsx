@@ -3,14 +3,42 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { BsBell } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
-import { ToastContainer, toast } from "react-toastify";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+
+import "react-notifications/lib/notifications.css";
 
 const NavigationBar = () => {
   const [isLogin, setLogin] = useState(false);
 
-  const notify = () => toast.dark("Hey 👋, see how easy!");
-
   const history = useHistory();
+
+  const createNotification = (type) => {
+    return () => {
+      switch (type) {
+        case "info":
+          NotificationManager.info("Info message");
+          break;
+        case "success":
+          NotificationManager.success("Success message", "Title here");
+          break;
+        case "warning":
+          NotificationManager.warning(
+            "Warning message",
+            "Close after 3000ms",
+            3000
+          );
+          break;
+        case "error":
+          NotificationManager.error("Error message", "Click me!", 5000, () => {
+            alert("callback");
+          });
+          break;
+      }
+    };
+  };
 
   useEffect(() => {
     if (localStorage.getItem("username") === "faris") {
@@ -37,7 +65,7 @@ const NavigationBar = () => {
           <Button
             className={"mr-sm-2 rounded-circle"}
             variant="outline-primary"
-            onClick={notify}
+            onClick={createNotification('info')}
           >
             <BsBell />
           </Button>
@@ -60,7 +88,7 @@ const NavigationBar = () => {
           </Button>
         </Navbar.Collapse>
       </Navbar>
-      <ToastContainer />
+      <NotificationContainer />
     </>
   );
 };
