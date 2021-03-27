@@ -4,7 +4,7 @@ import InputComponent from "../components/Input.component";
 
 const AddNewProject = () => {
   return (
-    <div className="container-fluid">
+    <div className="add-project-section container-fluid">
       <h1>Add New Project</h1>
       <div>
         <InputComponent
@@ -20,7 +20,7 @@ const AddNewProject = () => {
         <textarea />
       </div>
       <div>
-        <ButtonComponent title="Draft" />
+        <ButtonComponent title="Draft"  />
         <ButtonComponent title="Submit" />
       </div>
     </div>

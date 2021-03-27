@@ -86,7 +86,7 @@ const NavigationBar = () => {
             Add New Project
           </Nav.Link>
           <Button
-            className="d-flex justify-content-center align-items-center"
+            className="d-flex justify-content-center align-items-center ml-2"
             variant="outline-danger"
             onClick={() => {
               localStorage.clear();
