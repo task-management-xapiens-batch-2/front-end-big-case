@@ -1,33 +1,79 @@
-import React from "react";
-import { useHistory } from "react-router";
+import React, { useEffect } from "react";
+import { Redirect } from "react-router";
 import { useQuery } from "@apollo/client";
-import {GET_ALL_PROJECT} from '../graphql/queries'
+import { GET_USER } from "../graphql/queries";
+import DashboardAdmin from "./dashboard/admin/DashboardAdmin";
+import DashboardPlanner from "./dashboard/planner/DashboardPlanner";
+import DashboardSupervisor from "./dashboard/supervisor/DashboardSupervisor";
 
-import ProjectComponent from "../components/Project.component";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../components/Jumbotron.component";
 import TableComponent from "../components/Table.component";
 
-
 const Dashboard = () => {
-  const history = useHistory();
-  const { data, loading } = useQuery(GET_ALL_PROJECT);
-  if (loading) return <div>Loading...</div>;
 
-  const getAllProject = data.findTaskSPV.map(
-    ({ id, title, description, start_date, due_date }) => {
-      return (
-        <div key={id}>
-          <ProjectComponent
-            title={title}
-            description={description}
-            start_date={start_date}
-            due_date={due_date}
-          />
-        </div>
-      );
-    }
-  );
+  // const getUserData = () => data.user.map(
+  //   ({ id, fullname, username, email, role, spv_id }) => {
+  //     switch (role) {
+  //       case "admin":
+  //         <>
+  //         <DashboardAdmin
+  //           id={id}
+  //           fullname={fullname}
+  //           username={username}
+  //           email={email}
+  //           role={role}
+  //           idSpv={spv_id}
+  //         />;
+  //         <Redirect to="/dashboard/admin"/>
+  //         </>
+  //         break;
+  //       case "planner":
+  //         <DashboardPlanner
+  //           id={id}
+  //           fullname={fullname}
+  //           username={username}
+  //           email={email}
+  //           role={role}
+  //           idSpv={spv_id}
+  //         />;
+  //         break;
+  //       case "supervisor":
+  //         <DashboardSupervisor
+  //           id={id}
+  //           fullname={fullname}
+  //           username={username}
+  //           email={email}
+  //           role={role}
+  //           idSpv={spv_id}
+  //         />;
+  //       default:
+  //         return role;
+  //     }
+  //   }
+  // );
+
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
+
+  const { data, loading, error } = useQuery(GET_USER);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error dong hihihi</div>;
+
+ 
+
+
+
+  // TODO: Make 3 different dashboards: Admin Dashboard, Supervisor Dashboard, and Planner Dashboard
+
+  /**
+   * TODOS: Make an auth for 3 different roles: Admin, Supervisor, and Planner.
+   * * Example: If I'm an admin, I'll be redirected to Admin Dashboard
+   */
+
+   
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -46,7 +92,6 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="col">{getAllProject}</div>
         </div>
       </div>
     </div>
