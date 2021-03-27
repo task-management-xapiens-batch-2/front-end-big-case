@@ -7,7 +7,7 @@ export const client = new ApolloClient({
   });
 
 export const GET_TASK_DETAIL = gql`
-  {
+  query {
     findTaskSPV {
       id
       assignee

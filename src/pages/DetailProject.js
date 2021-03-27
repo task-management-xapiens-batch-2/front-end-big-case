@@ -1,23 +1,30 @@
-import { useQuery} from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { useHistory } from "react-router";
 import ProgressBar from "../components/ProgressBar.component";
 import TaskComponent from "../components/Task.component";
-import {GET_TASK_DETAIL} from '../graphql/queries'
-
+import { GET_TASK_DETAIL } from "../graphql/queries";
 
 const DetailProject = () => {
   const { error, data } = useQuery(GET_TASK_DETAIL);
 
-  const getTaskDetail =  data.findTaskSPV.map(({ id, title, description }) => (
-    <div key={id}>
-      <TaskComponent desc={description} title={title} />
-    </div>
-  ))
+  console.log(error)
 
   const history = useHistory();
+
+  if (error) return 'Error bos...';
+
   console.log(data);
-  if (error) return <div>Error bos...</div>;
+
+  const getTaskDetail = data.findTaskSPV.map(({ id, title, description }) => {
+    return (
+      <div key={id}>
+        <TaskComponent desc={description} title={title} />
+      </div>
+    );
+  });
+
+  console.log(data);
   return (
     <div className="container-fluid">
       <h1>Detail Project</h1>
@@ -29,9 +36,7 @@ const DetailProject = () => {
         </div>
 
         <ProgressBar />
-        <div className="col mt-3 sm-10">
-         {getTaskDetail}
-        </div>
+        <div className="col mt-3 sm-10">{getTaskDetail}</div>
       </div>
     </div>
   );
