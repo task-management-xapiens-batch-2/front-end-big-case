@@ -13,6 +13,8 @@ import "react-notifications/lib/notifications.css";
 const NavigationBar = () => {
   const [isLogin, setLogin] = useState(false);
 
+  const [isNotif, setNotif] = useState(false);
+
   const history = useHistory();
 
   const createNotification = (type) => {
@@ -44,6 +46,11 @@ const NavigationBar = () => {
     if (localStorage.getItem("username") === "faris") {
       setLogin(true);
     }
+    setNotif(true);
+    isNotif &&
+      setTimeout(() => {
+        NotificationManager.info("Info message");
+      }, 1000);
   }, []);
 
   return (
@@ -65,7 +72,7 @@ const NavigationBar = () => {
           <Button
             className={"mr-sm-2 rounded-circle"}
             variant="outline-primary"
-            onClick={createNotification('info')}
+            onClick={isNotif && createNotification("info")}
           >
             <BsBell />
           </Button>
@@ -76,7 +83,7 @@ const NavigationBar = () => {
             Add New Project
           </Nav.Link>
           <Button
-            className={"mr-sm-2"}
+            className="d-flex justify-content-center align-items-center"
             variant="outline-danger"
             onClick={() => {
               localStorage.clear();
