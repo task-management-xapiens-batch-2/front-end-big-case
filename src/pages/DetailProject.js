@@ -6,11 +6,13 @@ import TaskComponent from "../components/Task.component";
 import { GET_TASK_DETAIL } from "../graphql/queries";
 
 const DetailProject = () => {
-  const { error, data } = useQuery(GET_TASK_DETAIL);
+  const { error, data, loading } = useQuery(GET_TASK_DETAIL);
 
   console.log(error)
 
   const history = useHistory();
+
+  if (loading) return 'Loading...';
 
   if (error) return 'Error bos...';
 
@@ -24,7 +26,6 @@ const DetailProject = () => {
     );
   });
 
-  console.log(data);
   return (
     <div className="container-fluid">
       <h1>Detail Project</h1>

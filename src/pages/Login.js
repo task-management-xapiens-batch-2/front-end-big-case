@@ -25,7 +25,7 @@ const Login = () => {
         <div className="mb-3">
           <ButtonComponent
             title="Login"
-            clicked={() => {
+            onClick={() => {
               localStorage.setItem("name", "faris");
               history.push('/dashboard')
             }}

@@ -24,7 +24,7 @@ const NavigationBar = () => {
         <Nav className="mr-auto" />
         <Button
           className={`mr-sm-2 rounded-circle ${!isLogin ? "d-none" : ""}`}
-          variant="outline-success"
+          variant="outline-primary"
         >
           <BsBell />
         </Button>
