@@ -1,14 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import "../styles/Project.scss";
 
-const ProjectComponent = () => {
+const ProjectComponent = ({ title, description, start_date, due_date }) => {
   const history = useHistory();
   return (
     <div
       onClick={() => history.push("/detail-project")}
-      style={{ backgroundColor: "#efefef", height: 100 }}
-      className="row mb-3"
-    />
+      className="project__container row mb-3"
+    >
+      <div className="col">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+      <div className="col project__date">
+        <span className="mr-3">Start: {start_date}</span>
+        <span>Deadline: {due_date}</span>
+      </div>
+    </div>
   );
 };
 

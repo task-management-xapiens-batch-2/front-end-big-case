@@ -38,6 +38,8 @@ const NavigationBar = () => {
             alert("callback");
           });
           break;
+        default:
+          break;
       }
     };
   };
