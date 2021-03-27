@@ -1,8 +1,8 @@
 import React from "react";
 
-const ButtonComponent = ({ title }) => {
+const ButtonComponent = ({ title, ...rest }) => {
   return (
-    <button className="btn btn-primary" type="submit">
+    <button {...rest} className="btn btn-primary" type="submit">
       {title}
     </button>
   );
