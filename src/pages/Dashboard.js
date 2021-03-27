@@ -1,37 +1,63 @@
 import React from "react";
 import { useHistory } from "react-router";
-import ButtonComponent from "../components/Button.component";
+import { gql, useQuery } from "@apollo/client";
+
 import ProjectComponent from "../components/Project.component";
-import SideMenuComponent from "../components/SideMenu.component";
+// import ButtonComponent from "../components/Button.component";
+import "../styles/Dashboard.scss";
+import JumbotronComponent from "../components/Jumbotron.component";
+import TableComponent from "../components/Table.component";
+
+const GET_ALL_PROJECT = gql`
+  query {
+    findTaskSPV {
+      id
+      title
+      description
+      start_date
+      due_date
+    }
+  }
+`;
 
 const Dashboard = () => {
   const history = useHistory();
+  const { data, loading } = useQuery(GET_ALL_PROJECT);
+  if (loading) return <div>Loading...</div>;
+
+  const getAllProject = data.findTaskSPV.map(
+    ({ id, title, description, start_date, due_date }) => {
+      return (
+        <div key={id}>
+          <ProjectComponent
+            title={title}
+            description={description}
+            start_date={start_date}
+            due_date={due_date}
+          />
+        </div>
+      );
+    }
+  );
   return (
     <div className="container-fluid">
       <div className="row">
-          {/* <SideMenuComponent /> */}
         <div className="col-sm-12">
-          <div className="row">
-            <h2>Task List</h2>
-            <div className="ml-3">
-              <input type="text" placeholder="Search project..." />
-            </div>
-            <div className="mr-auto" />
-            <div className="mr-3">
-              <ButtonComponent
-                onClick={() => history.push("/all-project")}
-                className="mr-3"
-                title="View All Project"
-              />
+          <JumbotronComponent />
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-sm">
+                <TableComponent title="Initiatives" status="Pending" />
+              </div>
+              <div className="col-sm">
+                <TableComponent title="On Going" status="Not Started" />
+              </div>
+              <div className="col-sm">
+                <TableComponent title="Reject" status="Rejected" />
+              </div>
             </div>
           </div>
-          <div className="col">
-            <ProjectComponent />
-            <ProjectComponent />
-            <ProjectComponent />
-            <ProjectComponent />
-            <ProjectComponent />
-          </div>
+          <div className="col">{getAllProject}</div>
         </div>
       </div>
     </div>

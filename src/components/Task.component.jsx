@@ -6,7 +6,7 @@ const TaskComponent = ({ title, desc }) => {
   return (
     <div
       onClick={() => history.push("/detail-project")}
-      style={{ backgroundColor: "#efefef" }}
+      style={{ backgroundColor: "#efefef", padding: 10, borderRadius: 10 }}
       className="mb-3"
     >
       <h3>{title}</h3>
