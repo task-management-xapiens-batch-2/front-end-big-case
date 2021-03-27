@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Nav, Button } from "react-bootstrap";
+import { Navbar, Nav, Button, Image } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { BsBell } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
@@ -7,6 +7,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import Logo from "../img/xapiens-logo.png"
 
 import "react-notifications/lib/notifications.css";
 
@@ -51,10 +52,10 @@ const NavigationBar = () => {
       setTimeout(() => {
         NotificationManager.info("Info message");
       }, 1000);
-  }, []);
+  }, [isNotif]);
 
   return (
-    <>
+    <div className="navbar-section">
       <Navbar
         bg="light"
         expand="lg"
@@ -63,7 +64,7 @@ const NavigationBar = () => {
       >
         <Navbar.Brand>
           <Nav.Link as={Link} to="/">
-            xMan
+            <Image src={Logo} fluid/>
           </Nav.Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -96,7 +97,7 @@ const NavigationBar = () => {
         </Navbar.Collapse>
       </Navbar>
       <NotificationContainer />
-    </>
+    </div>
   );
 };
 
