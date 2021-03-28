@@ -19,6 +19,18 @@ export const GET_USER = gql`
   }
 `;
 
+export const FIND_USER = gql`
+  query {
+    findUser {
+      id
+      fullname
+      username
+      email
+      role
+    }
+  }
+`;
+
 export const GET_TASK_SUPERVISOR = gql`
   query {
     findTaskSPV {
