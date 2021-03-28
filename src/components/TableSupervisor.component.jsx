@@ -1,12 +1,13 @@
 import React from "react";
+import ButtonComponent from "./Button.component";
 
-const TableSupervisorComponent = ({ title, status }) => {
+const TableSupervisorComponent = ({ id, title, description }) => {
   return (
     <div>
       <h2>{title}</h2>
       <table className="table">
         <thead>
-          <tr>
+          <tr className="text-center">
             <th scope="col">No</th>
             <th scope="col">Project Name</th>
             <th scope="col">Planner Name</th>
@@ -15,22 +16,22 @@ const TableSupervisorComponent = ({ title, status }) => {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
+            <th scope="row" className="text-center">1</th>
             <td>Lorem, ipsum dolor sit amet consectetur adipisicing.</td>
-            <td>5 days</td>
-            <td>{status}</td>
+            <td className="text-center">5 days</td>
+            <td className="text-center"><ButtonComponent title="View Detail"/></td>
           </tr>
           <tr>
-            <th scope="row">2</th>
+            <th scope="row" className="text-center">2</th>
             <td>Lorem ipsum dolor sit amet consectetur.</td>
-            <td>7 days</td>
-            <td>{status}</td>
+            <td className="text-center">7 days</td>
+            <td className="text-center"><ButtonComponent title="View Detail"/></td>
           </tr>
           <tr>
-            <th scope="row">3</th>
+            <th scope="row" className="text-center">3</th>
             <td>Lorem ipsum dolor sit amet.</td>
-            <td>30 days</td>
-            <td>{status}</td>
+            <td className="text-center">30 days</td>
+            <td className="text-center"><ButtonComponent title="View Detail"/></td>
           </tr>
         </tbody>
       </table>

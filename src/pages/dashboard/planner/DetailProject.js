@@ -3,17 +3,19 @@ import React from "react";
 import { useHistory } from "react-router";
 import ProgressBar from "../../../components/ProgressBar.component";
 import TaskComponent from "../../../components/Task.component";
-import { GET_TASK_DETAIL } from "../../../graphql/queries";
+import { GET_TASK_PLANNER } from "../../../graphql/queries";
 
 const DetailProject = () => {
-  const { error, data, loading } = useQuery(GET_TASK_DETAIL);
+  const { error, data, loading } = useQuery(GET_TASK_PLANNER);
 
   const history = useHistory();
 
   if (loading) return "Loading...";
   if (error) return "Error bos...";
 
-  const getTaskDetail = data.findTaskSPV.map(({ id, title, description }) => {
+  console.log(data)
+
+  const getTaskDetail = data.findAllTaskPlanner.map(({ id, title, description }) => {
     return (
       <div key={id}>
         <TaskComponent desc={description} title={title} />
@@ -21,7 +23,7 @@ const DetailProject = () => {
     );
   });
 
-  console.log(data.findTaskSPV.length)
+  // console.log(data.findAllTaskPlanner.length)
 
   return (
     <div className="container-fluid">
@@ -32,7 +34,7 @@ const DetailProject = () => {
           <div className="mr-3">Tanggal 21 Oktober 1931</div>
           <input type="text" placeholder="Worker name" />
         </div>
-        <ProgressBar totalTask={data.findTaskSPV.length}/>
+        <ProgressBar totalTask={data.findAllTaskPlanner.length}/>
         <div className="col mt-3 sm-10">{getTaskDetail}</div>
       </div>
     </div>

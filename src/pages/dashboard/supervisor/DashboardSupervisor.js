@@ -1,25 +1,30 @@
 import { useQuery } from '@apollo/client';
 import React from 'react'
-import { GET_ALL_PROJECT } from "../../../graphql/queries";
+import { GET_TASK_SUPERVISOR } from "../../../graphql/queries";
 import JumbotronComponent from '../../../components/Jumbotron.component'
 import ProjectComponent from '../../../components/Project.component';
 import TableSupervisorComponent from '../../../components/TableSupervisor.component'
 
 const DashboardSupervisor = () => {
-    const { data, loading } = useQuery(GET_ALL_PROJECT);
+    const { data, loading } = useQuery(GET_TASK_SUPERVISOR);
     if (loading) return <div>Loading...</div>;
   
     console.log(data)
   
-    const getAllProject = data.findAllTask.map(
-      ({ id, title, description, start_date, due_date }) => {
+    const getAllTaskSPV = data.findTaskSPV.map(
+      ({ id, project_id, title, description, start_date, due_date, attachment, draft, notes }) => {
         return (
           <div key={id}>
-            <ProjectComponent
+            <TableSupervisorComponent
+                id={id}
+                projectId={project_id}
               title={title}
               description={description}
               start_date={start_date}
               due_date={due_date}
+              attachment={attachment}
+              status={draft}
+              notes={notes}
             />
           </div>
         );
@@ -32,9 +37,8 @@ const DashboardSupervisor = () => {
         <div className="col-sm-12">
           <JumbotronComponent />
           <div className="container-fluid">
-                <TableSupervisorComponent />
+                {getAllTaskSPV}
             </div>
-          <div className="col">{getAllProject}</div>
         </div>
       </div>
     </div>
