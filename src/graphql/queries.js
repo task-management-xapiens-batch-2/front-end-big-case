@@ -19,6 +19,19 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_ALL_USER = gql`
+  query {
+    user {
+      id
+      fullname
+      username
+      email
+      password
+      role
+    }
+  }
+`;
+
 export const FIND_USER = gql`
   query {
     findUser {

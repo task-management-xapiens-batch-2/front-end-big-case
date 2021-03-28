@@ -1,26 +1,37 @@
 import React from "react";
 import { Navbar, Button, Nav } from "react-bootstrap";
+import {Link, useHistory} from 'react-router-dom'
 
 const NavbarAdmin = () => {
+  const history = useHistory()
   return (
     <Navbar bg="light" expand="lg" sticky="top">
-      <Nav>
+      <Nav className="mx-auto">
         <Button
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-center align-items-center m-2"
           variant="outline-primary"
+          onClick={() => {
+            history.push('/dashboard/admin/admin')
+          }}
           active
         >
           Admin
         </Button>
         <Button
-          className="d-flex justify-content-center align-items-center ml-2"
+          className="d-flex justify-content-center align-items-center m-2"
           variant="outline-primary"
+          onClick={() => {
+            history.push('/dashboard/admin/supervisor')
+          }}
         >
           Supervisor
         </Button>
         <Button
-          className="d-flex justify-content-center align-items-center ml-2"
+          className="d-flex justify-content-center align-items-center m-2"
           variant="outline-primary"
+          onClick={() => {
+            history.push('/dashboard/admin/planner')
+          }}
         >
           Planner
         </Button>
