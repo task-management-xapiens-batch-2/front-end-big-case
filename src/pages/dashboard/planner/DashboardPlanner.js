@@ -11,7 +11,7 @@ const DashboardPlanner = () => {
   const { data, loading } = useQuery(GET_ALL_PROJECT);
   if (loading) return <div>Loading...</div>;
 
-  console.log(data)
+  console.log(data);
 
   const getAllProject = data.findAllTask.map(
     ({ id, title, description, start_date, due_date }) => {
@@ -35,13 +35,25 @@ const DashboardPlanner = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm">
-                <TablePlannerComponent title="Initiatives" status="Pending" />
+                <TablePlannerComponent
+                  title="Initiatives"
+                  status="Pending"
+                  search="Search initiative projects..."
+                />
               </div>
               <div className="col-sm">
-                <TablePlannerComponent title="On Going" status="Not Started" />
+                <TablePlannerComponent
+                  title="On Going"
+                  status="Not Started"
+                  search="Search on going projects..."
+                />
               </div>
               <div className="col-sm">
-                <TablePlannerComponent title="Reject" status="Rejected" />
+                <TablePlannerComponent
+                  title="Reject"
+                  status="Rejected"
+                  search="Search rejected projects..."
+                />
               </div>
             </div>
           </div>
