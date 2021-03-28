@@ -5,8 +5,8 @@ import { GET_USER } from "../../graphql/queries";
 
 // import ButtonComponent from "../components/Button.component";
 import DashboardAdmin from '../dashboard/admin/DashboardAdmin'
-import DashboardPlanner from '../dashboard/admin/DashboardPlanner'
-import DashboardSupervisor from '../dashboard/admin/DashboardSupervisor'
+import DashboardPlanner from '../dashboard/planner/DashboardPlanner'
+import DashboardSupervisor from '../dashboard/supervisor/DashboardSupervisor'
 
 const Dashboard = () => {
   const history = useHistory();

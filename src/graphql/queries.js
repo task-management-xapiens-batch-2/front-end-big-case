@@ -33,7 +33,7 @@ export const GET_TASK_DETAIL = gql`
 
 export const GET_ALL_PROJECT = gql`
   query {
-    findTaskSPV {
+    findAllTask {
       id
       title
       description
