@@ -1,41 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonComponent from "./Button.component";
 
-const TableSupervisorComponent = ({ id, title, description }) => {
+const TableSupervisorComponent = ({ items }) => {
+  console.log(items);
+  const [newData, setNewData] = useState([items]);
+
+//   const contentLoop = newData.map(
+//     ({
+//       id,
+//       project_id,
+//       assignee,
+//       title,
+//       description,
+//       start_date,
+//       due_date,
+//       attachment,
+//       draft,
+//     }) => {
+//       return (
+//         <>
+//           <td key={id}>{id}</td>
+//           <td className="text-center">{project_id}</td>
+//           <td className="text-center">{title.substring(0,10)}</td>
+//           <td className="text-center">Sopan santun</td>
+//           <td className="text-center">
+//             <ButtonComponent title="View Detail" />
+//           </td>
+//         </>
+//       );
+//     }
+//   );
   return (
-    <div>
-      <h2>{title}</h2>
+    <>
+      {/* <h2>Project List</h2>
       <table className="table">
         <thead>
           <tr className="text-center">
             <th scope="col">No</th>
+            <th scope="col">Id Project</th>
             <th scope="col">Project Name</th>
             <th scope="col">Planner Name</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row" className="text-center">1</th>
-            <td>Lorem, ipsum dolor sit amet consectetur adipisicing.</td>
-            <td className="text-center">5 days</td>
-            <td className="text-center"><ButtonComponent title="View Detail"/></td>
-          </tr>
-          <tr>
-            <th scope="row" className="text-center">2</th>
-            <td>Lorem ipsum dolor sit amet consectetur.</td>
-            <td className="text-center">7 days</td>
-            <td className="text-center"><ButtonComponent title="View Detail"/></td>
-          </tr>
-          <tr>
-            <th scope="row" className="text-center">3</th>
-            <td>Lorem ipsum dolor sit amet.</td>
-            <td className="text-center">30 days</td>
-            <td className="text-center"><ButtonComponent title="View Detail"/></td>
-          </tr>
+          <tr>{contentLoop}</tr>
         </tbody>
-      </table>
-    </div>
+      </table> */}
+    </>
   );
 };
 

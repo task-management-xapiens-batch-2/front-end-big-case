@@ -31,18 +31,13 @@ export const GET_TASK_SUPERVISOR = gql`
       due_date
       attachment
       status
-      notes {
-        id
-        task_id
-        note
-      }
     }
   }
 `;
 
 export const GET_TASK_PLANNER = gql`
   query {
-    findAllTaskPlanner {
+    findAllTask {
       id
       project_id
       assignee
@@ -53,11 +48,6 @@ export const GET_TASK_PLANNER = gql`
       attachment
       status
       is_read
-      notes {
-        id
-        task_id
-        note
-      }
     }
   }
 `;
