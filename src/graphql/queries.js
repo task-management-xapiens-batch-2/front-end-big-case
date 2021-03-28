@@ -24,8 +24,6 @@ export const FIND_USER = gql`
     findUser {
       id
       fullname
-      username
-      email
       role
     }
   }
