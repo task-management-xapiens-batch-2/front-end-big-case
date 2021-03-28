@@ -15,7 +15,7 @@ const DetailProject = () => {
 
   console.log(data)
 
-  const getTaskDetail = data.findAllTaskPlanner.map(({ id, title, description }) => {
+  const getTaskDetail = data.findAllTask.map(({ id, title, description }) => {
     return (
       <div key={id}>
         <TaskComponent desc={description} title={title} />
@@ -34,7 +34,7 @@ const DetailProject = () => {
           <div className="mr-3">Tanggal 21 Oktober 1931</div>
           <input type="text" placeholder="Worker name" />
         </div>
-        <ProgressBar totalTask={data.findAllTaskPlanner.length}/>
+        <ProgressBar totalTask={data.findAllTask.length}/>
         <div className="col mt-3 sm-10">{getTaskDetail}</div>
       </div>
     </div>
