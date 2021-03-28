@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_PROJECT } from "../../../graphql/queries";
 
 import ProjectComponent from "../../../components/Project.component";
+import WorkerListPlannerComponent from '../../../components/WorkerListPlanner.component'
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
 import TablePlannerComponent from "../../../components/TablePlanner.component";
@@ -58,6 +59,7 @@ const DashboardPlanner = () => {
             </div>
           </div>
           <div className="col">{getAllProject}</div>
+          <WorkerListPlannerComponent />
         </div>
       </div>
     </div>
