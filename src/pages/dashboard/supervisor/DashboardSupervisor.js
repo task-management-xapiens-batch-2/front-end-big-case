@@ -8,7 +8,7 @@ import ButtonComponent from "../../../components/Button.component";
 import { useHistory } from "react-router";
 
 const DashboardSupervisor = () => {
-    const history = useHistory()
+  const history = useHistory();
   const { data, loading } = useQuery(GET_TASK_SUPERVISOR);
   if (loading) return <div>Loading...</div>;
 
@@ -33,9 +33,12 @@ const DashboardSupervisor = () => {
           <td>{title.substring(0, 10)}</td>
           <td>Andy</td>
           <td>
-            <ButtonComponent title="View Detail" onClick={() => {
-                history.push('/dashboard/supervisor/detail-project')
-            }}/>
+            <ButtonComponent
+              title="View Detail"
+              onClick={() => {
+                history.push("/dashboard/supervisor/detail-project");
+              }}
+            />
           </td>
         </tr>
       );
@@ -59,9 +62,7 @@ const DashboardSupervisor = () => {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                {getAllTaskSPV}
-              </tbody>
+              <tbody>{getAllTaskSPV}</tbody>
             </Table>
           </div>
         </div>
