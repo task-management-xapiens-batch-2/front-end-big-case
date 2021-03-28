@@ -1,48 +1,66 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { useState } from "react";
 import { GET_TASK_SUPERVISOR } from "../../../graphql/queries";
 import JumbotronComponent from "../../../components/Jumbotron.component";
 import TableSupervisorComponent from "../../../components/TableSupervisor.component";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import ButtonComponent from "../../../components/Button.component";
 import { useHistory } from "react-router";
+import MaterialTable from "material-table";
 
 const DashboardSupervisor = () => {
   const history = useHistory();
+
+  const [columns, setColumns] = useState([
+    { title: "No", field: "id" },
+    { title: "Project ID", field: "project_id" },
+    { title: "Project Title", field: "title" },
+    { title: "Planner Name", field: "start_date" },
+    {
+      title: "Status",
+      field: "status",
+      lookup: { submit: "Submit", reject: "Reject", return: "Return" },
+    },
+  ]);
+
   const { data, loading } = useQuery(GET_TASK_SUPERVISOR);
+
   if (loading) return <div>Loading...</div>;
 
-  console.log(data);
+  const rawData = data.findTaskSPV.map((o) => ({ ...o }));
 
-  const getAllTaskSPV = data.findTaskSPV.map(
-    ({
-      id,
-      project_id,
-      assignee,
-      title,
-      description,
-      start_date,
-      due_date,
-      attachment,
-      draft,
-    }) => {
-      return (
-        <tr className="text-center">
-          <td>{id}</td>
-          <td>{project_id}</td>
-          <td>{title.substring(0, 10)}</td>
-          <td>Andy</td>
-          <td>
-            <ButtonComponent
-              title="View Detail"
-              onClick={() => {
-                history.push("/dashboard/supervisor/detail-project");
-              }}
-            />
-          </td>
-        </tr>
-      );
-    }
+  const projectList = (
+    <MaterialTable
+      columns={columns}
+      data={rawData}
+      actions={[
+        {
+          onClick: () => history.push("/dashboard/supervisor/detail-project"),
+        },
+      ]}
+      title="Project List"
+      options={{
+        headerStyle: {
+          backgroundColor: "#0074d9",
+          color: "#FFF",
+        },
+        rowStyle: {
+          backgroundColor: "#EEE",
+        },
+        filtering: true,
+      }}
+      components={{
+        Action: (props) => (
+          <Button
+            onClick={(event) => props.action.onClick(event, props.data)}
+            variant="primary"
+            style={{ textTransform: "none" }}
+          >
+            View Detail
+          </Button>
+        ),
+      }}
+    />
   );
 
   return (
@@ -51,19 +69,7 @@ const DashboardSupervisor = () => {
         <div className="col-sm-12">
           <JumbotronComponent />
           <div className="container-fluid">
-            <h2>Project List</h2>
-            <Table responsive>
-              <thead>
-                <tr className="text-center">
-                  <th>No</th>
-                  <th>Project ID</th>
-                  <th>Project Title</th>
-                  <th>Planner Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>{getAllTaskSPV}</tbody>
-            </Table>
+              {projectList}
           </div>
         </div>
       </div>
