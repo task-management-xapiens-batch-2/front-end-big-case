@@ -13,6 +13,7 @@ import DetailProjectSupervisor from "./dashboard/supervisor/DetailProject";
 
 import Login from "./Login";
 import MainTemplateProject from "./dashboard/planner/projectForm/MainTemplateProject";
+import { PrivateRoute } from "../components/ProtectedRoute";
 
 const TaskManagement = () => {
   return (
@@ -22,15 +23,44 @@ const TaskManagement = () => {
         <LayoutComponent>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            {/* <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/admin" component={DashboardAdmin} />
             <Route exact path="/dashboard/planner" component={DashboardPlanner} />
             <Route exact path="/dashboard/supervisor" component={DashboardSupervisor} />
             <Route exact path="/dashboard/planner/detail-project" component={DetailProjectPlanner} />
-            <Route exact path="/dashboard/supervisor/detail-project" component={DetailProjectSupervisor} />
+            <Route exact path="/dashboard/supervisor/detail-project" component={DetailProjectSupervisor} /> */}
 
+            <PrivateRoute
+              exact
+              path="/dashboard"
+              component={DashboardPlanner}
+            />
+            <PrivateRoute
+              exact
+              path="/dashboard/admin"
+              component={DashboardAdmin}
+            />
+            <PrivateRoute
+              exact
+              path="/dashboard/planner"
+              component={Dashboard}
+            />
+            <PrivateRoute
+              exact
+              path="/dashboard/supervisor"
+              component={DashboardSupervisor}
+            />
+            <PrivateRoute
+              exact
+              path="/dashboard/planner/detail-project"
+              component={DetailProjectPlanner}
+            />
             {/* <Route exact path="/new-project" component={AddNewProject} /> */}
-            <Route exact path="/dashboard/planner/new-project" component={MainTemplateProject} />
+            <PrivateRoute
+              exact
+              path="/dashboard/planner/new-project"
+              component={MainTemplateProject}
+            />
           </Switch>
         </LayoutComponent>
         <FooterBar />

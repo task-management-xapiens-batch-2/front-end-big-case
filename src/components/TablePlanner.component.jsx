@@ -1,9 +1,11 @@
 import React from "react";
+import InputComponent from "./Input.component";
 
-const TablePlannerComponent = ({ title, status }) => {
+const TablePlannerComponent = ({ title, status, search }) => {
   return (
     <div>
       <h2>{title}</h2>
+      {search ? <InputComponent placeholder={search} /> : null}
       <table className="table">
         <thead>
           <tr>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const JumbotronComponent = () => {
   return (
@@ -9,9 +10,13 @@ const JumbotronComponent = () => {
         calling extra attention to featured content or information.
       </p>
       <p className="lead">
-        <a className="btn btn-primary btn-lg" href="/" role="button">
+        <Link
+          className="btn btn-primary btn-lg"
+          to="dashboard/planner/new-project"
+          role="button"
+        >
           Add New Project
-        </a>
+        </Link>
       </p>
     </div>
   );
