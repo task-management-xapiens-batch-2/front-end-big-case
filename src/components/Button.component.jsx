@@ -3,12 +3,12 @@ import React from "react";
 
 const ButtonComponent = ({ variant, title, ...rest }) => {
   switch (variant) {
-    case "primary":
+    case "secondary":
       return (
         <Button
           {...rest}
           className="btn btn-primary mx-2"
-          variant="primary"
+          variant="secondary"
           type="submit"
         >
           {title}
