@@ -2,9 +2,22 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { urlConfig } from "../configs/urlConfig";
 
 export const client = new ApolloClient({
-    uri: urlConfig,
-    cache: new InMemoryCache(),
-  });
+  uri: urlConfig,
+  cache: new InMemoryCache(),
+});
+
+export const GET_USER = gql`
+  query {
+    user {
+      id
+      fullname
+      username
+      email
+      role
+      spv_id
+    }
+  }
+`;
 
 export const GET_TASK_DETAIL = gql`
   query {

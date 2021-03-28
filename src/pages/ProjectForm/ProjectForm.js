@@ -1,13 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router";
-import ButtonComponent from "../components/Button.component";
-import InputComponent from "../components/Input.component";
-import OptionSelector from "../components/Selector.component";
+import ButtonComponent from "../../components/Button.component";
+import InputComponent from "../../components/Input.component";
 
-const AddNewProject = () => {
+const ProjectForm = ({ formData, setFormData, navigation }) => {
   const history = useHistory();
+
+  const { projectTitle, projectDesc } = formData;
   return (
-    <div className="add-project-section container-fluid">
+    <div className="container-fluid">
       <h1>Create New Project</h1>
       <div className="container-fluid">
         <div className="row">
@@ -22,27 +23,20 @@ const AddNewProject = () => {
             <div className="container">
               <InputComponent
                 type="text"
+                name="projectTitle"
                 placeholder="Enter your project name"
                 label="Project Name"
+                value={projectTitle}
+                onChange={setFormData}
               />
               <InputComponent
                 type="text"
+                name="projectDesc"
                 placeholder="Enter your project description"
                 label="Project Description"
+                value={projectDesc}
+                onChange={setFormData}
               />
-              <InputComponent
-                type="file"
-                label="Attachment"
-                accept="image/png, image/jpeg"
-              />
-              <div className="row">
-                <div className="col">
-                  <InputComponent type="date" label="Start Date" />
-                </div>
-                <div className="col">
-                  <OptionSelector label="Assign a Worker" />
-                </div>
-              </div>
               <div>
                 <ButtonComponent
                   className="mr-3"
@@ -51,7 +45,7 @@ const AddNewProject = () => {
                 />
                 <ButtonComponent
                   title="Next"
-                  onClick={() => history.push("/dashboard")}
+                  onClick={() => navigation.next()}
                 />
               </div>
             </div>
@@ -62,4 +56,4 @@ const AddNewProject = () => {
   );
 };
 
-export default AddNewProject;
+export default ProjectForm;
