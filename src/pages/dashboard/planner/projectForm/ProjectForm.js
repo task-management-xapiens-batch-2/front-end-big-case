@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
-import ButtonComponent from "../../components/Button.component";
-import InputComponent from "../../components/Input.component";
+import ButtonComponent from "../../../../components/Button.component"
+import InputComponent from "../../../../components/Input.component";
 
 const ProjectForm = ({ formData, setFormData, navigation }) => {
   const history = useHistory();

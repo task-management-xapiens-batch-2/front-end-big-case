@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponent from "../../components/Button.component";
+import ButtonComponent from "../../../../components/Button.component"
 
 const ProjectConfirmation = ({ formData, navigation }) => {
   const { go } = navigation;

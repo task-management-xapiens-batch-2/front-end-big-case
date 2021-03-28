@@ -5,7 +5,7 @@ const TaskComponent = ({ title, desc }) => {
   const history = useHistory();
   return (
     <div
-      onClick={() => history.push("/detail-project")}
+      // onClick={() => history.push("/dashboard/planner/detail-project")}
       style={{ backgroundColor: "#efefef", padding: 10, borderRadius: 10 }}
       className="mb-3"
     >

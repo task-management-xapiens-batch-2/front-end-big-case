@@ -5,7 +5,7 @@ const ProjectComponent = ({ title, description, start_date, due_date }) => {
   const history = useHistory();
   return (
     <div
-      onClick={() => history.push("/detail-project")}
+      onClick={() => history.push("/dashboard/planner/detail-project")}
       className="project__container row mb-3"
     >
       <div className="col">

@@ -1,7 +1,7 @@
 import React from "react";
-import ButtonComponent from "../../components/Button.component";
-import InputComponent from "../../components/Input.component";
-import OptionSelector from "../../components/Selector.component";
+import ButtonComponent from "../../../../components/Button.component";
+import InputComponent from "../../../../components/Input.component";
+import OptionSelector from "../../../../components/Selector.component";
 
 const TaskForm = ({ formData, setFormData, navigation }) => {
   const {
