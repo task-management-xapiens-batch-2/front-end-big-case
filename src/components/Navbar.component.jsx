@@ -82,7 +82,7 @@ const NavigationBar = () => {
           <Nav.Link as={Link} to="/dashboard">
             Dashboard
           </Nav.Link>{" "}
-          <Nav.Link as={Link} to="/new-project">
+          <Nav.Link as={Link} to="/dashboard/planner/new-project">
             Add New Project
           </Nav.Link>
           <Button

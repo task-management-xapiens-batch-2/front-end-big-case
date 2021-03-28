@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router";
-import "../../../../styles/success.scss";
 
 const SuccessInfo = () => {
   const history = useHistory();
