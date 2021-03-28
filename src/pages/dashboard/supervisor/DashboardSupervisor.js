@@ -5,8 +5,10 @@ import JumbotronComponent from "../../../components/Jumbotron.component";
 import TableSupervisorComponent from "../../../components/TableSupervisor.component";
 import { Table } from "react-bootstrap";
 import ButtonComponent from "../../../components/Button.component";
+import { useHistory } from "react-router";
 
 const DashboardSupervisor = () => {
+    const history = useHistory()
   const { data, loading } = useQuery(GET_TASK_SUPERVISOR);
   if (loading) return <div>Loading...</div>;
 
@@ -31,7 +33,9 @@ const DashboardSupervisor = () => {
           <td>{title.substring(0, 10)}</td>
           <td>Andy</td>
           <td>
-            <ButtonComponent title="View Detail" />
+            <ButtonComponent title="View Detail" onClick={() => {
+                history.push('/dashboard/supervisor/detail-project')
+            }}/>
           </td>
         </tr>
       );

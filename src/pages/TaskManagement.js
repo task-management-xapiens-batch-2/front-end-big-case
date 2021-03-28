@@ -8,7 +8,9 @@ import DashboardAdmin from "./dashboard/admin/DashboardAdmin";
 import Dashboard from "./dashboard/Index";
 import DashboardPlanner from "./dashboard/planner/DashboardPlanner";
 import DashboardSupervisor from "./dashboard/supervisor/DashboardSupervisor";
-import DetailProject from "./dashboard/planner/DetailProject";
+import DetailProjectPlanner from "./dashboard/planner/DetailProject";
+import DetailProjectSupervisor from "./dashboard/supervisor/DetailProject";
+
 import Login from "./Login";
 import MainTemplateProject from "./dashboard/planner/projectForm/MainTemplateProject";
 
@@ -24,7 +26,9 @@ const TaskManagement = () => {
             <Route exact path="/dashboard/admin" component={DashboardAdmin} />
             <Route exact path="/dashboard/planner" component={DashboardPlanner} />
             <Route exact path="/dashboard/supervisor" component={DashboardSupervisor} />
-            <Route exact path="/dashboard/planner/detail-project" component={DetailProject} />
+            <Route exact path="/dashboard/planner/detail-project" component={DetailProjectPlanner} />
+            <Route exact path="/dashboard/supervisor/detail-project" component={DetailProjectSupervisor} />
+
             {/* <Route exact path="/new-project" component={AddNewProject} /> */}
             <Route exact path="/dashboard/planner/new-project" component={MainTemplateProject} />
           </Switch>

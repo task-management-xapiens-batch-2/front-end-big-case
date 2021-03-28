@@ -1,54 +1,54 @@
-import React, { useState } from "react";
-import ButtonComponent from "./Button.component";
+// import React, { useState } from "react";
+// import { Table } from "react-bootstrap";
+// import ButtonComponent from "./Button.component";
 
-const TableSupervisorComponent = ({ items }) => {
-  console.log(items);
-  const [newData, setNewData] = useState([items]);
-
-//   const contentLoop = newData.map(
-//     ({
-//       id,
-//       project_id,
-//       assignee,
-//       title,
-//       description,
-//       start_date,
-//       due_date,
-//       attachment,
-//       draft,
-//     }) => {
-//       return (
-//         <>
-//           <td key={id}>{id}</td>
-//           <td className="text-center">{project_id}</td>
-//           <td className="text-center">{title.substring(0,10)}</td>
-//           <td className="text-center">Sopan santun</td>
-//           <td className="text-center">
-//             <ButtonComponent title="View Detail" />
-//           </td>
-//         </>
+// const TableSupervisorComponent = ({ items }) => {
+//     const getAllTaskSPV = items.map(
+//         ({
+//           id,
+//           project_id,
+//           assignee,
+//           title,
+//           description,
+//           start_date,
+//           due_date,
+//           attachment,
+//           draft,
+//         }) => {
+//           return (
+//             <tr className="text-center">
+//               <td>{id}</td>
+//               <td>{project_id}</td>
+//               <td>{title.substring(0, 10)}</td>
+//               <td>Andy</td>
+//               <td>
+//                 <ButtonComponent title="View Detail" onClick={() => {
+//                     history.push('/dashboard/supervisor/detail-project')
+//                 }}/>
+//               </td>
+//             </tr>
+//           );
+//         }
 //       );
-//     }
+//   return (
+//     <>
+//             <h2>Project List</h2>
+//       <Table responsive>
+//     <thead>
+//       <tr className="text-center">
+//         <th>No</th>
+//         <th>Project ID</th>
+//         <th>Project Title</th>
+//         <th>Planner Name</th>
+//         <th>Action</th>
+//       </tr>
+//     </thead>
+//     <tbody>
+//       {getAllTaskSPV}
+//     </tbody>
+//   </Table>
+//     </>
 //   );
-  return (
-    <>
-      {/* <h2>Project List</h2>
-      <table className="table">
-        <thead>
-          <tr className="text-center">
-            <th scope="col">No</th>
-            <th scope="col">Id Project</th>
-            <th scope="col">Project Name</th>
-            <th scope="col">Planner Name</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>{contentLoop}</tr>
-        </tbody>
-      </table> */}
-    </>
-  );
-};
+// };
 
-export default TableSupervisorComponent;
+// export default TableSupervisorComponent;
