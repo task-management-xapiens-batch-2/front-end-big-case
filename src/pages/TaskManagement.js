@@ -8,7 +8,7 @@ import DashboardAdmin from "./dashboard/admin/DashboardAdmin";
 import Dashboard from "./dashboard/Index";
 import DashboardPlanner from "./dashboard/planner/DashboardPlanner";
 import DashboardSupervisor from "./dashboard/supervisor/DashboardSupervisor";
-import DetailProject from "./DetailProject";
+import DetailProject from "./dashboard/planner/DetailProject";
 import Login from "./Login";
 import MainTemplateProject from "./projectForm/MainTemplateProject";
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router";
-import ButtonComponent from "../components/Button.component";
-import InputComponent from "../components/Input.component";
-import OptionSelector from "../components/Selector.component";
+import ButtonComponent from "../../../components/Button.component";
+import InputComponent from "../../../components/Input.component";
+import OptionSelector from "../../../components/Selector.component";
 
 const AddNewProject = () => {
   const history = useHistory();

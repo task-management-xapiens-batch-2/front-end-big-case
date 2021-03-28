@@ -5,7 +5,6 @@ import { GET_USER } from "../../../graphql/queries";
 
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component"
-import TableComponent from "../../../components/Table.component";
 import NavbarAdminComponent from "../../../components/NavbarAdmin.component";
 
 const DashboardAdmin = () => {

@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
 import { useHistory } from "react-router";
-import ProgressBar from "../components/ProgressBar.component";
-import TaskComponent from "../components/Task.component";
-import { GET_TASK_DETAIL } from "../graphql/queries";
+import ProgressBar from "../../../components/ProgressBar.component";
+import TaskComponent from "../../../components/Task.component";
+import { GET_TASK_DETAIL } from "../../../graphql/queries";
 
 const DetailProject = () => {
   const { error, data, loading } = useQuery(GET_TASK_DETAIL);
