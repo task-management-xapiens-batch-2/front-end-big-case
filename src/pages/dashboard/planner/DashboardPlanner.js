@@ -5,7 +5,7 @@ import { GET_ALL_PROJECT } from "../../../graphql/queries";
 import ProjectComponent from "../../../components/Project.component";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
-import TableComponent from "../../../components/Table.component";
+import TablePlannerComponent from "../../../components/TablePlanner.component";
 
 const DashboardPlanner = () => {
   const { data, loading } = useQuery(GET_ALL_PROJECT);
@@ -35,13 +35,13 @@ const DashboardPlanner = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm">
-                <TableComponent title="Initiatives" status="Pending" />
+                <TablePlannerComponent title="Initiatives" status="Pending" />
               </div>
               <div className="col-sm">
-                <TableComponent title="On Going" status="Not Started" />
+                <TablePlannerComponent title="On Going" status="Not Started" />
               </div>
               <div className="col-sm">
-                <TableComponent title="Reject" status="Rejected" />
+                <TablePlannerComponent title="Reject" status="Rejected" />
               </div>
             </div>
           </div>

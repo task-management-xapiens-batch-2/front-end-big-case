@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableComponent = ({ title, status }) => {
+const TablePlannerComponent = ({ title, status }) => {
   return (
     <div>
       <h2>{title}</h2>
@@ -38,4 +38,4 @@ const TableComponent = ({ title, status }) => {
   );
 };
 
-export default TableComponent;
+export default TablePlannerComponent;
