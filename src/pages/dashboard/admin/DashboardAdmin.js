@@ -35,7 +35,11 @@ const DashboardAdmin = () => {
             <JumbotronComponent />
             <NavbarAdminComponent />
             <Switch>
-            <Route exact path="/dashboard/admin/admin" component={DashBoardAdminAdmin} />
+              <Route
+                exact
+                path="/dashboard/admin/admin"
+                component={DashBoardAdminAdmin}
+              />
               <Route
                 exact
                 path="/dashboard/admin/planner"
