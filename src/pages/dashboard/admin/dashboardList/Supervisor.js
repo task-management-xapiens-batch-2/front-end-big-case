@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import JumbotronComponent from "../../../../components/Jumbotron.component";
 import ProjectListSupervisor from "../../../../components/ProjectListSupervisor.component";
 import PlannerListSupervisor from "../../../../components/PlannerListSupervisor.component";
+import NavbarAllUserComponent from "../../../../components/NavbarAllUser.component";
+
 
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
@@ -14,6 +16,7 @@ const Supervisor = () => {
 
   return (
     <div className="container-fluid my-5">
+      <NavbarAllUserComponent />
       <div className="row">
         <div className="col-sm-12">
           <div className="container-fluid">

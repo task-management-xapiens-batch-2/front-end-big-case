@@ -7,6 +7,7 @@ import WorkerListPlannerComponent from '../../../../components/WorkerListPlanner
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../../components/Jumbotron.component";
 import TablePlannerComponent from "../../../../components/TablePlanner.component";
+import NavbarAllUserComponent from "../../../../components/NavbarAllUser.component";
 
 const Planner = () => {
   const { data, loading } = useQuery(GET_ALL_PROJECT);
@@ -30,6 +31,7 @@ const Planner = () => {
   );
   return (
     <div className="container-fluid my-5">
+      <NavbarAllUserComponent />
       <div className="row">
         <div className="col-sm-12">
           <div className="container-fluid">

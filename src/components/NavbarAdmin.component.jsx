@@ -11,7 +11,7 @@ const NavbarAdmin = () => {
           className="d-flex justify-content-center align-items-center m-2"
           variant="outline-primary"
           onClick={() => {
-            history.push('/dashboard/admin/admin')
+            history.push('/dashboard/admin/all-admin')
           }}
           active
         >
@@ -21,7 +21,7 @@ const NavbarAdmin = () => {
           className="d-flex justify-content-center align-items-center m-2"
           variant="outline-primary"
           onClick={() => {
-            history.push('/dashboard/admin/supervisor')
+            history.push('/dashboard/admin/all-supervisor')
           }}
         >
           Supervisor
@@ -30,7 +30,7 @@ const NavbarAdmin = () => {
           className="d-flex justify-content-center align-items-center m-2"
           variant="outline-primary"
           onClick={() => {
-            history.push('/dashboard/admin/planner')
+            history.push('/dashboard/admin/all-planner')
           }}
         >
           Planner

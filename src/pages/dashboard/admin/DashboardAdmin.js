@@ -15,9 +15,13 @@ import { GET_USER } from "../../../graphql/queries";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
 import NavbarAdminComponent from "../../../components/NavbarAdmin.component";
-import DashboardPlanner from "../../dashboard/admin/dashboardList/Planner";
-import DashBoardAdminAdmin from "../../dashboard/admin/dashboardList/Admin";
-import DashboardSupervisor from "../../dashboard/admin/dashboardList/Supervisor";
+import DashboardPlanner from "./dashboardList/Planner";
+import DashboardAllAdmin from "./dashboardList/Admin";
+import DashboardSupervisor from "./dashboardList/Supervisor";
+import DetailProjectPlanner from './dashboardList/planner/DetailProject'
+import DetailProjectSupervisor from './dashboardList/supervisor/DetailProject'
+import AddNewProject from './dashboardList/supervisor/DetailProject'
+
 
 const DashboardAdmin = () => {
   const history = useHistory();
@@ -37,18 +41,33 @@ const DashboardAdmin = () => {
             <Switch>
               <Route
                 exact
-                path="/dashboard/admin/admin"
-                component={DashBoardAdminAdmin}
+                path="/dashboard/admin/all-admin"
+                component={DashboardAllAdmin}
               />
               <Route
                 exact
-                path="/dashboard/admin/planner"
+                path="/dashboard/admin/all-planner"
                 component={DashboardPlanner}
               />
               <Route
                 exact
-                path="/dashboard/admin/supervisor"
+                path="/dashboard/admin/all-supervisor"
                 component={DashboardSupervisor}
+              />
+              <Route
+                exact
+                path="/dashboard/admin/all-planner/detail-project"
+                component={DetailProjectPlanner}
+              />
+              <Route
+                exact
+                path="/dashboard/admin/all-supervisor/detail-project"
+                component={DetailProjectSupervisor}
+              />
+              <Route
+                exact
+                path="/dashboard/admin/all-planner/new-project"
+                component={AddNewProject}
               />
             </Switch>
           </div>
