@@ -5,7 +5,7 @@ import {Link, useHistory} from 'react-router-dom'
 const NavbarAdmin = () => {
   const history = useHistory()
   return (
-    <Navbar bg="light" expand="lg" sticky="top">
+    <Navbar bg="light" expand="lg" sticky="top" style={{zIndex: "1000"}}>
       <Nav className="mx-auto">
         <Button
           className="d-flex justify-content-center align-items-center m-2"

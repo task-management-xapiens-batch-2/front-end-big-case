@@ -58,30 +58,12 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
-          <Button
-            className={"mr-sm-2 rounded-circle"}
-            variant="outline-primary"
-            onClick={isNotif && createNotification("info")}
-          >
-            <BsBell />
-          </Button>
-          <Nav.Link as={Link} to="/dashboard/admin/all-admin">
+          <Nav.Link as={Link} to="/dashboard/admin/">
             Dashboard
-          </Nav.Link>{" "}
+          </Nav.Link>
           <Nav.Link as={Link} to="/dashboard/admin/all-planner/new-project">
             Add New Project
           </Nav.Link>
-          <Button
-            className="d-flex justify-content-center align-items-center ml-3"
-            variant="outline-danger"
-            onClick={() => {
-              localStorage.clear();
-              history.push("/");
-              window.location.reload();
-            }}
-          >
-            <BiLogOut />
-          </Button>
         </Navbar.Collapse>
       </Navbar>
       <NotificationContainer />
