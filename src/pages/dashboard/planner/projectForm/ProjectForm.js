@@ -1,9 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router";
-import ButtonComponent from "../../../../components/Button.component"
+import ButtonComponent from "../../../../components/Button.component";
 import InputComponent from "../../../../components/Input.component";
 
-const ProjectForm = ({ formData, setFormData, navigation }) => {
+const ProjectForm = ({ formData, setFormData, navigation, addTodo }) => {
+  let input;
   const history = useHistory();
 
   const { projectTitle, projectDesc } = formData;
@@ -20,7 +21,15 @@ const ProjectForm = ({ formData, setFormData, navigation }) => {
             </ol>
           </div>
           <div className="col-9">
-            <div className="container">
+            {/* { variables: { type: input.value } } */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addTodo({ variables: { type: input.value } });
+                input.value = "";
+              }}
+              className="container"
+            >
               <InputComponent
                 type="text"
                 name="projectTitle"
@@ -48,7 +57,7 @@ const ProjectForm = ({ formData, setFormData, navigation }) => {
                   onClick={() => navigation.next()}
                 />
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponent from "../../../../components/Button.component"
+import ButtonComponent from "../../../../components/Button.component";
 
 const ProjectConfirmation = ({ formData, navigation }) => {
   const { go } = navigation;
@@ -15,17 +15,18 @@ const ProjectConfirmation = ({ formData, navigation }) => {
     worker,
   } = formData;
 
-  //   Todo Fix: (Misal tanggal start 28 Maret dan end datenya tanggal 4 maka hasilnya minus)
-  let estimation = endDate.slice(8) - startDate.slice(8);
-  //   console.log(endDate);
-  //   console.log(startDate);
+  //  Done Fixing: (Misal tanggal start 28 Maret dan end datenya tanggal 4 maka hasilnya minus)
+  let newstartDate = new Date(startDate.toString());
+  let newEndDate = new Date(endDate.toString());
+
+  let estimation = newEndDate - newstartDate;
+  let difDays = estimation / (1000 * 3600 * 24);
   return (
     <div>
       <h1>Confirm Your Data</h1>
       <div>
         <RenderData
           summary="project"
-          style={{ background: "aliceblue" }}
           go={go}
           details={[
             { "Project Title": projectTitle },
@@ -34,18 +35,19 @@ const ProjectConfirmation = ({ formData, navigation }) => {
         />
         <RenderData
           summary="task"
-          style={{ background: "#efefef" }}
           go={go}
           details={[
             { "Task Title": taskTitle },
             { "Task Description": taskDesc },
-            { "Project Estimation": estimation + " days" },
+            {
+              "Project Estimation": difDays + " days",
+            },
             { Attachment: attachment },
             { Notes: note },
             { Worker: worker },
           ]}
         />
-        <ButtonComponent title="Back" />
+        <ButtonComponent title="Back" onClick={() => go("task")} />
         <ButtonComponent title="Save to Draft" />
         <ButtonComponent title="Confirm" onClick={() => go("success")} />
       </div>
@@ -57,7 +59,6 @@ export default ProjectConfirmation;
 
 export const RenderData = ({ summary, go, details }) => (
   <div>
-    <div>{summary}</div>
     <div>
       {details.map((data, key) => {
         const obKey = Object.keys(data)[0];
@@ -65,8 +66,10 @@ export const RenderData = ({ summary, go, details }) => (
 
         return <div key={key}>{`${obKey}: ${val}`}</div>;
       })}
-      {/* Todo Fix: Jika Pencet Edit maka akan Error. */}
-      <ButtonComponent title="Edit" onClick={() => go(`${summary}`)} />
+      <ButtonComponent
+        title={`Edit ${summary}`}
+        onClick={() => go(`${summary}`)}
+      />
     </div>
   </div>
 );

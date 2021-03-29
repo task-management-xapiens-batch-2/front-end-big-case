@@ -1,7 +1,19 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 import ButtonComponent from "../../../../components/Button.component";
 import InputComponent from "../../../../components/Input.component";
-import OptionSelector from "../../../../components/Selector.component";
+
+const GET_USER_OPTION = gql`
+  {
+    user {
+      id
+      fullname
+    }
+  }
+`;
 
 const TaskForm = ({ formData, setFormData, navigation }) => {
   const {
@@ -10,9 +22,17 @@ const TaskForm = ({ formData, setFormData, navigation }) => {
     attachment,
     startDate,
     endDate,
-    // worker,
+    worker,
     note,
   } = formData;
+
+  const { data, loading, error } = useQuery(GET_USER_OPTION);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
+
+  console.log(data);
+
   return (
     <div className="container-fluid">
       <h1>Create New Project</h1>
@@ -61,6 +81,7 @@ const TaskForm = ({ formData, setFormData, navigation }) => {
                     label="Start Date"
                   />
                 </div>
+                {startDate}
                 <div className="col">
                   <InputComponent
                     type="date"
@@ -71,7 +92,23 @@ const TaskForm = ({ formData, setFormData, navigation }) => {
                   />
                 </div>
                 <div className="col">
-                  <OptionSelector label="Assign a Worker" />
+                  <Autocomplete
+                    freeSolo
+                    id="fullname ops"
+                    disableClearable
+                    size="small"
+                    options={data.user.map((option) => option.fullname)}
+                    onChange={setFormData}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Assign worker"
+                        margin="normal"
+                        variant="outlined"
+                        InputProps={{ ...params.InputProps, type: "search" }}
+                      />
+                    )}
+                  />
                 </div>
               </div>
               <InputComponent
