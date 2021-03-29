@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MaterialTable from "material-table";
-import { useQuery } from "@apollo/client";
-import { GET_USER} from "../graphql/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { CREATE_USER, DELETE_USER, GET_ALL_USER, UPDATE_USER } from "../graphql/queries";
 
 const WorkerListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -13,18 +13,31 @@ const WorkerListSupervisor = () => {
     { title: "Role", field: "role", lookup: {worker: "Worker"} },
   ]);
 
-  const { data, loading } = useQuery(GET_USER);
+  const [newData, setNewData] = useState([]);
 
-  console.log(data)
+  console.log(newData);
 
-  if (loading) return <div>Loading...</div>;
+  const { loading, refetch } = useQuery(GET_ALL_USER, {
+    onCompleted: ({ user }) => {
+      console.log(user);
+      return setNewData(user);
+    },
+  });
 
-  const plannerData = data.user.map((o) => ({ ...o }));
+  const [createUser] = useMutation(CREATE_USER);
+
+  const [updateUser] = useMutation(UPDATE_USER);
+
+  const [deleteUser] = useMutation(DELETE_USER);
+
+  if (loading) return <h1>Loading...</h1>;
+
+  const rawData = newData.map((o) => ({ ...o }));
 
   const plannerList = (
     <MaterialTable
       columns={columns}
-      data={plannerData}
+      data={rawData}
       title="Worker List"
       options={{
         headerStyle: {
@@ -39,18 +52,31 @@ const WorkerListSupervisor = () => {
         onRowAdd: (newNewData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
+              setNewData([...newData, newNewData]);
+              console.log(newNewData);
+              createUser({ variables: { input: newNewData } });
               resolve();
             }, 200);
           }),
         onRowUpdate: (newNewData, oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
+              const dataUpdate = [...newData];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newNewData;
+              setNewData([...dataUpdate]);
+              updateUser({ variables: { input: dataUpdate } });
               resolve();
             }, 200);
           }),
         onRowDelete: (oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
+              const dataDelete = [...rawData];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setNewData([...dataDelete]);
+              deleteUser({ variables: { input: dataDelete } });
               resolve();
             }, 200);
           }),
