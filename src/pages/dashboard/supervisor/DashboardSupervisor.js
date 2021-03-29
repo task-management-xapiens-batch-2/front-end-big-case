@@ -5,7 +5,7 @@ import JumbotronComponent from "../../../components/Jumbotron.component";
 import ProjectListSupervisor from "../../../components/ProjectListSupervisor.component";
 import PlannerListSupervisor from "../../../components/PlannerListSupervisor.component";
 
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Modal } from "react-bootstrap";
 import { useHistory } from "react-router";
 import WorkerListSupervisor from "../../../components/WorkerListSupervisor.component";
 import NavigationBar from "../../../components/NavbarSupervisor.component";
@@ -14,7 +14,8 @@ import { Button } from "react-bootstrap";
 import MaterialTable from "material-table";
 import DetailProject from "./DetailProject";
 import { Link } from "react-router-dom";
-import Modal from "../../../components/Modal.component";
+import ButtonComponent from "../../../components/Button.component";
+import TaskComponent from "../../../components/Task.component";
 
 const DashboardSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -29,7 +30,12 @@ const DashboardSupervisor = () => {
     },
   ]);
 
-  const [newData, setNewData] = useState({})
+  const [newData, setNewData] = useState({});
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const history = useHistory();
 
@@ -41,11 +47,36 @@ const DashboardSupervisor = () => {
 
   console.log(spvData);
 
-  console.log(newData)
+  console.log(newData);
 
   return (
     <div className="container-fluid">
       {/* <Modal dataModal={newData}/> */}
+      <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          // key={id}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>You must provide a note when returning the task back to the planner</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <p className="font-weight-bold">Notes for planner: </p>
+              <textarea type="text" style={{width: "100%", resize: "none", height: "200px"}} />
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <ButtonComponent
+              title="Close"
+              variant="secondary"
+              onClick={handleClose}
+            />
+            <ButtonComponent title="Submit" />
+          </Modal.Footer>
+        </Modal>
       <NavigationBar />
       <div className="row">
         <div className="col-sm-12">
@@ -54,17 +85,39 @@ const DashboardSupervisor = () => {
             <MaterialTable
               columns={columns}
               data={spvData}
-              actions={[
-                {
-                  // onClick: () => history.push("/dashboard/supervisor/detail-project"),
-                  onClick: (event, rowData) => {
-                    console.log(rowData);
-                    // <DetailProject detailData={newData}/>
-                    setNewData(rowData)
-                    // history.push("/dashboard/supervisor/detail-project")
-                  },
-                },
-              ]}
+              detailPanel={({ id, title, description }) => {
+                return (
+                  <div className="detail-project-spv-section container-fluid">
+                    {/* {modalNotes} */}
+                    <div className="container-fluid mt-3">
+                      <div className="row">
+                        <div className="d-flex justify-content-center align-items-center mr-3">
+                          Tanggal 21 Oktober 1931
+                        </div>
+                        <p className="worker-name mr-2 p-2">Worker Name</p>
+                        <p className="worker-name ml-2 p-2">Planner Name</p>
+                      </div>
+                      {/* <ProgressBar totalTask={data.findTaskSPV.length} /> */}
+                      <div className="col mt-3 sm-10">
+                        {" "}
+                        <div key={id}>
+                          <TaskComponent desc={description} title={title} />
+                          <div className="d-flex justify-content-end align-items-end my-3">
+                            <ButtonComponent
+                              title="Return"
+                              variant="warning"
+                              onClick={handleShow}
+                            />
+                            <ButtonComponent title="Reject" variant="danger" />
+                            <ButtonComponent title="Approve" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }}
+              onRowClick={(event, rowData, togglePanel) => togglePanel()}
               title="Project List"
               options={{
                 headerStyle: {
@@ -75,17 +128,6 @@ const DashboardSupervisor = () => {
                   backgroundColor: "#EEE",
                 },
                 filtering: true,
-              }}
-              components={{
-                Action: (props) => (
-                  <Button
-                    onClick={(event) => props.action.onClick(event, props.data)}
-                    variant="primary"
-                    style={{ textTransform: "none" }}
-                  >
-                    View Detail
-                  </Button>
-                ),
               }}
             />
             <Row className="my-5">
