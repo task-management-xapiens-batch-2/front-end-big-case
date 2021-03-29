@@ -19,7 +19,7 @@ const WorkerListSupervisor = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  const plannerData = data.user.map((o) => ({ ...o }));
+  const plannerData = data.findAllUserAdmin.map((o) => ({ ...o }));
 
   const plannerList = (
     <MaterialTable

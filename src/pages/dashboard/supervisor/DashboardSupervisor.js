@@ -17,18 +17,23 @@ import { Link } from "react-router-dom";
 import ButtonComponent from "../../../components/Button.component";
 import TaskComponent from "../../../components/Task.component";
 
+
 const DashboardSupervisor = () => {
+  const moment = require('moment');
+
   const [columns, setColumns] = useState([
     { title: "No", field: "id" },
     { title: "Project ID", field: "project_id" },
     { title: "Project Title", field: "title" },
-    { title: "Planner Name", field: "start_date" },
+    { title: "Planner Name", field: "assignee" },
     {
       title: "Status",
       field: "status",
-      lookup: { submit: "Submit", reject: "Reject", return: "Return" },
+      lookup: { Submit: "Submit", Reject: "Reject", Return: "Return" },
     },
   ]);
+
+  //TODO: Ingatkan backend kalau status jangan huruf capitalize
 
   const [newData, setNewData] = useState({});
 
@@ -43,7 +48,7 @@ const DashboardSupervisor = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  const spvData = data.findTaskSPV.map((o) => ({ ...o }));
+  const spvData = data.findAllTaskSpv.map((o) => ({ ...o }));
 
   console.log(spvData);
 
@@ -85,14 +90,17 @@ const DashboardSupervisor = () => {
             <MaterialTable
               columns={columns}
               data={spvData}
-              detailPanel={({ id, title, description }) => {
+              detailPanel={({ id, title, description, start_date, due_date, note }) => {
                 return (
                   <div className="detail-project-spv-section container-fluid">
                     {/* {modalNotes} */}
                     <div className="container-fluid mt-3">
                       <div className="row">
                         <div className="d-flex justify-content-center align-items-center mr-3">
-                          Tanggal 21 Oktober 1931
+                        <p>Start from: {moment.unix((start_date)).format("DD/MM/YYYY")} </p>
+                        </div>
+                        <div className="d-flex justify-content-center align-items-center mr-3">
+                        <p>Due Date: {moment.unix((due_date)).format("DD/MM/YYYY")} </p>
                         </div>
                         <p className="worker-name mr-2 p-2">Worker Name</p>
                         <p className="worker-name ml-2 p-2">Planner Name</p>

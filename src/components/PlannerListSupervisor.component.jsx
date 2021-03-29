@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_ALL_USER, CREATE_USER, UPDATE_USER, DELETE_USER } from "../graphql/queries";
+import { GET_ALL_USER, CREATE_USER, UPDATE_USER, DELETE_USER, GET_USER_FROM_ADMIN } from "../graphql/queries";
 
 const PlannerListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -17,10 +17,10 @@ const PlannerListSupervisor = () => {
 
   console.log(newData);
 
-  const { loading, refetch } = useQuery(GET_ALL_USER, {
-    onCompleted: ({ user }) => {
-      console.log(user);
-      return setNewData(user);
+  const { loading, refetch } = useQuery(GET_USER_FROM_ADMIN, {
+    onCompleted: ({ findAllUserAdmin }) => {
+      console.log(findAllUserAdmin);
+      return setNewData(findAllUserAdmin);
     },
   });
 
