@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_ALL_USER, CREATE_USER, UPDATE_USER, DELETE_USER, GET_USER_FROM_ADMIN } from "../graphql/queries";
+import {
+  CREATE_USER,
+  UPDATE_USER,
+  DELETE_USER,
+  GET_USER_FROM_ADMIN,
+} from "../graphql/queries";
 
 const PlannerListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -54,33 +59,32 @@ const PlannerListSupervisor = () => {
         onRowAdd: (newNewData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              setNewData([...newData, newNewData]);
-              console.log(newNewData);
-              createUser({ variables: { input: newNewData } });
-              // refetch()
+              createUser({
+                variables: {
+                  ...newNewData,
+                },
+              });
+              refetch();
               resolve();
             }, 200);
           }),
+        // TODOS: Update belum bisa. Coba tanya backend
         onRowUpdate: (newNewData, oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
               const dataUpdate = [...newData];
               const index = oldData.tableData.id;
               dataUpdate[index] = newNewData;
-              setNewData([...dataUpdate]);
-              updateUser({ variables: { input: dataUpdate } });
-              // refetch()
+              updateUser({ variables: { ...newNewData } });
+              refetch();
               resolve();
             }, 200);
           }),
         onRowDelete: (oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              const dataDelete = [...rawData];
-              const index = oldData.tableData.id;
-              dataDelete.splice(index, 1);
-              setNewData([...dataDelete]);
-              deleteUser({ variables: { input: dataDelete } });
+              deleteUser({ variables: { id: oldData.id } });
+              refetch();
               resolve();
             }, 200);
           }),

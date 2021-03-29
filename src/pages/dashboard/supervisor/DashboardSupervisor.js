@@ -54,6 +54,9 @@ const DashboardSupervisor = () => {
 
   console.log(newData);
 
+  //TODOS: Admin tidak bisa melakukan pemberian task note balik ke planner
+  //TODOS: Create Note tidak bisa dilakukan karena foreign key
+
   return (
     <div className="container-fluid">
       {/* <Modal dataModal={newData}/> */}
@@ -65,6 +68,7 @@ const DashboardSupervisor = () => {
           // key={id}
         >
           <Modal.Header closeButton>
+            
             <Modal.Title>You must provide a note when returning the task back to the planner</Modal.Title>
           </Modal.Header>
           <Modal.Body>
