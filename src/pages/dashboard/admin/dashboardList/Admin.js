@@ -1,26 +1,26 @@
 import { useMutation, useQuery } from "@apollo/client";
 import MaterialTable from "material-table";
 import React, { useState } from "react";
-import { GET_ALL_USER, CREATE_USER } from "../../../../graphql/queries";
+import { CREATE_USER, GET_USER_FROM_ADMIN } from "../../../../graphql/queries";
 
 const Admin = () => {
   const [columns, setColumns] = useState([
-    { title: "Id", field: "id" },
+    { title: "No", field: "id" },
     { title: "Full Name", field: "fullname" },
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
     { title: "Password", field: "password" },
-    { title: "Role", field: "role", lookup: {supervisor: "Supervisor", planner: "Planner", worker: "Worker"} },
+    { title: "Role", field: "role", lookup: {supervisor: "supervisor", planner: "planner", worker: "worker"} },
   ]);
 
   const [newData, setNewData] = useState([]);
 
   console.log(newData)
 
-  const { loading, refetch } = useQuery(GET_ALL_USER, {
-    onCompleted: ({ user}) => {
-      console.log(user);
-      return setNewData(user);
+  const { loading, refetch } = useQuery(GET_USER_FROM_ADMIN, {
+    onCompleted: ({ findAllUserAdmin}) => {
+      console.log(findAllUserAdmin);
+      return setNewData(findAllUserAdmin);
     }
   });
 
@@ -55,7 +55,16 @@ const Admin = () => {
               setTimeout(() => {
                 setNewData([...newData, newNewData]);
                 console.log(newNewData);
-                createUser({ variables: { input: newNewData } });
+                createUser({
+                  variables: {
+                    ...newNewData,
+                    // email: "eren@gmail.com",
+                    // fullname: "eren",
+                    // password: "eren",
+                    // role: "supervisor",
+                    // username: "erenjaeger"
+                  },
+                });
                 refetch();
                 resolve();
               }, 200);

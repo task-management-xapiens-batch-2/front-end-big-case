@@ -1,18 +1,37 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { urlConfig } from "../configs/urlConfig";
+import { ApolloClient, createHttpLink, InMemoryCache, gql } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
-export const client = new ApolloClient({
+export const httpLink = createHttpLink({
   uri: urlConfig,
-  cache: new InMemoryCache(),
 });
 
-export const GET_USER = gql`
+export const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  // const token = localStorage.getItem('token');
+  const token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJBZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInNwdl9pZCI6bnVsbCwiaWF0IjoxNjE3MDI1MTg5LCJleHAiOjE2MTcyODQzODl9.GzNsll5bB9HeUKuP725NlKLCDT6iRyBwgbzZgSaH6wMn0SGc8kpLWpUsfUY_d1marRoeo-SrgHhazVWJy28w0w"
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
+
+export const GET_USER_FROM_ADMIN = gql`
   query {
-    user {
+    findAllUserAdmin {
       id
       fullname
       username
       email
+      password
       role
       spv_id
     }
@@ -88,30 +107,30 @@ export const GET_ALL_PROJECT = gql`
 `;
 
 export const CREATE_USER = gql`
-  mutation CreateUser(
-    $fullname: String
-    $username: String
-    $email: String
-    $password: String
-    $spv_id: Int
-    $role: String
+  mutation RegisterUser(
+  $fullname: String
+  $username: String!
+  $email: String!
+  $password: String!
+  $spv_id: Int
+  $role: String!
+) {
+  registerUser(
+    fullname: $fullname
+    username: $username
+    email: $email
+    password: $password
+    spv_id: $spv_id
+    role: $role
   ) {
-    createUser(
-      fullname: $fullname
-      username: $username
-      email: $email
-      password: $password
-      spv_id: $spv_id
-      role: $role
-    ) {
-      fullname
-      username
-      email
-      password
-      spv_id
-      role
-    }
+    fullname
+    username
+    email
+    password
+    role
+    spv_id
   }
+}
 `;
 
 export const UPDATE_USER = gql`

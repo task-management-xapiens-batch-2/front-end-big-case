@@ -1,1 +1,1 @@
-export const urlConfig = "https://mockup-graphql-task-m.herokuapp.com/graphql";
+export const urlConfig = "https://ex-man.herokuapp.com/graphql";

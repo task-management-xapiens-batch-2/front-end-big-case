@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MaterialTable from "material-table";
 import { useQuery } from "@apollo/client";
-import { GET_USER} from "../graphql/queries";
+import { GET_USER_FROM_ADMIN} from "../graphql/queries";
 
 const WorkerListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -13,7 +13,7 @@ const WorkerListSupervisor = () => {
     { title: "Role", field: "role", lookup: {worker: "Worker"} },
   ]);
 
-  const { data, loading } = useQuery(GET_USER);
+  const { data, loading } = useQuery(GET_USER_FROM_ADMIN);
 
   console.log(data)
 

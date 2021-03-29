@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../graphql/queries";
+import { GET_USER_FROM_ADMIN } from "../../graphql/queries";
 
 // import ButtonComponent from "../components/Button.component";
 import DashboardAdmin from '../dashboard/admin/DashboardAdmin'
@@ -11,7 +11,7 @@ import DashboardSupervisor from '../dashboard/supervisor/DashboardSupervisor'
 const Dashboard = () => {
   const history = useHistory();
 
-  const { data, loading, error } = useQuery(GET_USER);
+  const { data, loading, error } = useQuery(GET_USER_FROM_ADMIN);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error dong hihihi</div>;
