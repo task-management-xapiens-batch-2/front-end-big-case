@@ -1,6 +1,11 @@
 import { urlConfig } from "../configs/urlConfig";
-import { ApolloClient, createHttpLink, InMemoryCache, gql } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  gql,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 export const httpLink = createHttpLink({
   uri: urlConfig,
@@ -9,19 +14,20 @@ export const httpLink = createHttpLink({
 export const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   // const token = localStorage.getItem('token');
-  const token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJBZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInNwdl9pZCI6bnVsbCwiaWF0IjoxNjE3MDI1MTg5LCJleHAiOjE2MTcyODQzODl9.GzNsll5bB9HeUKuP725NlKLCDT6iRyBwgbzZgSaH6wMn0SGc8kpLWpUsfUY_d1marRoeo-SrgHhazVWJy28w0w"
+  const token =
+    "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJBZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInNwdl9pZCI6bnVsbCwiaWF0IjoxNjE3MDI1MTg5LCJleHAiOjE2MTcyODQzODl9.GzNsll5bB9HeUKuP725NlKLCDT6iRyBwgbzZgSaH6wMn0SGc8kpLWpUsfUY_d1marRoeo-SrgHhazVWJy28w0w";
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
-    }
-  }
+    },
+  };
 });
 
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 export const GET_USER_FROM_ADMIN = gql`
@@ -62,17 +68,23 @@ export const FIND_USER = gql`
 `;
 
 export const GET_TASK_SUPERVISOR = gql`
-  query {
-    findTaskSPV {
+  query FindAllTaskSpv {
+    findAllTaskSpv {
       id
       project_id
-      title
       assignee
+      title
       description
       start_date
       due_date
       attachment
       status
+      is_read
+      note {
+        id
+        task_id
+        note
+      }
     }
   }
 `;
@@ -108,29 +120,29 @@ export const GET_ALL_PROJECT = gql`
 
 export const CREATE_USER = gql`
   mutation RegisterUser(
-  $fullname: String
-  $username: String!
-  $email: String!
-  $password: String!
-  $spv_id: Int
-  $role: String!
-) {
-  registerUser(
-    fullname: $fullname
-    username: $username
-    email: $email
-    password: $password
-    spv_id: $spv_id
-    role: $role
+    $fullname: String
+    $username: String!
+    $email: String!
+    $password: String!
+    $spv_id: Int
+    $role: String!
   ) {
-    fullname
-    username
-    email
-    password
-    role
-    spv_id
+    registerUser(
+      fullname: $fullname
+      username: $username
+      email: $email
+      password: $password
+      spv_id: $spv_id
+      role: $role
+    ) {
+      fullname
+      username
+      email
+      password
+      role
+      spv_id
+    }
   }
-}
 `;
 
 export const UPDATE_USER = gql`
@@ -139,30 +151,35 @@ export const UPDATE_USER = gql`
     $fullname: String
     $username: String
     $email: String
-    $spv_id: Int
+    $password: String
     $role: String
+    $spv_id: Int
   ) {
     updateUser(
       id: $id
       fullname: $fullname
       username: $username
       email: $email
-      spv_id: $spv_id
+      password: $password
       role: $role
+      spv_id: $spv_id
     ) {
+      id
       fullname
       username
       email
       password
-      spv_id
       role
+      spv_id
     }
   }
 `;
 
 export const DELETE_USER = gql`
-  mutation DeleteUser($id: Int) {
-    deleteUser(id: $id)
+  mutation DeleteUser($id: Int!) {
+    deleteUser(id: $id) {
+      id
+    }
   }
 `;
 

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import MaterialTable from "material-table";
 import React, { useState } from "react";
-import { CREATE_USER, GET_USER_FROM_ADMIN } from "../../../../graphql/queries";
+import { CREATE_USER, DELETE_USER, GET_USER_FROM_ADMIN, UPDATE_USER } from "../../../../graphql/queries";
 
 const Admin = () => {
   const [columns, setColumns] = useState([
@@ -21,11 +21,16 @@ const Admin = () => {
     onCompleted: ({ findAllUserAdmin}) => {
       console.log(findAllUserAdmin);
       return setNewData(findAllUserAdmin);
-    }
+    },
+    pollInterval: 1000
   });
 
   const [createUser] = useMutation(CREATE_USER);
 
+  const [updateUser] = useMutation(UPDATE_USER);
+
+  const [deleteUser] = useMutation(DELETE_USER);
+ 
   if(loading) return <h1>Loading...</h1>
 
   const rawData = newData.map((o) => ({ ...o }));
@@ -69,24 +74,23 @@ const Admin = () => {
                 resolve();
               }, 200);
             }),
+            // TODOS: Update belum bisa. Coba tanya backend
           onRowUpdate: (newNewData, oldData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                const dataUpdate = [...rawData];
-                const index = oldData.tableData.id;
-                // dataUpdate[index] = newData;
-                // setNewData([...dataUpdate]);
-
+                const dataUpdate = [...newData];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newNewData;
+                updateUser({ variables: {...newNewData}})
+                refetch()
                 resolve();
               }, 200);
             }),
           onRowDelete: (oldData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                // const dataDelete = [...newData];
-                // const index = oldData.tableData.id;
-                // dataDelete.splice(index, 1);
-                // setNewData([...dataDelete]);
+                deleteUser({variables: {id: oldData.id}})
+                refetch()
                 resolve();
               }, 200);
             }),
