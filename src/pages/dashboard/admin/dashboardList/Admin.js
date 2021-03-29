@@ -13,8 +13,6 @@ const Admin = () => {
     { title: "Role", field: "role" },
   ]);
 
-
-
   const [newData, setNewData] = useState([]);
 
   console.log(newData)

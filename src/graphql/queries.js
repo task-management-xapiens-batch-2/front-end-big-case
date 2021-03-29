@@ -94,6 +94,7 @@ export const CREATE_USER = gql`
     $email: String
     $password: String
     $spv_id: Int
+    $role: String
   ) {
     createUser(
       fullname: $fullname
@@ -101,12 +102,14 @@ export const CREATE_USER = gql`
       email: $email
       password: $password
       spv_id: $spv_id
+      role: $role
     ) {
       fullname
       username
       email
       password
       spv_id
+      role
     }
   }
 `;
