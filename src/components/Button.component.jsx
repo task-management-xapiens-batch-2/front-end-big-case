@@ -36,6 +36,17 @@ const ButtonComponent = ({ variant, title, ...rest }) => {
           {title}
         </Button>
       )
+    case "login":
+      return(
+        <Button
+          {...rest}
+          className="btn btn-primary px-4"
+          variant="primary"
+          type="submit"
+        >
+          {title}
+        </Button>
+      )
     default:
       return (
         <Button {...rest} className="btn btn-primary mx-2" type="submit">

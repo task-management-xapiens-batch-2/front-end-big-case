@@ -1,3 +1,4 @@
+import { Nav } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import ButtonComponent from "../components/Button.component";
 import InputComponent from "../components/Input.component";
@@ -25,10 +26,11 @@ const Login = () => {
           label="Password"
           placeholder="Enter your password"
         />
-        <div className="mb-3">
-          <ButtonComponent title="Login" />
+        <div className="d-flex justify-content-center align-items-center mb-3">
+          <ButtonComponent title="Login" variant="login" />
         </div>
       </form>
+      <Nav.Link href="#">Lupa Password?</Nav.Link>
     </div>
   );
 };
