@@ -70,6 +70,10 @@ const Login = () => {
               .then((res) => {
                 console.log(res);
                 localStorage.setItem("token", res.data.data.token);
+                localStorage.setItem("id", res.data.data.id);
+                localStorage.setItem("role", res.data.data.role);
+                localStorage.setItem("email", res.data.data.email);
+                localStorage.setItem("spv_id", res.data.data.spv_id);
                 localStorage.setItem("fullname", res.data.data.fullname);
                 localStorage.setItem("username", res.data.data.username);
                 localStorage.setItem("email", res.data.data.email);

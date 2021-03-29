@@ -16,6 +16,7 @@ import DetailProject from "./DetailProject";
 import { Link } from "react-router-dom";
 import ButtonComponent from "../../../components/Button.component";
 import TaskComponent from "../../../components/Task.component";
+import NavbarSupervisorComponent from "../../../components/NavbarSupervisor.component";
 
 
 const DashboardSupervisor = () => {
@@ -59,6 +60,7 @@ const DashboardSupervisor = () => {
 
   return (
     <div className="container-fluid">
+      <NavbarSupervisorComponent />
       {/* <Modal dataModal={newData}/> */}
       <Modal
           show={show}

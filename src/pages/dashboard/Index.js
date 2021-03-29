@@ -1,69 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useQuery } from "@apollo/client";
 import { GET_USER_FROM_ADMIN } from "../../graphql/queries";
 
 // import ButtonComponent from "../components/Button.component";
-import DashboardAdmin from '../dashboard/admin/DashboardAdmin'
-import DashboardPlanner from '../dashboard/planner/DashboardPlanner'
-import DashboardSupervisor from '../dashboard/supervisor/DashboardSupervisor'
+import DashboardAdmin from "../dashboard/admin/DashboardAdmin";
+import DashboardPlanner from "../dashboard/planner/DashboardPlanner";
+import DashboardSupervisor from "../dashboard/supervisor/DashboardSupervisor";
 
 const Dashboard = () => {
-  const history = useHistory();
+  const history = useHistory()
+  useEffect(() => {
+    getUserData();
+  }, []);
 
-  const { data, loading, error } = useQuery(GET_USER_FROM_ADMIN);
+  const getUserData = () => {
+    // let fakeRole = "supervisor"
+    const role = localStorage.getItem("role");
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error dong hihihi</div>;
-
-  const getUserData = () =>
-  data.user.map(({ id, fullname, username, email, role, spv_id }) => {
-    let fakeRole = "supervisor"
-    switch (fakeRole) {
+    console.log(role);
+    switch (role) {
       case "admin":
-        <DashboardAdmin
-          id={id}
-          fullname={fullname}
-          username={username}
-          email={email}
-          role={role}
-          idSpv={spv_id}
-        />;
         history.push("/dashboard/admin");
         break;
       case "planner":
-        <DashboardPlanner
-          id={id}
-          fullname={fullname}
-          username={username}
-          email={email}
-          role={role}
-          idSpv={spv_id}
-        />;
         history.push("/dashboard/planner");
         break;
       case "supervisor":
-        <DashboardSupervisor
-          id={id}
-          fullname={fullname}
-          username={username}
-          email={email}
-          role={role}
-          idSpv={spv_id}
-        />;
         history.push("/dashboard/supervisor");
         break;
       default:
         return role;
     }
-  });
+  };
+  return getUserData
+};
 
-  getUserData()
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default Dashboard
+export default Dashboard;

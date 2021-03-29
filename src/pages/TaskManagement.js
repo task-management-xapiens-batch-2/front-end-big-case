@@ -15,7 +15,6 @@ import Login from "./Login";
 import MainTemplateProject from "./dashboard/planner/projectForm/MainTemplateProject";
 
 const TaskManagement = () => {
-  
   return (
     <div>
       <Router>
