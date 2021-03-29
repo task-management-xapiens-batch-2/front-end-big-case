@@ -34,8 +34,7 @@ const WorkerListSupervisor = () => {
         },
         rowStyle: {
           backgroundColor: "#EEE",
-        },
-        filtering: true,
+        }
       }}
     />
   );

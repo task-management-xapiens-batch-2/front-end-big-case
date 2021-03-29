@@ -9,6 +9,7 @@ import JumbotronComponent from "../../../../components/Jumbotron.component";
 import TablePlannerComponent from "../../../../components/TablePlanner.component";
 import NavbarAllUserComponent from "../../../../components/NavbarAllUser.component";
 
+
 const Planner = () => {
   const { data, loading } = useQuery(GET_ALL_PROJECT);
   if (loading) return <div>Loading...</div>;

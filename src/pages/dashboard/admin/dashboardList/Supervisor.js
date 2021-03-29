@@ -6,7 +6,6 @@ import ProjectListSupervisor from "../../../../components/ProjectListSupervisor.
 import PlannerListSupervisor from "../../../../components/PlannerListSupervisor.component";
 import NavbarAllUserComponent from "../../../../components/NavbarAllUser.component";
 
-
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 import WorkerListSupervisor from "../../../../components/WorkerListSupervisor.component";

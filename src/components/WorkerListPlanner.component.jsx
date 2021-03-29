@@ -29,8 +29,7 @@ const WorkerListPlanner = () => {
         },
         rowStyle: {
           backgroundColor: "#EEE",
-        },
-        filtering: true,
+        }
       }}
     />
   );

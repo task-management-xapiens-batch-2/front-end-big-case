@@ -15,14 +15,13 @@ import { GET_USER } from "../../../graphql/queries";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
 import NavbarAdminComponent from "../../../components/NavbarAdmin.component";
-import NavigationBar from "../../../components/Navbar.component";
+import NavigationBar from "../../../components/NavbarSuperAdmin.component";
 import DashboardPlanner from "./dashboardList/Planner";
 import DashboardAllAdmin from "./dashboardList/Admin";
 import DashboardSupervisor from "./dashboardList/Supervisor";
 import DetailProjectPlanner from './dashboardList/planner/DetailProject'
 import DetailProjectSupervisor from './dashboardList/supervisor/DetailProject'
 import AddNewProject from './dashboardList/supervisor/DetailProject'
-
 
 const DashboardAdmin = () => {
   const history = useHistory();

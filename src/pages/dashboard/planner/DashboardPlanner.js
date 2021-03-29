@@ -6,7 +6,7 @@ import ProjectComponent from "../../../components/Project.component";
 import WorkerListPlannerComponent from '../../../components/WorkerListPlanner.component'
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
-import NavigationBar from "../../../components/Navbar.component";
+import NavigationBar from "../../../components/NavbarPlanner.component";
 import TablePlannerComponent from "../../../components/TablePlanner.component";
 
 const DashboardPlanner = () => {

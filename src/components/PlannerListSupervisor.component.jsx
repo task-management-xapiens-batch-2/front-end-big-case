@@ -35,7 +35,6 @@ const PlannerListSupervisor = () => {
         rowStyle: {
           backgroundColor: "#EEE",
         },
-        filtering: true,
       }}
     />
   );
