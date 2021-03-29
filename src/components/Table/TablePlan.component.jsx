@@ -1,9 +1,7 @@
 import React, { Fragment, useState } from "react";
-import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 import {
   Paper,
   makeStyles,
-  TableBody,
   TableRow,
   TableCell,
   Toolbar,
@@ -13,16 +11,19 @@ import {
   Table,
   TableHead,
   TableSortLabel,
-  Grid,
+  TableBody,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import ActionButton from "../ActionButton.component";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_PROJECT } from "../../graphql/queries";
+import { useMutation, useQuery } from "@apollo/client";
 import Popup from "../Popup.component";
+import TableFormComponent from "./TableForm.component";
+import { useHistory } from "react-router";
+import { GET_TASK_PLANNER } from "../../graphql/queries";
+import { CREATE_TASK, DELETE_TASK } from "../../graphql/mutation";
 
 const useStyles = makeStyles((theme) => ({
   tableContent: {
@@ -61,26 +62,45 @@ const useStyles = makeStyles((theme) => ({
 
 const TablePlanComponent = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
-  // const openPopup = item => {
-  //   setIsOpen(true)
-  // }
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [projectId, setProjectId] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [assignee, setAssignee] = useState("");
 
-  const { data, loading, error } = useQuery(GET_ALL_PROJECT);
+  const { data, loading, error } = useQuery(GET_TASK_PLANNER);
+  const [createTask] = useMutation(CREATE_TASK);
+  const [deleteTask] = useMutation(DELETE_TASK);
+
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Fetching failed...</div>;
+  if (error) return <div>Fetching failed..</div>;
 
-  const getAllProject = data.findAllTask.map(
-    ({ id, title, description, start_date, due_date }) => {
+  const handleEdit = () => {
+    setIsOpen(true);
+  };
+
+  const handleCreateProject = (e) => {
+    e.preventDefault();
+    createTask({ variables: { title, description, startDate, dueDate } });
+    setIsOpen(false);
+  };
+
+  const getAllProject = data.findAllTaskPlanner.map(
+    ({ id, title, start_date, status }) => {
       return (
-        <TableRow key={id}>
+        <TableRow
+          key={id}
+          onClick={() => history.push(`/dashboard/planner/project/${id}`)}
+        >
           <TableCell>{title}</TableCell>
-          <TableCell>{description}</TableCell>
-          <TableCell>5 Days</TableCell>
-          <TableCell>On Going</TableCell>
+          <TableCell>{start_date}</TableCell>
+          <TableCell>{status ? "Submitted" : status}</TableCell>
           <TableCell>
-            <ActionButton color="primary">
+            <ActionButton onClick={() => handleEdit()} color="primary">
               <EditOutlinedIcon fontSize="small" />
             </ActionButton>
             <ActionButton color="secondary">
@@ -127,9 +147,6 @@ const TablePlanComponent = () => {
                 <TableSortLabel>Project Name</TableSortLabel>
               </TableCell>
               <TableCell>
-                <TableSortLabel>Assigned To</TableSortLabel>
-              </TableCell>
-              <TableCell>
                 <TableSortLabel>Duration</TableSortLabel>
               </TableCell>
               <TableCell>
@@ -140,30 +157,15 @@ const TablePlanComponent = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {getAllProject}
+          <TableBody>{getAllProject}</TableBody>
         </Table>
       </Paper>
       <Popup title="Add a New Project" openPopup={isOpen} setIsOpen={setIsOpen}>
-        <form className={classes.root}>
-          <Grid container>
-            <Grid item xs={6}>
-              <TextField name="projectName" label="Project Name" />
-              <TextField name="projectDesc" label="Project Description" />
-              <TextField name="projectName" label="Project Name" />
-              <TextField name="projectName" label="Project Name" />
-            </Grid>
-            <Grid item xs={6}>
-              <ActionButton
-                className={classes.button}
-                color="primary"
-                size="large"
-                variant="contained"
-              >
-                Submit
-              </ActionButton>
-            </Grid>
-          </Grid>
-        </form>
+        <TableFormComponent
+          submit={handleCreateProject}
+          title={(e) => setTitle(e.target.value)}
+          desc={(e) => setDescription(e.target.value)}
+        />
       </Popup>
     </Fragment>
   );

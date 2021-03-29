@@ -4,13 +4,11 @@ import FooterBar from "../components/Footer.component";
 import LayoutComponent from "../components/Layout.component";
 import NavigationBar from "../components/Navbar.component";
 import DashboardAdmin from "./dashboard/admin/DashboardAdmin";
-// import AddNewProject from "./AddNewProject";
 import Dashboard from "./dashboard/Index";
 import DashboardPlanner from "./dashboard/planner/DashboardPlanner";
 import DashboardSupervisor from "./dashboard/supervisor/DashboardSupervisor";
 import DetailProject from "./dashboard/planner/DetailProject";
 import Login from "./Login";
-import MainTemplateProject from "./dashboard/planner/projectForm/MainTemplateProject";
 import { PrivateRoute } from "../components/ProtectedRoute";
 
 const TaskManagement = () => {
@@ -43,14 +41,8 @@ const TaskManagement = () => {
             />
             <PrivateRoute
               exact
-              path="/dashboard/planner/detail-project"
+              path="/dashboard/planner/project/:id"
               component={DetailProject}
-            />
-            {/* <Route exact path="/new-project" component={AddNewProject} /> */}
-            <PrivateRoute
-              exact
-              path="/dashboard/planner/new-project"
-              component={MainTemplateProject}
             />
           </Switch>
         </LayoutComponent>

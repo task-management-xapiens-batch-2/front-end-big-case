@@ -7,15 +7,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0.5),
   },
   secondary: {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: "#f8324526",
     "& .MuiButton-label": {
-      color: theme.palette.secondary.main,
+      color: "#f83245",
     },
   },
   primary: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: "#3c44b126",
     "& .MuiButton-label": {
-      color: theme.palette.primary.main,
+      color: "#333996",
     },
   },
 }));

@@ -1,9 +1,14 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { urlConfig } from "../configs/urlConfig";
 
+const token = localStorage.getItem("token");
+
 export const client = new ApolloClient({
   uri: urlConfig,
   cache: new InMemoryCache(),
+  headers: {
+    authorization: `Bearer ${token}`,
+  },
 });
 
 export const GET_USER = gql`
@@ -51,9 +56,9 @@ export const GET_TASK_PLANNER = gql`
       start_date
       due_date
       attachment
-      status
       is_read
-      notes {
+      status
+      note {
         id
         task_id
         note
@@ -64,12 +69,12 @@ export const GET_TASK_PLANNER = gql`
 
 export const GET_ALL_PROJECT = gql`
   query {
-    findAllTask {
+    findAllproject {
       id
+      created_by
       title
       description
-      start_date
-      due_date
+      is_complete
     }
   }
 `;
