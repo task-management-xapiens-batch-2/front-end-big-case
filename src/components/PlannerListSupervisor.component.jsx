@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MaterialTable from "material-table";
-import { useQuery } from "@apollo/client";
-import { GET_USER } from "../graphql/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ALL_USER, CREATE_USER } from "../graphql/queries";
 
 const PlannerListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -13,18 +13,29 @@ const PlannerListSupervisor = () => {
     { title: "Role", field: "role", lookup: { planner: "Planner" } },
   ]);
 
-  const { data, loading } = useQuery(GET_USER);
+  const [newData, setNewData] = useState([]);
 
-  console.log(data);
+  console.log(newData);
 
-  if (loading) return <div>Loading...</div>;
+  const { loading, refetch } = useQuery(GET_ALL_USER, {
+    onCompleted: ({ user }) => {
+      console.log(user);
+      return setNewData(user);
+    },
+  });
 
-  const plannerData = data.user.map((o) => ({ ...o }));
+  const [createUser] = useMutation(CREATE_USER);
+
+  if (loading) return <h1>Loading...</h1>;
+
+  const rawData = newData.map((o) => ({ ...o }));
+
+  console.log(rawData);
 
   const plannerList = (
     <MaterialTable
       columns={columns}
-      data={plannerData}
+      data={rawData}
       title="Planner List"
       options={{
         headerStyle: {
@@ -39,6 +50,10 @@ const PlannerListSupervisor = () => {
         onRowAdd: (newNewData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
+              setNewData([...newData, newNewData]);
+              console.log(newNewData);
+              createUser({ variables: { input: newNewData } });
+              refetch();
               resolve();
             }, 200);
           }),

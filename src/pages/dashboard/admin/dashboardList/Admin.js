@@ -10,7 +10,7 @@ const Admin = () => {
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
     { title: "Password", field: "password" },
-    { title: "Role", field: "role" },
+    { title: "Role", field: "role", lookup: {supervisor: "Supervisor", planner: "Planner", worker: "Worker"} },
   ]);
 
   const [newData, setNewData] = useState([]);

@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   const getUserData = () =>
   data.user.map(({ id, fullname, username, email, role, spv_id }) => {
-    let fakeRole = "admin"
+    let fakeRole = "supervisor"
     switch (fakeRole) {
       case "admin":
         <DashboardAdmin
