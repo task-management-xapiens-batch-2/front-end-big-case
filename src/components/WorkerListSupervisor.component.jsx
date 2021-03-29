@@ -7,11 +7,10 @@ const WorkerListSupervisor = () => {
   const [columns, setColumns] = useState([
     { title: "No", field: "id" },
     { title: "Worker Name", field: "fullname" },
-    {
-      title: "Role",
-      field: "role",
-      lookup: { admin: "Admin", supervisor: "Supervisor", planner: "Planner", worker: "Worker" }
-    },
+    { title: "Username", field: "username" },
+    { title: "Email Address", field: "email" },
+    { title: "Password", field: "password" },
+    { title: "Role", field: "role", lookup: {worker: "Worker"} },
   ]);
 
   const { data, loading } = useQuery(GET_USER);
@@ -35,6 +34,26 @@ const WorkerListSupervisor = () => {
         rowStyle: {
           backgroundColor: "#EEE",
         }
+      }}
+      editable={{
+        onRowAdd: (newNewData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 200);
+          }),
+        onRowUpdate: (newNewData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 200);
+          }),
+        onRowDelete: (oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 200);
+          }),
       }}
     />
   );

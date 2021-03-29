@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import MaterialTable from "material-table";
 import { useQuery } from "@apollo/client";
-import { GET_USER} from "../graphql/queries";
+import { GET_USER } from "../graphql/queries";
 
 const PlannerListSupervisor = () => {
   const [columns, setColumns] = useState([
     { title: "No", field: "id" },
     { title: "Planner Name", field: "fullname" },
-    {
-      title: "Role",
-      field: "role",
-      lookup: { admin: "Admin", supervisor: "Supervisor", planner: "Planner", worker: "Worker" }
-    },
+    { title: "Username", field: "username" },
+    { title: "Email Address", field: "email" },
+    { title: "Password", field: "password" },
+    { title: "Role", field: "role", lookup: { planner: "Planner" } },
   ]);
 
   const { data, loading } = useQuery(GET_USER);
 
-  console.log(data)
+  console.log(data);
 
   if (loading) return <div>Loading...</div>;
 
@@ -36,10 +35,30 @@ const PlannerListSupervisor = () => {
           backgroundColor: "#EEE",
         },
       }}
+      editable={{
+        onRowAdd: (newNewData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 200);
+          }),
+        onRowUpdate: (newNewData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 200);
+          }),
+        onRowDelete: (oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 200);
+          }),
+      }}
     />
   );
 
-  return plannerList
+  return plannerList;
 };
 
 export default PlannerListSupervisor;

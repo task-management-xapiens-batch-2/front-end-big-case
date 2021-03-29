@@ -24,13 +24,6 @@ import DetailProjectSupervisor from './dashboardList/supervisor/DetailProject'
 import AddNewProject from './dashboardList/supervisor/DetailProject'
 
 const DashboardAdmin = () => {
-  const history = useHistory();
-
-  const { data, loading, error } = useQuery(GET_USER);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error dong hihihi</div>;
-
   return (
     <BrowserRouter>
       <div className="container-fluid">
