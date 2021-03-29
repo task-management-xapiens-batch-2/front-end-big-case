@@ -1,13 +1,12 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import auth from "../configs/authConfig";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (auth.isAuth()) {
+        if (localStorage.getItem("token") !== "") {
           return <Component {...props} />;
         } else {
           return (

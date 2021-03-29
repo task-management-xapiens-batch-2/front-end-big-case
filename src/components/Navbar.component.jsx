@@ -7,11 +7,11 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import Logo from "../img/xapiens-logo.png"
+import Logo from "../img/xapiens-logo.png";
 
 import "react-notifications/lib/notifications.css";
-import toaster from 'toasted-notes' 
-import 'toasted-notes/src/styles.css';
+import toaster from "toasted-notes";
+import "toasted-notes/src/styles.css";
 
 const NavigationBar = () => {
   const [isLogin, setLogin] = useState(false);
@@ -48,7 +48,7 @@ const NavigationBar = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("username") === "faris") {
+    if (localStorage.getItem("token")) {
       setLogin(true);
     }
     setNotif(true);
@@ -66,9 +66,9 @@ const NavigationBar = () => {
         className={`${isLogin === false ? "d-none" : ""}`}
         sticky="top"
       >
-          <Nav.Link as={Link} to="/">
-            <Image src={Logo} fluid/>
-          </Nav.Link>
+        <Nav.Link as={Link} to="/">
+          <Image src={Logo} fluid />
+        </Nav.Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
