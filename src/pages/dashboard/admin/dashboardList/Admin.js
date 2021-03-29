@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import MaterialTable from "material-table";
 import React, { useState } from "react";
-import { GET_ALL_USER } from "../../../../graphql/queries";
+import { GET_ALL_USER, CREATE_USER } from "../../../../graphql/queries";
 
 const Admin = () => {
   const [columns, setColumns] = useState([
@@ -13,11 +13,28 @@ const Admin = () => {
     { title: "Role", field: "role" },
   ]);
 
-  const { data, loading } = useQuery(GET_ALL_USER);
+
+
+  const [newData, setNewData] = useState([]);
+
+  console.log(newData)
+
+  const { loading, refetch } = useQuery(GET_ALL_USER, {
+    onCompleted: ({ user}) => {
+      console.log(user);
+      return setNewData(user);
+    }
+  });
+
+  const [createUser] = useMutation(CREATE_USER);
 
   if(loading) return <h1>Loading...</h1>
 
-  const rawData = data.user.map((o) => ({ ...o }));
+  const rawData = newData.map((o) => ({ ...o }));
+
+  console.log(rawData)
+
+  // const rawData = data.user.map((o) => ({ ...o }));
 
   return (
     <div style={{ maxWidth: "100%" }}>
@@ -38,8 +55,10 @@ const Admin = () => {
           onRowAdd: (newNewData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                // setNewData([...rawData, newData]);
-
+                setNewData([...newData, newNewData]);
+                console.log(newNewData);
+                createUser({ variables: { input: newNewData } });
+                refetch();
                 resolve();
               }, 200);
             }),
