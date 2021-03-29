@@ -8,12 +8,16 @@ import PlannerListSupervisor from "../../../components/PlannerListSupervisor.com
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 import WorkerListSupervisor from "../../../components/WorkerListSupervisor.component";
+import NavigationBar from "../../../components/Navbar.component";
+import { Navigation } from "@material-ui/icons";
+
 
 const DashboardSupervisor = () => {
   const history = useHistory();
 
   return (
     <div className="container-fluid">
+      <NavigationBar />
       <div className="row">
         <div className="col-sm-12">
           <JumbotronComponent />

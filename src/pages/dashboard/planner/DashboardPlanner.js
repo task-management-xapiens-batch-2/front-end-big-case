@@ -6,6 +6,7 @@ import ProjectComponent from "../../../components/Project.component";
 import WorkerListPlannerComponent from '../../../components/WorkerListPlanner.component'
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
+import NavigationBar from "../../../components/Navbar.component";
 import TablePlannerComponent from "../../../components/TablePlanner.component";
 
 const DashboardPlanner = () => {
@@ -30,6 +31,7 @@ const DashboardPlanner = () => {
   );
   return (
     <div className="container-fluid">
+      <NavigationBar />
       <div className="row">
         <div className="col-sm-12">
           <JumbotronComponent />

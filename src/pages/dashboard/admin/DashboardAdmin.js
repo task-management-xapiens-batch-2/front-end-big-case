@@ -15,6 +15,7 @@ import { GET_USER } from "../../../graphql/queries";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
 import NavbarAdminComponent from "../../../components/NavbarAdmin.component";
+import NavigationBar from "../../../components/Navbar.component";
 import DashboardPlanner from "./dashboardList/Planner";
 import DashboardAllAdmin from "./dashboardList/Admin";
 import DashboardSupervisor from "./dashboardList/Supervisor";
@@ -34,6 +35,7 @@ const DashboardAdmin = () => {
   return (
     <BrowserRouter>
       <div className="container-fluid">
+        <NavigationBar />
         <div className="row">
           <div className="col-sm-12">
             <JumbotronComponent />

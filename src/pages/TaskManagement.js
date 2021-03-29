@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, useRouteMatch } from "react-router-dom";
 import FooterBar from "../components/Footer.component";
 import LayoutComponent from "../components/Layout.component";
-import NavigationBar from "../components/Navbar.component";
 import DashboardAdmin from "./dashboard/admin/DashboardAdmin";
 // import AddNewProject from "./AddNewProject";
 import Dashboard from "./dashboard/Index";
@@ -20,7 +19,6 @@ const TaskManagement = () => {
   return (
     <div>
       <Router>
-        <NavigationBar />
         <LayoutComponent>
           <Switch>
             <Route exact path="/" component={Login} />
