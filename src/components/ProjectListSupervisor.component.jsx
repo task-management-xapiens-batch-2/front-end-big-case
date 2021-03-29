@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_TASK_SUPERVISOR} from "../graphql/queries";
 import { useHistory } from "react-router";
 import { Button } from "react-bootstrap";
+import DetailProject from '../pages/dashboard/supervisor/DetailProject'
 
 const ProjectListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -26,13 +27,21 @@ const ProjectListSupervisor = () => {
 
   const spvData = data.findTaskSPV.map((o) => ({ ...o }));
 
+  console.log(spvData)
+
   const projectList = (
     <MaterialTable
       columns={columns}
       data={spvData}
       actions={[
         {
-          onClick: () => history.push("/dashboard/supervisor/detail-project"),
+          // onClick: () => history.push("/dashboard/supervisor/detail-project"),
+          onClick: (event, rowData) => {
+            console.log(rowData)
+            // const newData = {};
+            // <DetailProject detailData={newData}/>
+            // history.push("/dashboard/supervisor/detail-project")
+          }
         },
       ]}
       title="Project List"
