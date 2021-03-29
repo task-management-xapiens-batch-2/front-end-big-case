@@ -5,14 +5,11 @@ import { GET_ALL_PROJECT } from "../../../graphql/queries";
 import ProjectComponent from "../../../components/Project.component";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../components/Jumbotron.component";
-import TablePlannerComponent from "../../../components/TablePlanner.component";
 import TablePlanComponent from "../../../components/Table/TablePlan.component";
 
 const DashboardPlanner = () => {
   const { data, loading } = useQuery(GET_ALL_PROJECT);
   if (loading) return <div>Loading...</div>;
-
-  console.log(data);
 
   const getAllProject = data.findAllTask.map(
     ({ id, title, description, start_date, due_date }) => {
@@ -37,27 +34,6 @@ const DashboardPlanner = () => {
             <div className="row">
               <div className="col-12">
                 <TablePlanComponent />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="Initiatives"
-                  status="Pending"
-                  search="Search initiative projects..."
-                />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="On Going"
-                  status="Not Started"
-                  search="Search on going projects..."
-                />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="Reject"
-                  status="Rejected"
-                  search="Search rejected projects..."
-                />
               </div>
             </div>
           </div>
