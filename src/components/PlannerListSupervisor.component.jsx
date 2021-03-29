@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_ALL_USER, CREATE_USER } from "../graphql/queries";
+import { GET_ALL_USER, CREATE_USER, UPDATE_USER, DELETE_USER } from "../graphql/queries";
 
 const PlannerListSupervisor = () => {
   const [columns, setColumns] = useState([
@@ -25,6 +25,10 @@ const PlannerListSupervisor = () => {
   });
 
   const [createUser] = useMutation(CREATE_USER);
+
+  const [updateUser] = useMutation(UPDATE_USER);
+
+  const [deleteUser] = useMutation(DELETE_USER);
 
   if (loading) return <h1>Loading...</h1>;
 
@@ -53,19 +57,30 @@ const PlannerListSupervisor = () => {
               setNewData([...newData, newNewData]);
               console.log(newNewData);
               createUser({ variables: { input: newNewData } });
-              refetch();
+              // refetch()
               resolve();
             }, 200);
           }),
         onRowUpdate: (newNewData, oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
+              const dataUpdate = [...newData];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newNewData;
+              setNewData([...dataUpdate]);
+              updateUser({ variables: { input: dataUpdate } });
+              // refetch()
               resolve();
             }, 200);
           }),
         onRowDelete: (oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
+              const dataDelete = [...rawData];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setNewData([...dataDelete]);
+              deleteUser({ variables: { input: dataDelete } });
               resolve();
             }, 200);
           }),

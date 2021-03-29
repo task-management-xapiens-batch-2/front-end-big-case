@@ -32,7 +32,7 @@ const DashboardAdmin = () => {
           <div className="col-sm-12">
             <JumbotronComponent />
             <NavbarAdminComponent />
-            <Switch>
+            {/* <Switch>
               <Route
                 exact
                 path="/dashboard/admin/all-admin"
@@ -63,7 +63,7 @@ const DashboardAdmin = () => {
                 path="/dashboard/admin/all-planner/new-project"
                 component={AddNewProject}
               />
-            </Switch>
+            </Switch> */}
           </div>
         </div>
       </div>

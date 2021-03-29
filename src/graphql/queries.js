@@ -121,6 +121,7 @@ export const UPDATE_USER = gql`
     $username: String
     $email: String
     $spv_id: Int
+    $role: String
   ) {
     updateUser(
       id: $id
@@ -128,12 +129,14 @@ export const UPDATE_USER = gql`
       username: $username
       email: $email
       spv_id: $spv_id
+      role: $role
     ) {
       fullname
       username
       email
       password
       spv_id
+      role
     }
   }
 `;
