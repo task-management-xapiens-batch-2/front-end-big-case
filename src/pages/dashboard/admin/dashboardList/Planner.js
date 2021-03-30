@@ -21,9 +21,7 @@ const Planner = () => {
       <div className="row">
         <div className="col-sm-12">
           <div className="container-fluid">
-            <div className="row">
-              
-            </div>
+            <div className="row"></div>
           </div>
 
           <WorkerListPlannerComponent />
