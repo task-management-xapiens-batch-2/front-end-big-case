@@ -89,8 +89,8 @@ export const GET_TASK_SUPERVISOR = gql`
 `;
 
 export const GET_TASK_PLANNER = gql`
-  query {
-    findAllTask {
+  query FindAllTaskPlanner {
+    findAllTaskPlanner {
       id
       project_id
       assignee
@@ -101,6 +101,33 @@ export const GET_TASK_PLANNER = gql`
       attachment
       status
       is_read
+      note {
+        id
+        task_id
+        note
+      }
+    }
+  }
+`;
+
+export const GET_TASK_WORKER = gql`
+  query FindAllTaskWorker {
+    findAllTaskWorker {
+      id
+      project_id
+      assignee
+      title
+      description
+      start_date
+      due_date
+      attachment
+      status
+      is_read
+      note {
+        id
+        task_id
+        note
+      }
     }
   }
 `;

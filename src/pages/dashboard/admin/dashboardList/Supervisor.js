@@ -62,7 +62,6 @@ const Supervisor = () => {
         // key={id}
       >
         <Modal.Header closeButton>
-          
           <Modal.Title>You must provide a note when returning the task back to the planner</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -80,7 +79,7 @@ const Supervisor = () => {
           <ButtonComponent title="Submit" />
         </Modal.Footer>
       </Modal>
-    <NavigationBar />
+    <NavigationBar needToHide={true}/>
     <div className="row">
       <div className="col-sm-12">
         <div className="container-fluid">

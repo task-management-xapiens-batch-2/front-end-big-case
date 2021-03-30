@@ -13,7 +13,7 @@ import "react-notifications/lib/notifications.css";
 import toaster from 'toasted-notes' 
 import 'toasted-notes/src/styles.css';
 
-const NavigationBar = () => {
+const NavigationBar = ({needToHide}) => {
   const [isNotif, setNotif] = useState(false);
 
   const history = useHistory();
@@ -47,20 +47,30 @@ const NavigationBar = () => {
 
   return (
     <div className="navbar-section">
-      <Navbar
-        bg="light"
-        expand="lg"
-        sticky="top"
-      >
-          <Nav.Link as={Link} to="/">
-            <Image src={Logo} fluid/>
-          </Nav.Link>
+      <Navbar bg="light" expand="lg" sticky="top">
+        {needToHide ? (
+          ""
+        ) : (
+          <>
+            {" "}
+            <Nav.Link as={Link} to="/dashboard/">
+              <Image src={Logo} fluid />
+            </Nav.Link>
+          </>
+        )}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
-          <Nav.Link as={Link} to="/dashboard/admin/">
-            Dashboard
-          </Nav.Link>
+          {needToHide ? (
+            ""
+          ) : (
+            <>
+              <Nav.Link as={Link} to="/dashboard/admin/">
+                Dashboard
+              </Nav.Link>
+            </>
+          )}
+
           <Nav.Link as={Link} to="/dashboard/admin/all-planner/new-project">
             Add New Project
           </Nav.Link>

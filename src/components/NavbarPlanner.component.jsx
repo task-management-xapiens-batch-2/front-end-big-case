@@ -66,7 +66,7 @@ const NavigationBar = () => {
         // className={`${isLogin === false ? "d-none" : ""}`}
         sticky="top"
       >
-          <Nav.Link as={Link} to="/">
+          <Nav.Link as={Link} to='/dashboard/'>
             <Image src={Logo} fluid/>
           </Nav.Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

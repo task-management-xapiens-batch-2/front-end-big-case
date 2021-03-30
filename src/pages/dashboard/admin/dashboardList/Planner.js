@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_PROJECT, GET_TASK_SUPERVISOR } from "../../../../graphql/queries";
+import { GET_TASK_PLANNER } from "../../../../graphql/queries";
 
 import ProjectComponent from "../../../../components/Project.component";
 import WorkerListPlannerComponent from "../../../../components/WorkerListPlanner.component";
@@ -11,12 +11,12 @@ import NavbarAllUserComponent from "../../../../components/NavbarAllUser.compone
 import NavigationBar from "../../../../components/NavbarSuperAdmin.component";
 
 const Planner = () => {
-  const { data, loading } = useQuery(GET_TASK_SUPERVISOR);
+  const { data, loading } = useQuery(GET_TASK_PLANNER);
   if (loading) return <div>Loading...</div>;
 
   console.log(data);
 
-  const getAllTaskSpv = data.findAllTaskSpv.map(
+  const getAllTaskPlanner = data.findAllTaskPlanner.map(
     ({ id, title, description, start_date, due_date }) => {
       return (
         <div key={id}>
@@ -61,7 +61,7 @@ const Planner = () => {
           </div>
           <NavigationBar />
 
-          <div className="col">{getAllTaskSpv}</div>
+          <div className="col">{getAllTaskPlanner}</div>
           <WorkerListPlannerComponent />
         </div>
       </div>

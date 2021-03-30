@@ -21,7 +21,7 @@ const Dashboard = () => {
     console.log(role);
     switch (role) {
       case "admin":
-        history.push("/dashboard/admin");
+        history.push("/dashboard/admin/");
         break;
       case "planner":
         history.push("/ dashboard/planner");
