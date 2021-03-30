@@ -34,7 +34,7 @@ const DashboardPlanner = () => {
       <NavigationBar />
       <div className="row">
         <div className="col-sm-12">
-          <JumbotronComponent />
+          <JumbotronComponent notPlanner={false}/>
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm">

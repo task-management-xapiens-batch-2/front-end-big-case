@@ -90,7 +90,7 @@ const DashboardSupervisor = () => {
       <NavigationBar />
       <div className="row">
         <div className="col-sm-12">
-          <JumbotronComponent />
+          <JumbotronComponent notPlanner={true}/>
           <div className="container-fluid">
             <MaterialTable
               columns={columns}

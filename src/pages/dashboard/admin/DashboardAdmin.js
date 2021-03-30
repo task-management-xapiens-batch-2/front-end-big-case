@@ -30,7 +30,7 @@ const DashboardAdmin = () => {
         <NavigationBar />
         <div className="row">
           <div className="col-sm-12">
-            <JumbotronComponent />
+            <JumbotronComponent notPlanner={true}/>
             <NavbarAdminComponent />
             <Switch>
               <Route
