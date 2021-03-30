@@ -79,7 +79,7 @@ export const GET_TASK_SUPERVISOR = gql`
       attachment
       status
       is_read
-      note {
+      notes {
         id
         task_id
         note
@@ -101,7 +101,7 @@ export const GET_TASK_PLANNER = gql`
       attachment
       status
       is_read
-      note {
+      notes {
         id
         task_id
         note

@@ -37,30 +37,10 @@ const DashboardPlanner = () => {
           <JumbotronComponent notPlanner={false}/>
           <div className="container-fluid">
             <div className="row">
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="Initiatives"
-                  status="Pending"
-                  search="Search initiative projects..."
-                />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="On Going"
-                  status="Not Started"
-                  search="Search on going projects..."
-                />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="Reject"
-                  status="Rejected"
-                  search="Search rejected projects..."
-                />
-              </div>
+              
             </div>
           </div>
-          <div className="col">{getAllTaskSpv}</div>
+          {/* <div className="col">{getAllTaskSpv}</div> */}
           <WorkerListPlannerComponent />
         </div>
       </div>

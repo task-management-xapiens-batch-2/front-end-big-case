@@ -16,52 +16,16 @@ const Planner = () => {
 
   console.log(data);
 
-  const getAllTaskPlanner = data.findAllTaskPlanner.map(
-    ({ id, title, description, start_date, due_date }) => {
-      return (
-        <div key={id}>
-          <ProjectComponent
-            title={title}
-            description={description}
-            start_date={start_date}
-            due_date={due_date}
-          />
-        </div>
-      );
-    }
-  );
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="Initiatives"
-                  status="Pending"
-                  search="Search initiative projects..."
-                />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="On Going"
-                  status="Not Started"
-                  search="Search on going projects..."
-                />
-              </div>
-              <div className="col-sm">
-                <TablePlannerComponent
-                  title="Reject"
-                  status="Rejected"
-                  search="Search rejected projects..."
-                />
-              </div>
+              
             </div>
           </div>
-          <NavigationBar />
 
-          <div className="col">{getAllTaskPlanner}</div>
           <WorkerListPlannerComponent />
         </div>
       </div>
