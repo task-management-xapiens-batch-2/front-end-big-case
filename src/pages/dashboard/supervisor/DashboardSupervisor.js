@@ -60,7 +60,6 @@ const DashboardSupervisor = () => {
 
   return (
     <div className="container-fluid">
-      <NavbarSupervisorComponent />
       {/* <Modal dataModal={newData}/> */}
       <Modal
           show={show}

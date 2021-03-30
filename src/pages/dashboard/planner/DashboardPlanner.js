@@ -29,9 +29,9 @@ const DashboardPlanner = () => {
       );
     }
   );
-  return (<>
-      <NavigationBar />
+  return (
     <div className="container-fluid">
+      <NavigationBar />
       <div className="row">
         <div className="col-sm-12">
           <JumbotronComponent />
@@ -60,12 +60,13 @@ const DashboardPlanner = () => {
               </div>
             </div>
           </div>
+      <NavigationBar />
+
           <div className="col">{getAllTaskSpv}</div>
           <WorkerListPlannerComponent />
         </div>
       </div>
     </div>
-    </>
   );
 };
 

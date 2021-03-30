@@ -13,11 +13,13 @@ import AddNewProject from './dashboard/planner/AddNewProject'
 
 import Login from "./Login";
 import MainTemplateProject from "./dashboard/planner/projectForm/MainTemplateProject";
+import NavigationBar from "../components/NavbarAllUser.component";
 
 const TaskManagement = () => {
   return (
     <div>
       <Router>
+        {/* <NavigationBar /> */}
         <LayoutComponent>
           <Switch>
             <Route exact path="/" component={Login} />
