@@ -236,42 +236,6 @@ export const CREATE_NOTE = gql`
   }
 `;
 
-export const CREATE_TASK = gql`
-  mutation CreateTask(
-    $project_id: Int
-    $assignee: Int
-    $title: String
-    $description: String
-    $start_date: String
-    $due_date: String
-    $attachment: String
-    $status: String
-    $is_read: String
-  ) {
-    createTask(
-      project_id: $project_id
-      assignee: $assignee
-      title: $title
-      description: $description
-      start_date: $start_date
-      due_date: $due_date
-      attachment: $attachment
-      status: $status
-      is_read: $is_read
-    ) {
-      project_id
-      assignee
-      title
-      description
-      start_date
-      due_date
-      attachment
-      status
-      is_read
-    }
-  }
-`;
-
 export const UPDATE_TASK = gql`
   mutation UpdateTask(
     $id: Int
@@ -325,19 +289,78 @@ export const UPDATE_IS_READ = gql`
   }
 `;
 
-export const DELETE_TASK = gql`
-  mutation DeleteTask($id: Int) {
-    deleteTask(id: $id) {
-      id
-    }
-  }
-`;
+
 
 export const STATUS_TO_DRAFT = gql`
   mutation StatusToDraft($id: Int, $status: String) {
     statusToDraft(id: $id, status: $status) {
       id
       status
+    }
+  }
+`;
+
+export const CREATE_PROJECT = gql`
+  mutation CreateProject($title: String, $description: String) {
+    createProject(title: $title, description: $description) {
+      id
+      created_by
+      title
+      description
+      is_complete
+    }
+  }
+`;
+
+export const UPDATE_PROJECT = gql`
+  mutation UpdateProject($title: String, $description: String) {
+    createProject(title: $title, description: $description) {
+      id
+      created_by
+      title
+      description
+      is_complete
+    }
+  }
+`;
+
+export const DELETE_PROJECT = gql`
+  mutation DeleteProject($id: Int) {
+    deleteProject(id: $id) {
+      id
+    }
+  }
+`;
+
+export const CREATE_TASK = gql`
+  mutation CreateTask(
+    $project_id: Int
+    $assignee: Int
+    $title: String
+    $description: String
+    $start_date: String
+    $due_date: String
+  ) {
+    createTask(
+      title: $title
+      description: $description
+      start_date: $start_date
+      due_date: $due_date
+    ) {
+      project_id
+      assignee
+      title
+      description
+      start_date
+      due_date
+    }
+  }
+`;
+
+export const DELETE_TASK = gql`
+  mutation DeleteTask($project_id: Int) {
+    deleteTask(project_id: $project_id) {
+      project_id
     }
   }
 `;

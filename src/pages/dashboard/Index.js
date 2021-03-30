@@ -24,7 +24,7 @@ const Dashboard = () => {
         history.push("/dashboard/admin/");
         break;
       case "planner":
-        history.push("/ dashboard/planner");
+        history.push("/dashboard/planner");
         break;
       case "supervisor":
         history.push("/dashboard/supervisor");
