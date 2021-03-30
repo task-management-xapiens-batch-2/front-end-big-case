@@ -102,7 +102,10 @@ const TablePlanComponent = () => {
   useEffect(() => {
     if (data)
       createProject({
-        variables: { title: "hello", description: "falserajw" },
+        variables: {
+          title: data.createProject.title,
+          description: "falserajw",
+        },
       });
   }, [data, createProject]);
 
@@ -115,10 +118,7 @@ const TablePlanComponent = () => {
 
   const handleCreateProject = (e) => {
     e.preventDefault();
-    createProject(...data, {
-      variables: { title: "halo", description: "world" },
-    });
-    console.log(data);
+    createProject(...data);
   };
 
   const getAllProject = data.findAllproject.map(
@@ -198,13 +198,13 @@ const TablePlanComponent = () => {
           <Grid container>
             <Grid item xs={6}>
               <InputFormComponent
-                onChange={(e) => e.target.value}
+                onChange={(e) => setTitle(e.target.value)}
                 value={title}
                 label="Project Name"
                 name="projectName"
               />
               <InputFormComponent
-                onChange={(e) => e.target.value}
+                onChange={(e) => setDescription(e.target.value)}
                 value={description}
                 label="Project Description"
                 name="projectDesc"
