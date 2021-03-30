@@ -10,7 +10,7 @@ const WorkerListPlanner = () => {
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
     { title: "Password", field: "password" },
-    { title: "Role", field: "role", lookup: {worker: "Worker"} },
+    { title: "Role", field: "role", lookup: {worker: "worker"} },
   ]);
 
   const [newData, setNewData] = useState([]);
@@ -32,12 +32,12 @@ const WorkerListPlanner = () => {
 
   if (loading) return <h1>Loading...</h1>;
 
-  const rawData = newData.map((o) => ({ ...o }));
+  const workerData = newData.map((o) => ({ ...o }));
 
   const plannerList = (
     <MaterialTable
       columns={columns}
-      data={rawData}
+      data={workerData}
       title="Worker List"
       options={{
         headerStyle: {

@@ -172,33 +172,33 @@ export const CREATE_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser(
-    $id: Int
-    $fullname: String
-    $username: String
-    $email: String
-    $password: String
-    $role: String
-    $spv_id: Int
+ mutation UpdateUser(
+  $id: Int
+  $fullname: String
+  $username: String
+  $email: String
+  $password: String
+  $role: String
+  $spv_id: Int
+) {
+  updateUser(
+    id: $id
+    fullname: $fullname
+    username: $username
+    email: $email
+    password: $password
+    role: $role
+    spv_id: $spv_id
   ) {
-    updateUser(
-      id: $id
-      fullname: $fullname
-      username: $username
-      email: $email
-      password: $password
-      role: $role
-      spv_id: $spv_id
-    ) {
-      id
-      fullname
-      username
-      email
-      password
-      role
-      spv_id
-    }
+    id
+    fullname
+    username
+    email
+    password
+    role
+    spv_id
   }
+}
 `;
 
 export const DELETE_USER = gql`

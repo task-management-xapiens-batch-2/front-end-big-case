@@ -60,8 +60,6 @@ const DashboardPlanner = () => {
               </div>
             </div>
           </div>
-      <NavigationBar />
-
           <div className="col">{getAllTaskSpv}</div>
           <WorkerListPlannerComponent />
         </div>
