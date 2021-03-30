@@ -58,11 +58,6 @@ export const GET_TASK_PLANNER = gql`
       attachment
       is_read
       status
-      note {
-        id
-        task_id
-        note
-      }
     }
   }
 `;
@@ -75,6 +70,15 @@ export const GET_ALL_PROJECT = gql`
       title
       description
       is_complete
+    }
+  }
+`;
+
+export const FIND_ONE_PROJECT = gql`
+  query {
+    findOneProjectById(id: 5) {
+      title
+      created_by
     }
   }
 `;

@@ -1,7 +1,6 @@
 import React from "react";
 import JumbotronComponent from "../../../components/Jumbotron.component";
 import TablePlanComponent from "../../../components/Table/TablePlan.component";
-import PlannerTaskList from "../../../components/TableX.component";
 
 const DashboardPlanner = () => {
   return (

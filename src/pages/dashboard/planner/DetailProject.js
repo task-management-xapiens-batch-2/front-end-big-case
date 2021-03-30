@@ -12,7 +12,7 @@ const DetailProject = (props) => {
   const id = props.match.params.id;
 
   if (loading) return "Loading...";
-  if (error) return "Error bos...";
+  if (error) return "Error...";
 
   console.log(data.findAllTaskPlanner);
   const getTaskDetail = data.findAllTaskPlanner.map(

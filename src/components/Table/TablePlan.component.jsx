@@ -92,22 +92,13 @@ const TablePlanComponent = () => {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [newProject, setNewProject] = useState({});
 
-  const { data, loading, error } = useQuery(GET_ALL_PROJECT);
+  const { data, loading, error, refetch } = useQuery(GET_ALL_PROJECT);
   const [createProject] = useMutation(CREATE_PROJECT);
   const [deleteProject] = useMutation(DELETE_PROJECT);
 
-  useEffect(() => {
-    if (data)
-      createProject({
-        variables: {
-          title: data.createProject.title,
-          description: "falserajw",
-        },
-      });
-  }, [data, createProject]);
+  console.log(data);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Fetching failed..</div>;
@@ -116,19 +107,28 @@ const TablePlanComponent = () => {
     setIsOpen(true);
   };
 
-  const handleCreateProject = (e) => {
+  const handleChangeProject = (e) => {
+    setNewProject({ ...newProject, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmitProject = (e) => {
+    createProject({
+      variables: {
+        ...newProject,
+      },
+    });
     e.preventDefault();
-    createProject(...data);
   };
 
   const getAllProject = data.findAllproject.map(
     ({ id, title, description }) => {
       return (
-        <TableRow
-          key={id}
-          onClick={() => history.push(`/dashboard/planner/project/${id}`)}
-        >
-          <TableCell>{title}</TableCell>
+        <TableRow key={id}>
+          <TableCell
+            onClick={() => history.push(`/dashboard/planner/project/${id}`)}
+          >
+            {title}
+          </TableCell>
           <TableCell>{description}</TableCell>
           <TableCell>aiwheroi</TableCell>
           {/* <TableCell>{status ? "Submitted" : status}</TableCell> */}
@@ -136,7 +136,13 @@ const TablePlanComponent = () => {
             <ActionButton onClick={() => handleEdit()} color="primary">
               <EditOutlinedIcon fontSize="small" />
             </ActionButton>
-            <ActionButton color="secondary">
+            <ActionButton
+              onClick={() => {
+                deleteProject({ variables: { id: id } });
+                refetch();
+              }}
+              color="secondary"
+            >
               <CloseIcon fontSize="small" />
             </ActionButton>
           </TableCell>
@@ -194,18 +200,16 @@ const TablePlanComponent = () => {
         </Table>
       </Paper>
       <Popup title="Add a New Project" openPopup={isOpen} setIsOpen={setIsOpen}>
-        <form onSubmit={handleCreateProject} className={classes.root}>
+        <form onSubmit={handleSubmitProject} className={classes.root}>
           <Grid container>
             <Grid item xs={6}>
               <InputFormComponent
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
+                onChange={handleChangeProject}
                 label="Project Name"
                 name="projectName"
               />
               <InputFormComponent
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
+                onChange={handleChangeProject}
                 label="Project Description"
                 name="projectDesc"
               />
