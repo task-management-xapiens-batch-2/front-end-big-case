@@ -1,22 +1,22 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_PROJECT } from "../../../../graphql/queries";
+import { GET_ALL_PROJECT, GET_TASK_SUPERVISOR } from "../../../../graphql/queries";
 
 import ProjectComponent from "../../../../components/Project.component";
-import WorkerListPlannerComponent from '../../../../components/WorkerListPlanner.component'
+import WorkerListPlannerComponent from "../../../../components/WorkerListPlanner.component";
 // import ButtonComponent from "../components/Button.component";
 import JumbotronComponent from "../../../../components/Jumbotron.component";
 import TablePlannerComponent from "../../../../components/TablePlanner.component";
 import NavbarAllUserComponent from "../../../../components/NavbarAllUser.component";
-
+import NavigationBar from "../../../../components/NavbarSuperAdmin.component";
 
 const Planner = () => {
-  const { data, loading } = useQuery(GET_ALL_PROJECT);
+  const { data, loading } = useQuery(GET_TASK_SUPERVISOR);
   if (loading) return <div>Loading...</div>;
 
   console.log(data);
 
-  const getAllProject = data.findAllTask.map(
+  const getAllTaskSpv = data.findAllTaskSpv.map(
     ({ id, title, description, start_date, due_date }) => {
       return (
         <div key={id}>
@@ -31,8 +31,7 @@ const Planner = () => {
     }
   );
   return (
-    <div className="container-fluid my-5">
-      <NavbarAllUserComponent />
+    <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
           <div className="container-fluid">
@@ -60,7 +59,9 @@ const Planner = () => {
               </div>
             </div>
           </div>
-          <div className="col">{getAllProject}</div>
+          <NavigationBar />
+
+          <div className="col">{getAllTaskSpv}</div>
           <WorkerListPlannerComponent />
         </div>
       </div>
