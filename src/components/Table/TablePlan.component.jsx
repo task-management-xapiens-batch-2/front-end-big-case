@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Paper,
   makeStyles,
@@ -12,6 +12,11 @@ import {
   TableHead,
   TableSortLabel,
   TableBody,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
@@ -22,8 +27,14 @@ import { useMutation, useQuery } from "@apollo/client";
 import Popup from "../Popup.component";
 import TableFormComponent from "./TableForm.component";
 import { useHistory } from "react-router";
-import { GET_TASK_PLANNER } from "../../graphql/queries";
-import { CREATE_TASK, DELETE_TASK } from "../../graphql/mutation";
+import { GET_ALL_PROJECT, GET_TASK_PLANNER } from "../../graphql/queries";
+import {
+  CREATE_PROJECT,
+  CREATE_TASK,
+  DELETE_PROJECT,
+  DELETE_TASK,
+} from "../../graphql/mutation";
+import InputFormComponent from "./InputForm.component";
 
 const useStyles = makeStyles((theme) => ({
   tableContent: {
@@ -57,6 +68,22 @@ const useStyles = makeStyles((theme) => ({
       width: "80%",
       margin: theme.spacing(1),
     },
+    "& .MuiPaper-root": {
+      width: "80%",
+      margin: theme.spacing(1),
+    },
+  },
+  label: {
+    textTransform: "uppercase",
+  },
+  dateField: {
+    marginTop: theme.spacing(2),
+  },
+  note: {
+    marginBottom: theme.spacing(2),
+  },
+  buttonPop: {
+    marginTop: theme.spacing(2.6),
   },
 }));
 
@@ -67,14 +94,17 @@ const TablePlanComponent = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [projectId, setProjectId] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [assignee, setAssignee] = useState("");
 
-  const { data, loading, error } = useQuery(GET_TASK_PLANNER);
-  const [createTask] = useMutation(CREATE_TASK);
-  const [deleteTask] = useMutation(DELETE_TASK);
+  const { data, loading, error } = useQuery(GET_ALL_PROJECT);
+  const [createProject] = useMutation(CREATE_PROJECT);
+  const [deleteProject] = useMutation(DELETE_PROJECT);
+
+  useEffect(() => {
+    if (data)
+      createProject({
+        variables: { title: "hello", description: "falserajw" },
+      });
+  }, [data, createProject]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Fetching failed..</div>;
@@ -85,20 +115,23 @@ const TablePlanComponent = () => {
 
   const handleCreateProject = (e) => {
     e.preventDefault();
-    createTask({ variables: { title, description, startDate, dueDate } });
-    setIsOpen(false);
+    createProject(...data, {
+      variables: { title: "halo", description: "world" },
+    });
+    console.log(data);
   };
 
-  const getAllProject = data.findAllTaskPlanner.map(
-    ({ id, title, start_date, status }) => {
+  const getAllProject = data.findAllproject.map(
+    ({ id, title, description }) => {
       return (
         <TableRow
           key={id}
           onClick={() => history.push(`/dashboard/planner/project/${id}`)}
         >
           <TableCell>{title}</TableCell>
-          <TableCell>{start_date}</TableCell>
-          <TableCell>{status ? "Submitted" : status}</TableCell>
+          <TableCell>{description}</TableCell>
+          <TableCell>aiwheroi</TableCell>
+          {/* <TableCell>{status ? "Submitted" : status}</TableCell> */}
           <TableCell>
             <ActionButton onClick={() => handleEdit()} color="primary">
               <EditOutlinedIcon fontSize="small" />
@@ -161,11 +194,81 @@ const TablePlanComponent = () => {
         </Table>
       </Paper>
       <Popup title="Add a New Project" openPopup={isOpen} setIsOpen={setIsOpen}>
-        <TableFormComponent
-          submit={handleCreateProject}
-          title={(e) => setTitle(e.target.value)}
-          desc={(e) => setDescription(e.target.value)}
-        />
+        <form onSubmit={handleCreateProject} className={classes.root}>
+          <Grid container>
+            <Grid item xs={6}>
+              <InputFormComponent
+                onChange={(e) => e.target.value}
+                value={title}
+                label="Project Name"
+                name="projectName"
+              />
+              <InputFormComponent
+                onChange={(e) => e.target.value}
+                value={description}
+                label="Project Description"
+                name="projectDesc"
+              />
+              <InputFormComponent label="Task Title" name="taskTitle" />
+              <InputFormComponent label="Task Description" name="taskDesc" />
+              <InputFormComponent label="Note" />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Assign Worker</InputLabel>
+                <Select label="Assign Worker" variant="outlined">
+                  <MenuItem value="">None</MenuItem>
+                </Select>
+                <TextField
+                  label="Start Date"
+                  type="date"
+                  variant="outlined"
+                  fullWidth
+                  className={classes.dateField}
+                  InputLabelProps={{ shrink: true }}
+                />
+                <TextField
+                  label="End Date"
+                  type="date"
+                  variant="outlined"
+                  fullWidth
+                  className={classes.dateField}
+                  InputLabelProps={{ shrink: true }}
+                />
+                <TextField
+                  label="Attachment"
+                  type="file"
+                  variant="outlined"
+                  fullWidth
+                  className={classes.dateField}
+                  InputLabelProps={{ shrink: true }}
+                />
+                <Grid container className={classes.buttonPop}>
+                  <Grid item xs={3}>
+                    <Button
+                      className={classes.label}
+                      color="primary"
+                      size="large"
+                      variant="contained"
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Button
+                      className={classes.label}
+                      color="primary"
+                      size="large"
+                      variant="contained"
+                    >
+                      Draft
+                    </Button>
+                  </Grid>
+                </Grid>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </form>
       </Popup>
     </Fragment>
   );
