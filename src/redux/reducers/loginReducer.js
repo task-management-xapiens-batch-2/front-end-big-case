@@ -1,8 +1,7 @@
 import {LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS} from '../actions/actionTypes'
 
 const initialState = {
-    email: "",
-    password: ""
+    errorMsg: "",
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -12,6 +11,7 @@ const loginReducer = (state = initialState, action) => {
             return state
         case LOGIN_SUCCESS:
             return {
+                ...state,
                 data: payload
             }
         case LOGIN_FAILED:

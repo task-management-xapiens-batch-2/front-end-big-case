@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { postLoginFailed, postLoginSuccess, postLoginRequest, postUserLogin } from "../redux/actions/loginAction";
+import { postUserLogin } from "../redux/actions/loginAction";
 
 const formValidationSchema = Yup.object({
   email: Yup.string("Enter your email address")
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = ({postUserLogin}) => {
+  const history = useHistory();
   const classes = useStyles();
 
   return (
@@ -62,8 +63,8 @@ const Login = ({postUserLogin}) => {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={formValidationSchema}
-          onSubmit={async ({ email, password }) =>
-           await postUserLogin(email, password)
+          onSubmit={({ email, password }) =>
+             postUserLogin(email, password)
           }
           className={classes.form}
           noValidate
@@ -138,15 +139,9 @@ const Login = ({postUserLogin}) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-
-//   }
-// }
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    postUserLogin: () => dispatch(postUserLogin()),
+    postUserLogin: (email, password) => dispatch(postUserLogin(email, password)),
   }
 }
 
