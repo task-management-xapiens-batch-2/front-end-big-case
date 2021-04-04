@@ -15,8 +15,9 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
-const apiUrl = "https://ex-man.herokuapp.com/api/auth/login";
+import { connect } from "react-redux";
+import { postLoginFailed, postLoginSuccess, postLoginRequest } from "../redux/actions/loginAction";
+import {urlPost} from '../configs/urlConfig'
 
 const formValidationSchema = Yup.object({
   email: Yup.string("Enter your email address")
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({postLoginSuccess, postLoginFailed, postLoginRequest}) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -66,7 +67,7 @@ const Login = () => {
           validationSchema={formValidationSchema}
           onSubmit={async ({ email, password }) =>
             await axios
-              .post(`${apiUrl}`, { email, password })
+              .post(`${urlPost}`, { email, password })
               .then((res) => {
                 console.log(res);
                 localStorage.setItem("token", res.data.data.token);
@@ -154,4 +155,18 @@ const Login = () => {
   );
 };
 
-export default Login;
+// const mapStateToProps = (state) => {
+//   return {
+
+//   }
+// }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postLoginRequest: () => dispatch(postLoginRequest()),
+    postLoginSuccess: () => dispatch(postLoginSuccess()),
+    postLoginFailed: () => dispatch(postLoginFailed()),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);
