@@ -13,11 +13,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { postLoginFailed, postLoginSuccess, postLoginRequest } from "../redux/actions/loginAction";
-import {urlPost} from '../configs/urlConfig'
+import { postLoginFailed, postLoginSuccess, postLoginRequest, postUserLogin } from "../redux/actions/loginAction";
 
 const formValidationSchema = Yup.object({
   email: Yup.string("Enter your email address")
@@ -48,9 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({postLoginSuccess, postLoginFailed, postLoginRequest}) => {
+const Login = ({postUserLogin}) => {
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,24 +60,10 @@ const Login = ({postLoginSuccess, postLoginFailed, postLoginRequest}) => {
           Sign in
         </Typography>
         <Formik
-          initialValues={{ username: "", password: "" }}
+          initialValues={{ email: "", password: "" }}
           validationSchema={formValidationSchema}
           onSubmit={async ({ email, password }) =>
-            await axios
-              .post(`${urlPost}`, { email, password })
-              .then((res) => {
-                console.log(res);
-                localStorage.setItem("token", res.data.data.token);
-                localStorage.setItem("id", res.data.data.id);
-                localStorage.setItem("role", res.data.data.role);
-                localStorage.setItem("email", res.data.data.email);
-                localStorage.setItem("spv_id", res.data.data.spv_id);
-                localStorage.setItem("fullname", res.data.data.fullname);
-                localStorage.setItem("username", res.data.data.username);
-                localStorage.setItem("email", res.data.data.email);
-                history.push("/dashboard");
-              })
-              .catch((err) => alert(err))
+           await postUserLogin(email, password)
           }
           className={classes.form}
           noValidate
@@ -163,9 +146,7 @@ const Login = ({postLoginSuccess, postLoginFailed, postLoginRequest}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postLoginRequest: () => dispatch(postLoginRequest()),
-    postLoginSuccess: () => dispatch(postLoginSuccess()),
-    postLoginFailed: () => dispatch(postLoginFailed()),
+    postUserLogin: () => dispatch(postUserLogin()),
   }
 }
 

@@ -2,15 +2,15 @@ import {LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS} from './actionTypes'
 import {urlPost} from '../../configs/urlConfig'
 import axios from 'axios'
 
-export const postUserLogin = (email, password) => {
+export const postUserLogin = () => {
     return (dispatch) => {
         dispatch(postLoginRequest());
         axios({
           method: "POST",
           url: urlPost,
           data: {
-              email: email,
-              password: password
+              email: "adminbaru@gmail.com",
+              password: "password"
           }
         })
           .then(({ data }) => {
