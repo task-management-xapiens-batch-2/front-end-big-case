@@ -1,6 +1,8 @@
 import {combineReducers as combiner} from 'redux'
-import loginReducer from '../reducers/loginReducer'
+import loginReducer from './loginReducer'
+import spvReducer from './spvReducer'
 
 export default combiner({
-    login: loginReducer
+    login: loginReducer,
+    spv: spvReducer
 })
