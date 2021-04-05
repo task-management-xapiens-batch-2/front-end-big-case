@@ -1,3 +1,3 @@
-export const urlConfig = "https://ex-man.herokuapp.com/graphql";
+export const urlConfig = "https://x-management.herokuapp.com/graphql";
 
-export const urlPost = "https://ex-man.herokuapp.com/api/auth/login"
+export const urlPost = "https://x-management.herokuapp.com/api/auth/login"

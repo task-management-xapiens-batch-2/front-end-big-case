@@ -31,14 +31,13 @@ export const client = new ApolloClient({
 
 export const GET_USER_FROM_ADMIN = gql`
   query {
-    findAllUserSpv {
+    findAllUser {
       id
       fullname
       username
       email
       password
       role
-      spv_id
     }
   }
 `;
@@ -172,33 +171,33 @@ export const CREATE_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
- mutation UpdateUser(
-  $id: Int
-  $fullname: String
-  $username: String
-  $email: String
-  $password: String
-  $role: String
-  $spv_id: Int
-) {
-  updateUser(
-    id: $id
-    fullname: $fullname
-    username: $username
-    email: $email
-    password: $password
-    role: $role
-    spv_id: $spv_id
+  mutation UpdateUser(
+    $id: Int
+    $fullname: String
+    $username: String
+    $email: String
+    $password: String
+    $role: String
+    $spv_id: Int
   ) {
-    id
-    fullname
-    username
-    email
-    password
-    role
-    spv_id
+    updateUser(
+      id: $id
+      fullname: $fullname
+      username: $username
+      email: $email
+      password: $password
+      role: $role
+      spv_id: $spv_id
+    ) {
+      id
+      fullname
+      username
+      email
+      password
+      role
+      spv_id
+    }
   }
-}
 `;
 
 export const DELETE_USER = gql`
@@ -288,8 +287,6 @@ export const UPDATE_IS_READ = gql`
     }
   }
 `;
-
-
 
 export const STATUS_TO_DRAFT = gql`
   mutation StatusToDraft($id: Int, $status: String) {
