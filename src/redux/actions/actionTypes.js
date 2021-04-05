@@ -5,7 +5,7 @@ export const LOGIN_FAILED = "LOGIN_FAILED"
 export const GET_USER_LOGIN = "GET_USER_LOGIN"
 export const GET_USER_LOGIN_DATA = "GET_USER_LOGIN_DATA"
 
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
+export const LOGOUT = "LOGOUT"
 
 export const SPV_DATA_REQUEST = "SPV_DATA_REQUEST"
 export const SPV_DATA_SUCCESS = "SPV_DATA_SUCCESS"

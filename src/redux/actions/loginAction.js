@@ -2,6 +2,7 @@ import {
   LOGIN_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT,
   GET_USER_LOGIN_DATA,
 } from "./actionTypes";
 import { urlPost } from "../../configs/urlConfig";
@@ -73,5 +74,11 @@ export const postLoginFailed = (message) => {
   return {
     type: LOGIN_FAILED,
     payload: message,
+  };
+};
+
+export const logout = () => {
+  return {
+    type: LOGOUT,
   };
 };

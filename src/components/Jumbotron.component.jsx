@@ -1,14 +1,14 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
 const JumbotronComponent = ({ notPlanner, fullname }) => {
   return (
     <div className="jumbotron">
       <h1 className="display-4 text-capitalize">Hi, {fullname}! </h1>
       <p className="lead">
-        Have a good day!
+        Welcome to user panel for planner and worker. Here you can create, edit,
+        and delete planner and worker.
       </p>
       <p className="lead">
         {notPlanner ? (
@@ -27,10 +27,10 @@ const JumbotronComponent = ({ notPlanner, fullname }) => {
   );
 };
 
-const mapStateToProps = state => {
-    return {
-        fullname: state.login.fullname
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    fullname: state.login.fullname,
+  };
+};
 
 export default connect(mapStateToProps, null)(JumbotronComponent);

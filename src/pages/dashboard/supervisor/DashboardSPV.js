@@ -6,7 +6,7 @@ const DashboardSPV = () => {
     return (
         <>
             <NavigationBar />
-            <Jumbotron />
+            <Jumbotron notPlanner={true}/>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import {GET_USER_LOGIN_DATA, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS} from '../actions/actionTypes'
+import {GET_USER_LOGIN_DATA, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT} from '../actions/actionTypes'
 
 const initialState = {
     errorMsg: "",
@@ -28,6 +28,9 @@ const loginReducer = (state = initialState, action) => {
                 ...state,
                 fullname: payload
             }
+        case LOGOUT:
+            localStorage.clear()
+            return state
         default:
             return state
     }

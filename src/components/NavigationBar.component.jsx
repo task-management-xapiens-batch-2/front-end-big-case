@@ -12,8 +12,10 @@ import {
 import { BsBell } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { NavLink, Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import {logout} from '../redux/actions/loginAction'
 
-const NavigationBar = () => {
+const NavigationBar = ({logout}) => {
   const history = useHistory();
   return (
     <div className="navbar-section">
@@ -35,7 +37,7 @@ const NavigationBar = () => {
             className="mr-sm-2 rounded-circle"
             variant="outline-danger"
             onClick={() => {
-              localStorage.clear();
+              logout()
               history.push("/");
               window.location.reload();
             }}
@@ -48,4 +50,5 @@ const NavigationBar = () => {
   );
 };
 
-export default NavigationBar;
+
+export default connect(null, {logout})(NavigationBar);
