@@ -50,17 +50,17 @@ const TableSPV = ({ columnData }) => {
                 resolve();
               }, 200);
             }),
-          onRowUpdate: (newNewData, oldData) =>
-            new Promise((resolve, reject) => {
-              setTimeout(() => {
-                const dataUpdate = [...plannerData];
-                const index = oldData.tableData.id;
-                dataUpdate[index] = newNewData;
-                updateUser({ variables: { ...newNewData } });
-                // refetch();
-                resolve();
-              }, 200);
-            }),
+        //   onRowUpdate: (newNewData, oldData) =>
+        //     new Promise((resolve, reject) => {
+        //       setTimeout(() => {
+        //         const dataUpdate = [...plannerData];
+        //         const index = oldData.tableData.id;
+        //         dataUpdate[index] = newNewData;
+        //         updateUser({ variables: { ...newNewData } });
+        //         // refetch();
+        //         resolve();
+        //       }, 200);
+        //     }),
           onRowDelete: (oldData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {

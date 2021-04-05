@@ -144,20 +144,18 @@ export const GET_ALL_PROJECT = gql`
 `;
 
 export const CREATE_USER = gql`
-  mutation RegisterUser(
-    $fullname: String
+  mutation CreateUser(
+    $fullname: String!
     $username: String!
     $email: String!
     $password: String!
-    $spv_id: Int
     $role: String!
   ) {
-    registerUser(
+    createUser(
       fullname: $fullname
       username: $username
       email: $email
       password: $password
-      spv_id: $spv_id
       role: $role
     ) {
       fullname
@@ -165,7 +163,6 @@ export const CREATE_USER = gql`
       email
       password
       role
-      spv_id
     }
   }
 `;
@@ -201,7 +198,7 @@ export const UPDATE_USER = gql`
 `;
 
 export const DELETE_USER = gql`
-  mutation DeleteUser($id: Int!) {
+  mutation DeleteUser($id: Int) {
     deleteUser(id: $id) {
       id
     }

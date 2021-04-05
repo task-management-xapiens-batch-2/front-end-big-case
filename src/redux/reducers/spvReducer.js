@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   columnData: [
-    { title: "No", field: "id" },
+    // { title: "No", field: "id" },
     { title: "Full Name", field: "fullname" },
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
