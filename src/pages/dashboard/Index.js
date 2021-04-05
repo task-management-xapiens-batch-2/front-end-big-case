@@ -1,27 +1,19 @@
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { useQuery } from "@apollo/client";
-import { GET_USER_FROM_ADMIN } from "../../graphql/queries";
+import {getUserLoginData} from '../../redux/actions/loginAction'
 
-// import ButtonComponent from "../components/Button.component";
-import DashboardAdmin from "../dashboard/admin/DashboardAdmin";
-import DashboardPlanner from "../dashboard/planner/DashboardPlanner";
-import DashboardSupervisor from "../dashboard/supervisor/DashboardSupervisor";
-
-const Dashboard = () => {
+const Dashboard = ({role}) => {
   const history = useHistory()
   useEffect(() => {
     getUserData();
   }, []);
 
   const getUserData = () => {
-    // let fakeRole = "supervisor"
-    const role = localStorage.getItem("role");
-
-    console.log(role);
+    // window.location.reload()
     switch (role) {
-      case "admin":
-        history.push("/dashboard/admin/");
+      case "admin": 
+        history.push("/dashboard/supervisor/");
         break;
       case "planner":
         history.push("/dashboard/planner");
@@ -36,4 +28,10 @@ const Dashboard = () => {
   return getUserData
 };
 
-export default Dashboard;
+const mapStateToProps = state => {
+  return {
+    role: state.login.role
+  }
+}
+
+export default connect(mapStateToProps, {getUserLoginData})(Dashboard);

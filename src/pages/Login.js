@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({postUserLogin}) => {
-  const history = useHistory();
+const Login = ({ postUserLogin }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,9 +63,10 @@ const Login = ({postUserLogin}) => {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={formValidationSchema}
-          onSubmit={({ email, password }) =>
-             postUserLogin(email, password)
-          }
+          onSubmit={({ email, password }) => {
+            postUserLogin(email, password);
+            history.push("./dashboard");
+          }}
           className={classes.form}
           noValidate
         >
@@ -141,8 +142,9 @@ const Login = ({postUserLogin}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postUserLogin: (email, password) => dispatch(postUserLogin(email, password)),
-  }
-}
+    postUserLogin: (email, password) =>
+      dispatch(postUserLogin(email, password)),
+  };
+};
 
 export default connect(null, mapDispatchToProps)(Login);

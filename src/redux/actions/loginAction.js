@@ -1,4 +1,9 @@
-import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "./actionTypes";
+import {
+  LOGIN_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  GET_USER_LOGIN_DATA,
+} from "./actionTypes";
 import { urlPost } from "../../configs/urlConfig";
 import axios from "axios";
 
@@ -17,20 +22,37 @@ export const postUserLogin = (email, password) => {
     })
       .then(({ data }) => {
         const articles = data;
-        localStorage.setItem("token", data.data.token);
-        localStorage.setItem("id", data.data.id);
-        localStorage.setItem("role", data.data.role);
-        localStorage.setItem("email", data.data.email);
-        localStorage.setItem("spv_id", data.data.spv_id);
-        localStorage.setItem("fullname", data.data.fullname);
-        localStorage.setItem("username", data.data.username);
-        localStorage.setItem("email", data.data.email);
-        // console.log(success)
-        dispatch(postLoginSuccess(articles));
+        const isSuccess = data.success;
+        const fetchingData = async () => {
+          await localStorage.setItem("token", data.data.token);
+          await localStorage.setItem("id", data.data.id);
+          await localStorage.setItem("role", data.data.role);
+          await localStorage.setItem("email", data.data.email);
+          await localStorage.setItem("spv_id", data.data.spv_id);
+          await localStorage.setItem("fullname", data.data.fullname);
+          await localStorage.setItem("username", data.data.username);
+          await localStorage.setItem("email", data.data.email);
+        };
+        fetchingData()
+          .then(dispatch(getUserLoginData(isSuccess)))
+          .then(dispatch(postLoginSuccess(articles)));
       })
       .catch(({ message }) => {
         dispatch(postLoginFailed(message));
       });
+  };
+};
+
+export const getUserLogin = () => {
+  return (dispatch) => {
+    dispatch(getUserLoginData());
+  };
+};
+
+export const getUserLoginData = (success) => {
+  return {
+    type: GET_USER_LOGIN_DATA,
+    payload: success,
   };
 };
 
