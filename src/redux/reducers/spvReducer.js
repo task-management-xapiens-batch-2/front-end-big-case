@@ -1,26 +1,41 @@
-import { SPV_COLUMN_DATA } from "../actions/actionTypes";
+import {
+  SPV_COLUMN_DATA,
+  SPV_CREATE_USER,
+  SPV_UPDATE_USER,
+  SPV_DELETE_USER,
+  SPV_DATA_REQUEST,
+} from "../actions/actionTypes";
 
-const initialState = [
-  { title: "No", field: "id" },
-  { title: "Full Name", field: "fullname" },
-  { title: "Username", field: "username" },
-  { title: "Email Address", field: "email" },
-  { title: "Password", field: "password" },
-  {
-    title: "Role",
-    field: "role",
-    lookup: { worker: "worker", planner: "planner" },
-  },
-];
+const initialState = {
+  columnData: [
+    // { title: "No", field: "id" },
+    { title: "Full Name", field: "fullname" },
+    { title: "Username", field: "username" },
+    { title: "Email Address", field: "email" },
+    // { title: "Password", field: "password" },
+    {
+      title: "Role",
+      field: "role",
+      lookup: { worker: "worker", planner: "planner" },
+    },
+  ],
+  userData: []
+};
 
 const spvReducer = (state = initialState, action) => {
-    const {payload, type} = action
-    switch(type) {
-        case SPV_COLUMN_DATA:
-            return state
-        default:
-            return state
-    }
-}
+  const { payload, type } = action;
+  console.log(payload)
+  switch (type) {
+    case SPV_COLUMN_DATA:
+      return state;
+    case SPV_DATA_REQUEST:
+        return {
+            ...state,
+            userData: payload
+        }
+    default:
+      return state;
+  }
+};
 
 export default spvReducer;
