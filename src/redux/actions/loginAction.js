@@ -49,10 +49,10 @@ export const getUserLogin = () => {
   };
 };
 
-export const getUserLoginData = (success) => {
+export const getUserLoginData = (fullname) => {
   return {
     type: GET_USER_LOGIN_DATA,
-    payload: success,
+    payload: fullname,
   };
 };
 

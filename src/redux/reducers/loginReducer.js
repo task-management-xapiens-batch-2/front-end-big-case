@@ -1,8 +1,9 @@
-import {GET_USER_LOGIN, GET_USER_LOGIN_DATA, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS} from '../actions/actionTypes'
+import {GET_USER_LOGIN_DATA, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS} from '../actions/actionTypes'
 
 const initialState = {
     errorMsg: "",
     role: localStorage.getItem("role"),
+    fullname: localStorage.getItem("fullname"),
     success: false
 }
 
@@ -25,7 +26,7 @@ const loginReducer = (state = initialState, action) => {
         case GET_USER_LOGIN_DATA:
             return {
                 ...state,
-                success: payload
+                fullname: payload
             }
         default:
             return state
