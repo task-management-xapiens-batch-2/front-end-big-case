@@ -1,18 +1,15 @@
 import {
   SPV_COLUMN_DATA,
-  SPV_CREATE_USER,
-  SPV_UPDATE_USER,
-  SPV_DELETE_USER,
   SPV_DATA_REQUEST,
 } from "../actions/actionTypes";
 
 const initialState = {
   columnData: [
-    // { title: "No", field: "id" },
+    { title: "No", field: "id" },
     { title: "Full Name", field: "fullname" },
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
-    // { title: "Password", field: "password" },
+    { title: "Password", field: "password" },
     {
       title: "Role",
       field: "role",

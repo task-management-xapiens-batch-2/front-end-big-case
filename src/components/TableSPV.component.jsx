@@ -11,7 +11,7 @@ import { useMutation, useQuery } from "@apollo/client";
 
 const TableSPV = ({ columnData }) => {
   const { data, loading, refetch } = useQuery(GET_USER_FROM_ADMIN, {
-    pollInterval: 1000,
+    pollInterval: 100,
   });
 
   const [createUser] = useMutation(CREATE_USER);
@@ -46,7 +46,7 @@ const TableSPV = ({ columnData }) => {
                     ...newNewData,
                   },
                 });
-                refetch();
+                // refetch();
                 resolve();
               }, 200);
             }),
@@ -57,7 +57,7 @@ const TableSPV = ({ columnData }) => {
                 const index = oldData.tableData.id;
                 dataUpdate[index] = newNewData;
                 updateUser({ variables: { ...newNewData } });
-                refetch();
+                // refetch();
                 resolve();
               }, 200);
             }),
@@ -65,7 +65,7 @@ const TableSPV = ({ columnData }) => {
             new Promise((resolve, reject) => {
               setTimeout(() => {
                 deleteUser({ variables: { id: oldData.id } });
-                refetch();
+                // refetch();
                 resolve();
               }, 200);
             }),
