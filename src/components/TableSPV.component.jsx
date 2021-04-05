@@ -38,18 +38,18 @@ const TableSPV = ({ columnData }) => {
         },
       }}
         editable={{
-          onRowAdd: (newNewData) =>
-            new Promise((resolve, reject) => {
-              setTimeout(() => {
-                createUser({
-                  variables: {
-                    ...newNewData,
-                  },
-                });
-                // refetch();
-                resolve();
-              }, 200);
-            }),
+        //   onRowAdd: (newNewData) =>
+        //     new Promise((resolve, reject) => {
+        //       setTimeout(() => {
+        //         createUser({
+        //           variables: {
+        //             ...newNewData,
+        //           },
+        //         });
+        //         // refetch();
+        //         resolve();
+        //       }, 200);
+        //     }),
         //   onRowUpdate: (newNewData, oldData) =>
         //     new Promise((resolve, reject) => {
         //       setTimeout(() => {

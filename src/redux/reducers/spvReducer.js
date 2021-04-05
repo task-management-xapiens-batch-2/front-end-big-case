@@ -9,7 +9,7 @@ const initialState = {
     { title: "Full Name", field: "fullname" },
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
-    { title: "Password", field: "password" },
+    // { title: "Password", field: "password" },
     {
       title: "Role",
       field: "role",
