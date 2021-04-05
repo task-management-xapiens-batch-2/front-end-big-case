@@ -65,24 +65,18 @@ export const FIND_USER = gql`
   }
 `;
 
-export const GET_TASK_SUPERVISOR = gql`
-  query FindAllTaskSpv {
-    findAllTaskSpv {
+export const GET_PROJECT_SUPERVISOR = gql`
+  query FindAllProjectSupervisor {
+    findAllProjectSupervisor {
       id
-      project_id
       assignee
       title
       description
+      status
+      attachment
+      is_read
       start_date
       due_date
-      attachment
-      status
-      is_read
-      notes {
-        id
-        task_id
-        note
-      }
     }
   }
 `;

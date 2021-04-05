@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import NavigationBar from "../../../components/NavigationBar.component";
 import Jumbotron from "../../../components/Jumbotron.component";
-import TableSPV from "../../../components/TableSPV.component";
+import TableSPV from "../../../components/TableUserSPV.component";
 import ButtonBottomRight from "../../../components/ButtonBottomRight.component";
-import { Button, Modal } from "react-bootstrap";
+import TableProjectSPV from "../../../components/TableProjectSPV.component";
 
 const DashboardSPV = () => {
 
@@ -12,6 +12,7 @@ const DashboardSPV = () => {
       <NavigationBar />
       <Jumbotron notPlanner={true} />
       <TableSPV />
+      <TableProjectSPV />
       <ButtonBottomRight />
     </>
   );

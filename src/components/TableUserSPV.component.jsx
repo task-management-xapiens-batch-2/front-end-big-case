@@ -1,8 +1,7 @@
 import MaterialTable from "material-table";
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
-  CREATE_USER,
   DELETE_USER,
   UPDATE_USER,
   GET_USER_FROM_ADMIN,
@@ -34,6 +33,7 @@ const TableSPV = ({ columnData }) => {
         rowStyle: {
           backgroundColor: "#EEE",
         },
+        actionsColumnIndex: -1
       }}
         editable={{
         //   onRowUpdate: (newNewData, oldData) =>
@@ -62,7 +62,7 @@ const TableSPV = ({ columnData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    columnData: state.spv.columnData,
+    columnData: state.spv.columnDataUser,
   };
 };
 

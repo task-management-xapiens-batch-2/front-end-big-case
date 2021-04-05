@@ -3,14 +3,14 @@ import {
   SPV_DATA_REQUEST,
   SPV_CREATE_USER,
 } from "../actions/actionTypes";
+import moment from 'moment'
 
 const initialState = {
-  columnData: [
+  columnDataUser: [
     // { title: "No", field: "id" },
     { title: "Full Name", field: "fullname" },
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
-    // { title: "Password", field: "password" },
     {
       title: "Role",
       field: "role",
@@ -24,6 +24,18 @@ const initialState = {
     password: "",
     role: "",
   },
+  columnDataProject: [
+    // { title: "No", field: "id" },
+    { title: "Assignee", field: "assignee" },
+    { title: "Project Title", field: "title" },
+    { title: "Start Date", field: "start_date" },
+    { title: "Due Date", field: "due_date" },
+    {
+      title: "Status",
+      field: "status",
+      lookup: { submit: "submit", reject: "reject", done: "done" },
+    },
+  ],
 };
 
 const spvReducer = (state = initialState, action) => {
