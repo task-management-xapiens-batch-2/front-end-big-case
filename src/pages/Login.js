@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ postUserLogin }) => {
+const Login = ({ postUserLogin, email, password }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -61,7 +61,7 @@ const Login = ({ postUserLogin }) => {
           Sign in
         </Typography>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email, password }}
           validationSchema={formValidationSchema}
           onSubmit={({ email, password }) => {
             postUserLogin(email, password);
@@ -140,6 +140,13 @@ const Login = ({ postUserLogin }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    email: state.login.email,
+    password: state.login.password,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     postUserLogin: (email, password) =>
@@ -147,4 +154,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

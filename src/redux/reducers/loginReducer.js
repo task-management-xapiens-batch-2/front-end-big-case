@@ -4,7 +4,9 @@ const initialState = {
     errorMsg: "",
     role: localStorage.getItem("role"),
     fullname: localStorage.getItem("fullname"),
-    success: false
+    success: false,
+    email: "",
+    password: ""
 }
 
 const loginReducer = (state = initialState, action) => {

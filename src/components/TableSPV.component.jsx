@@ -14,8 +14,6 @@ const TableSPV = ({ columnData }) => {
     pollInterval: 100,
   });
 
-  const [createUser] = useMutation(CREATE_USER);
-
   const [updateUser] = useMutation(UPDATE_USER);
 
   const [deleteUser] = useMutation(DELETE_USER);
@@ -38,18 +36,6 @@ const TableSPV = ({ columnData }) => {
         },
       }}
         editable={{
-        //   onRowAdd: (newNewData) =>
-        //     new Promise((resolve, reject) => {
-        //       setTimeout(() => {
-        //         createUser({
-        //           variables: {
-        //             ...newNewData,
-        //           },
-        //         });
-        //         // refetch();
-        //         resolve();
-        //       }, 200);
-        //     }),
         //   onRowUpdate: (newNewData, oldData) =>
         //     new Promise((resolve, reject) => {
         //       setTimeout(() => {

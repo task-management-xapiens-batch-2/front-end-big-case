@@ -4,5 +4,5 @@ import spvReducer from './spvReducer'
 
 export default combiner({
     login: loginReducer,
-    spv: spvReducer
+    spv: spvReducer,
 })
