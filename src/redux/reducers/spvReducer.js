@@ -16,7 +16,6 @@ const initialState = {
       lookup: { worker: "worker", planner: "planner" },
     },
   ],
-  userData: []
 };
 
 const spvReducer = (state = initialState, action) => {
@@ -24,12 +23,7 @@ const spvReducer = (state = initialState, action) => {
   console.log(payload)
   switch (type) {
     case SPV_COLUMN_DATA:
-      return state;
     case SPV_DATA_REQUEST:
-        return {
-            ...state,
-            userData: payload
-        }
     default:
       return state;
   }

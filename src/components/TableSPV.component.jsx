@@ -22,7 +22,7 @@ const TableSPV = ({ columnData }) => {
 
   if (loading) return <div>Loading...</div>;
 
-  const plannerData = data.findAllUserAdmin.map((o) => ({ ...o }));
+  const plannerData = data.findAllUserSpv.map((o) => ({ ...o }));
   return (
     <MaterialTable
       columns={columnData}

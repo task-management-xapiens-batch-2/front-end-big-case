@@ -31,7 +31,7 @@ export const client = new ApolloClient({
 
 export const GET_USER_FROM_ADMIN = gql`
   query {
-    findAllUserAdmin {
+    findAllUserSpv {
       id
       fullname
       username
