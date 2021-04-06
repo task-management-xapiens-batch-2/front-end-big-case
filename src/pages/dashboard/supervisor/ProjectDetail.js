@@ -1,14 +1,15 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { GET_PROJECT_SUPERVISOR } from "../../../graphql/queries";
+import moment from "moment";
+import "moment/locale/id";
+moment.locale("id");
 
 const ProjectDetail = () => {
   const history = useHistory();
   const match = useRouteMatch();
-
-  console.log(match.params.id)
 
   const { error, data, loading } = useQuery(GET_PROJECT_SUPERVISOR);
   const [show, setShow] = useState(false);
@@ -43,8 +44,10 @@ const ProjectDetail = () => {
               </form>
             </Modal.Body>
             <Modal.Footer>
-              <Button title="Close" variant="secondary" onClick={handleClose} />
-              <Button title="Submit" />
+              <Button title="Close" variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button>Submit</Button>
             </Modal.Footer>
           </Modal>
         </>
@@ -52,47 +55,74 @@ const ProjectDetail = () => {
     }
   );
 
-  const filterData = data.findAllProjectSupervisor.filter((item) => item.id==match.params.id)
-
-  console.log(filterData)
+  const filterData = data.findAllProjectSupervisor.filter(
+    (item) => item.id == match.params.id
+  );
 
   const getTaskDetail = filterData.map(
-    ({ id, title, description, status, assignee, attachment, is_read, start_date, due_date }) => {
+    ({
+      id,
+      title,
+      description,
+      status,
+      assignee,
+      attachment,
+      is_read,
+      start_date,
+      due_date,
+    }) => {
       return (
-        <div key={id}>
-            <div className="">
+        <div key={id} className="my-5">
+          <Row>
+            <Col>
+              <p>Start Date: {moment.unix(start_date).format("Do MMMM")}</p>
+            </Col>
+            <Col>
+              <p>End Date: {moment.unix(due_date).format("Do MMMM")}</p>
+            </Col>
+            <Col>
+              <p className="text-capitalize">Worker Name: {assignee}</p>
+            </Col>
+            <Col>
+              <p className="text-capitalize">Planner Name: {assignee}</p>
+            </Col>
+            <Col>
+              <p className="text-capitalize">Status: {status}</p>
+            </Col>
+          </Row>
+          <div>
             <h1>{title}</h1>
             <p>{description}</p>
-            </div>
+            <p>
+              File Attachment: {" "}
+              {attachment ? <a href={attachment}>Link Attachment</a> : "None"}
+            </p>
+          </div>
           <div className="d-flex justify-content-end align-items-end my-3">
             <Button variant="warning" onClick={handleShow} className="mx-2">
               Return
             </Button>
-            <Button variant="danger" className="mx-2">Reject</Button>
+            <Button variant="danger" className="mx-2">
+              Reject
+            </Button>
             <Button className="mx-2">Approve</Button>
           </div>
         </div>
       );
     }
-  )
-//   console.log(match);
+  );
   return (
-    <div className="project-detail-section">
+    <div className="project-detail-section m-2">
       {modalNotes}
-      <h1>Detail Project</h1>
-      <button onClick={() => history.goBack()}>Back</button>
-      <div className="container-fluid mt-3">
-        <div className="row">
-          <div className="d-flex justify-content-center align-items-center mr-3">
-            Tanggal 21 Oktober 1931
-          </div>
-          <p className="worker-name mr-2 p-2">Worker Name</p>
-          <p className="worker-name ml-2 p-2">Planner Name</p>
-        </div>
-        {/* <ProgressBar totalTask={data.findTaskSPV.length} /> */}
-        <div className="col mt-3 sm-10">{getTaskDetail}</div>
-      </div>
-      {/* <h1>{match.params.id}</h1> */}
+      <Button variant="outline-primary" onClick={() => history.goBack()}>
+        Back
+      </Button>
+      <h1 className="text-center">Detail Project</h1>
+      <Row>
+        <Col lg={9} md={9} sm={9} xs={9} className="mx-auto">
+          {getTaskDetail}
+        </Col>
+      </Row>
     </div>
   );
 };

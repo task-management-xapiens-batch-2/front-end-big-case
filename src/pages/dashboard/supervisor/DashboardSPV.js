@@ -4,6 +4,7 @@ import Jumbotron from "../../../components/Jumbotron.component";
 import TableSPV from "../../../components/TableUserSPV.component";
 import ButtonBottomRight from "../../../components/ButtonBottomRight.component";
 import TableProjectSPV from "../../../components/TableProjectSPV.component";
+import TableTaskListSPV from "../../../components/TableTaskList.component";
 
 const DashboardSPV = () => {
 
@@ -13,6 +14,7 @@ const DashboardSPV = () => {
       <Jumbotron notPlanner={true} />
       <TableSPV />
       <TableProjectSPV />
+      <TableTaskListSPV />
       <ButtonBottomRight />
     </>
   );

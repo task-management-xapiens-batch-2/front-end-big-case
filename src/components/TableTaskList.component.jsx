@@ -3,9 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { GET_PROJECT_SUPERVISOR } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
-import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import {BiDetail} from 'react-icons/bi'
 
-const TableSPV = ({ columnData }) => {
+const TableTaskList = ({ columnData }) => {
   const history = useHistory();
   const { data, loading, refetch } = useQuery(GET_PROJECT_SUPERVISOR, {
     pollInterval: 100,
@@ -18,17 +20,7 @@ const TableSPV = ({ columnData }) => {
     <MaterialTable
       columns={columnData}
       data={plannerData}
-      title="Need Approval Project List"
-      actions={[
-        {
-          icon: "view_column",
-          tooltip: "View Detail",
-          onClick: (event, rowData) =>
-            history.push({
-              pathname: `/dashboard/supervisor/project-detail/${rowData.id}`,
-            }),
-        },
-      ]}
+      title="Project List"
       options={{
         headerStyle: {
           backgroundColor: "#0074d9",
@@ -47,8 +39,8 @@ const TableSPV = ({ columnData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    columnData: state.spv.columnDataProject,
+    columnData: state.spv.columnDataTask,
   };
 };
 
-export default connect(mapStateToProps, null)(TableSPV);
+export default connect(mapStateToProps, null)(TableTaskList);

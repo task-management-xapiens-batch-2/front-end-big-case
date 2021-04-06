@@ -41,6 +41,21 @@ const initialState = {
       field: "due_date",
       render: (rowData) => moment.unix(rowData.due_date).format("Do MMMM"),
     },
+  ],
+  columnDataTask: [
+    // { title: "No", field: "id" },
+    { title: "Assignee", field: "assignee" },
+    { title: "Task Title", field: "title" },
+    {
+      title: "Start Date",
+      field: "start_date",
+      render: (rowData) => moment.unix(rowData.start_date).format("Do MMMM"),
+    },
+    {
+      title: "Due Date",
+      field: "due_date",
+      render: (rowData) => moment.unix(rowData.due_date).format("Do MMMM"),
+    },
     {
       title: "Status",
       field: "status",

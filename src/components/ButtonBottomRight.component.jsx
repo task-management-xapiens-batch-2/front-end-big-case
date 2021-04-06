@@ -35,6 +35,7 @@ const ButtonBottomRight = ({ createNewUser }) => {
           bottom: "2.5rem",
           right: "1rem",
           fontSize: "2rem",
+          zIndex: "1000"
         }}
         onClick={handleShow}
       >
