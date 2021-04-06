@@ -10,7 +10,7 @@ import {
       description: "",
       start_date: "",
       due_date: "",
-      status: "submit"
+      status: "approve"
     },
   };
   
