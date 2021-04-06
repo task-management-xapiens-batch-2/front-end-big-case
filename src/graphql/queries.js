@@ -306,33 +306,33 @@ export const STATUS_TO_DRAFT = gql`
 
 export const CREATE_PROJECT_PLANNER = gql`
   mutation CreateProjectPlanner(
-    $assignee: Int
-    $title: String
-    $description: String
-    $status: String
-    $is_read: Boolean
-    $start_date: String
-    $due_date: String
+  $assignee: Int
+  $title: String
+  $description: String
+  $status: String
+  $is_read: Boolean
+  $start_date: String
+  $due_date: String
+) {
+  createProjectPlanner(
+    assignee: $assignee
+    title: $title
+    description: $description
+    status: $status
+    is_read: $is_read
+    start_date: $start_date
+    due_date: $due_date
   ) {
-    createProjectPlanner(
-      assignee: $assignee
-      title: $title
-      description: $description
-      status: $status
-      is_read: $is_read
-      start_date: $start_date
-      due_date: $due_date
-    ) {
-      assignee
-      title
-      description
-      status
-      attachment
-      is_read
-      start_date
-      due_date
-    }
+    assignee
+    title
+    description
+    status
+    attachment
+    is_read
+    start_date
+    due_date
   }
+}
 `;
 
 export const UPDATE_PROJECT = gql`

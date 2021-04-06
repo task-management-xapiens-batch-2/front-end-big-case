@@ -18,7 +18,7 @@ const TableSPV = ({ columnData }) => {
     <MaterialTable
       columns={columnData}
       data={plannerData}
-      title="Need Approval Project List"
+      title="Need Review First Project List"
       actions={[
         {
           icon: "view_column",

@@ -40,7 +40,7 @@ const initialState = {
       title: "Due Date",
       field: "due_date",
       render: (rowData) => moment.unix(rowData.due_date).format("Do MMMM"),
-    },
+    }, 
   ],
   columnDataTask: [
     // { title: "No", field: "id" },

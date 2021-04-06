@@ -46,6 +46,7 @@ const Homepage = ({ fullname, createNewProject }) => {
   const formik = useFormik({
     initialValues: createNewProject,
     onSubmit: (values) => {
+      console.log(values)
       createProjectPlanner({
         variables: {
           ...values,
@@ -84,7 +85,7 @@ const Homepage = ({ fullname, createNewProject }) => {
                   <Form.Control
                     type="text"
                     placeholder="Enter Description Project"
-                    name="username"
+                    name="description"
                     value={formik.values.description}
                     onChange={formik.handleChange}
                     style={{ height: "100px" }}

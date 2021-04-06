@@ -9,7 +9,8 @@ import {
       title: "",
       description: "",
       start_date: "",
-      due_date: ""
+      due_date: "",
+      status: "submit"
     },
   };
   
