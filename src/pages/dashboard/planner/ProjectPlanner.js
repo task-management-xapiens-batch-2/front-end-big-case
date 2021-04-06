@@ -43,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
               <TableCell>Edit</TableCell>
             </TableHead>
             {data
-              ? data.findAllProjectPlanner.map((d) => {
+              ? data.findAllProjectPlanner.map((item) => {
                   return (
-                    <TableBody key={d.id}>
-                      <TableCell>{d.id}</TableCell>
-                      <TableCell>{d.title}</TableCell>
-                      <TableCell>{d.description}</TableCell>
-                      <TableCell>{d.status}</TableCell>
+                    <TableBody key={item.id}>
+                      <TableCell>{item.id}</TableCell>
+                      <TableCell>{item.title}</TableCell>
+                      <TableCell>{item.description}</TableCell>
+                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <Button
                           variant="contained"

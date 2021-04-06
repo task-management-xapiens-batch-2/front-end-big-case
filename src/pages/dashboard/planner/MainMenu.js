@@ -14,9 +14,8 @@ import ProjectPlanner from "./ProjectPlanner";
 import { secondaryNavMenu, sideNavMenu } from "./SideNavbar";
 import { useHistory } from "react-router";
 import {useStyles} from './Style'
-import { Container } from "@material-ui/core";
+import { Container, Button } from "@material-ui/core";
 import { connect } from "react-redux";
-
 
 const Homepage = ({fullname}) => {
   const history = useHistory();
@@ -59,6 +58,14 @@ const Homepage = ({fullname}) => {
               <Paper className={fixedHeightPaper}>
                 <h1>Welcome {fullname}!</h1>
                 <p>Welcome to planner configuration. Here you can create a new project and submit it to supervisor.</p>
+                <Button
+                          variant="contained"
+                          color="primary"
+                          style={{width: "200px"}}
+                          //   onClick={() => deleteProject({ variables: { id: d.id } })}
+                        >
+                          Add a New Project
+                        </Button>
               </Paper>
             </Grid>
             {/* Recent Project */}
