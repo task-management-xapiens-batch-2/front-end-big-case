@@ -10,16 +10,16 @@ import { Link } from "react-router-dom";
 
 export const sideNavMenu = (
   <div>
-    <Link to="/app">
+    <Link to="/dashboard/planner">
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary="Main Menu" />
       </ListItem>
     </Link>
 
-    <Link to="/project">
+    <Link to="/dashboard/planner/project-list">
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />
@@ -35,29 +35,5 @@ export const sideNavMenu = (
         <ListItemText primary="Task" />
       </ListItem>
     </Link>
-  </div>
-);
-
-export const secondaryNavMenu = (
-  <div>
-    <ListSubheader inset>Menu kedua</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Menu" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Menu" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Menu" />
-    </ListItem>
   </div>
 );

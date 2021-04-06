@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { Button as ButtonBootstrap } from "react-bootstrap";
 import ProjectPlanner from "./ProjectPlanner";
-import { secondaryNavMenu, sideNavMenu } from "./SideNavbar";
+import { sideNavMenu } from "./SideNavbar";
 import { useHistory } from "react-router";
 import { useStyles } from "./Style";
 import { Container, Button } from "@material-ui/core";
@@ -28,12 +28,11 @@ const Homepage = ({ fullname, createNewProject }) => {
   const history = useHistory();
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  const [startDate, setStartDate] = useState(new Date());
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
-    setOpen(false);
+    setOpen(!open);
   };
 
   const [show, setShow] = useState(false);
@@ -159,11 +158,10 @@ const Homepage = ({ fullname, createNewProject }) => {
         <Divider />
         <List>{sideNavMenu}</List>
         <Divider />
-        <List>{secondaryNavMenu}</List>
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <div />
+        <Container maxWidth="lg" className={classes.container} className="p-0">
           <Grid container spacing={3}>
             {/* Jumbotron */}
             <Grid item xs={12} md={12} lg={12}>
