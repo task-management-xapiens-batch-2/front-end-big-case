@@ -27,13 +27,5 @@ export const sideNavMenu = (
         <ListItemText primary="Project" />
       </ListItem>
     </Link>
-    <Link to="/task">
-      <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Task" />
-      </ListItem>
-    </Link>
   </div>
 );

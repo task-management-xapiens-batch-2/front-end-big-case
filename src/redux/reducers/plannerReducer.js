@@ -8,7 +8,7 @@ const initialState = {
     description: "",
     start_date: "",
     due_date: "",
-    status: "submit",
+    status: "reject",
   },
 };
 
@@ -18,7 +18,7 @@ const plannerReducer = (state = initialState, action) => {
   switch (type) {
     case PLANNER_CREATE_PROJECT:
       return {
-        ...state.createNewProject,
+        ...state,
         createNewProject: payload,
       };
     default:

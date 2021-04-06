@@ -50,7 +50,17 @@ const ProjectPlanner = () => {
         <TableCell className="text-center">{item.id}</TableCell>
         <TableCell className="text-center">{item.title}</TableCell>
         <TableCell className="text-center">{item.description}</TableCell>
-        <TableCell className="text-center text-capitalize">{item.status}</TableCell>
+        <TableCell
+          className={`${
+            item.status === "submit"
+              ? "bg-warning text-white"
+              : item.status === "approve"
+              ? "bg-success text-white"
+              : "bg-danger text-white"
+          } text-center text-capitalize`}
+        >
+          {item.status}
+        </TableCell>
         <TableCell className="d-flex justify-content-center align-content-center">
           <Button
             variant="outlined"

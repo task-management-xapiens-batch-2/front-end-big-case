@@ -28,10 +28,8 @@ const Homepage = ({ fullname, createNewProject }) => {
   const history = useHistory();
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
+
+  const handleDrawer   = () => {
     setOpen(!open);
   };
 
@@ -151,7 +149,7 @@ const Homepage = ({ fullname, createNewProject }) => {
         open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawer }>
             <ChevronLeftIcon />
           </IconButton>
         </div>
