@@ -81,7 +81,6 @@ export const GET_PROJECT_SUPERVISOR = gql`
   }
 `;
 
-
 export const GET_PROJECT_PLANNER = gql`
   query FindAllProjectPlanner {
     findAllProjectPlanner {
@@ -305,14 +304,33 @@ export const STATUS_TO_DRAFT = gql`
   }
 `;
 
-export const CREATE_PROJECT = gql`
-  mutation CreateProject($title: String, $description: String) {
-    createProject(title: $title, description: $description) {
-      id
-      created_by
+export const CREATE_PROJECT_PLANNER = gql`
+  mutation CreateProjectPlanner(
+    $assignee: Int
+    $title: String
+    $description: String
+    $status: String
+    $is_read: Boolean
+    $start_date: String
+    $due_date: String
+  ) {
+    createProjectPlanner(
+      assignee: $assignee
+      title: $title
+      description: $description
+      status: $status
+      is_read: $is_read
+      start_date: $start_date
+      due_date: $due_date
+    ) {
+      assignee
       title
       description
-      is_complete
+      status
+      attachment
+      is_read
+      start_date
+      due_date
     }
   }
 `;

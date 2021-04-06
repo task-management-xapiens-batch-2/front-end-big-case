@@ -8,9 +8,6 @@ import {
       assignee: "",
       title: "",
       description: "",
-      status: "",
-      attachment: "",
-      is_read: "",
       start_date: "",
       due_date: ""
     },

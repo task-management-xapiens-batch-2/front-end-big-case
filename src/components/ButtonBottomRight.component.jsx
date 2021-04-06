@@ -43,7 +43,7 @@ const ButtonBottomRight = ({ createNewUser }) => {
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Insert a new user</Modal.Title>
+          <Modal.Title>Insert a New User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={formik.handleSubmit}>
