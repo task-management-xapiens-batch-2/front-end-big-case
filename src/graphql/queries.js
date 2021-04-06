@@ -81,6 +81,23 @@ export const GET_PROJECT_SUPERVISOR = gql`
   }
 `;
 
+
+export const GET_PROJECT_PLANNER = gql`
+  query FindAllProjectPlanner {
+    findAllProjectPlanner {
+      id
+      assignee
+      title
+      description
+      status
+      attachment
+      is_read
+      start_date
+      due_date
+    }
+  }
+`;
+
 export const GET_TASK_PLANNER = gql`
   query FindAllTaskPlanner {
     findAllTaskPlanner {

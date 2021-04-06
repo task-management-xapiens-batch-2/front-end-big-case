@@ -10,16 +10,12 @@ const Dashboard = ({role}) => {
   }, []);
 
   const getUserData = () => {
-    // window.location.reload()
     switch (role) {
-      case "admin": 
-        history.push("/dashboard/supervisor/");
+      case "supervisor":
+        history.push("/dashboard/supervisor");
         break;
       case "planner":
         history.push("/dashboard/planner");
-        break;
-      case "supervisor":
-        history.push("/dashboard/supervisor");
         break;
       default:
         return role;

@@ -2,13 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-const JumbotronComponent = ({ notPlanner, fullname }) => {
+const JumbotronComponent = ({ notPlanner, fullname, description }) => {
   return (
     <div className="jumbotron">
       <h1 className="display-4 text-capitalize">Hi, {fullname}! </h1>
       <p className="lead">
-        Welcome to user panel for planner and worker. Here you can create, edit,
-        and delete planner and worker.
+        {description}
       </p>
       <p className="lead">
         {notPlanner ? (

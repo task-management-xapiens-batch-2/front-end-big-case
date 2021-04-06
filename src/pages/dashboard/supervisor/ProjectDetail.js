@@ -56,7 +56,7 @@ const ProjectDetail = () => {
   );
 
   const filterData = data.findAllProjectSupervisor.filter(
-    (item) => item.id == match.params.id
+    (item) => item.id === match.params.id
   );
 
   const getTaskDetail = filterData.map(

@@ -11,7 +11,7 @@ const DashboardSPV = () => {
   return (
     <>
       <NavigationBar />
-      <Jumbotron notPlanner={true} />
+      <Jumbotron notPlanner={true} description={"Welcome to user panel for planner and worker. Here you can create, edit, and delete planner and worker."}/>
       <TableSPV />
       <TableProjectSPV />
       <TableTaskListSPV />
