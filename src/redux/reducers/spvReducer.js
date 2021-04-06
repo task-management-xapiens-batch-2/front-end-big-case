@@ -4,14 +4,16 @@ import {
   SPV_CREATE_USER,
 } from "../actions/actionTypes";
 import moment from "moment";
-import 'moment/locale/id'
-moment.locale('id')
+import "moment/locale/id";
+moment.locale("id");
 
 const initialState = {
-    
   columnDataUser: [
     // { title: "No", field: "id" },
-    { title: "Full Name", field: "fullname" },
+    {
+      title: "Full Name",
+      field: "fullname",
+    },
     { title: "Username", field: "username" },
     { title: "Email Address", field: "email" },
     {
@@ -40,7 +42,7 @@ const initialState = {
       title: "Due Date",
       field: "due_date",
       render: (rowData) => moment.unix(rowData.due_date).format("Do MMMM"),
-    }, 
+    },
   ],
   columnDataTask: [
     // { title: "No", field: "id" },

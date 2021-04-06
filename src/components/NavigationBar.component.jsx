@@ -26,6 +26,15 @@ const NavigationBar = ({logout}) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
+          <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor">
+            Main Menu
+          </Nav.Link>
+          <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor/project-detail">
+            Pending Project
+          </Nav.Link>
+          <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor/project-list">
+            Project List
+          </Nav.Link>
           <Button
             className="mr-sm-2 rounded-circle"
             variant="outline-primary"

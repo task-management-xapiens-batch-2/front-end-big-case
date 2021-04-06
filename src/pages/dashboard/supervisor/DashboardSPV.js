@@ -1,21 +1,35 @@
 import React from "react";
 import NavigationBar from "../../../components/NavigationBar.component";
-import Jumbotron from "../../../components/Jumbotron.component";
-import TableSPV from "../../../components/TableUserSPV.component";
-import ButtonBottomRight from "../../../components/ButtonBottomRight.component";
-import TableProjectSPV from "../../../components/TableProjectSPV.component";
-import TableTaskListSPV from "../../../components/TableTaskList.component";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PendingProject from "./PendingProject";
+import ProjectList from "./ProjectList";
+import ProjectDetail from "./ProjectDetail";
+import MainMenu from './MainMenu';
 
 const DashboardSPV = () => {
-
   return (
     <>
-      <NavigationBar />
-      <Jumbotron notPlanner={true} description={"Welcome to user panel for planner and worker. Here you can create, edit, and delete planner and worker."}/>
-      <TableSPV />
-      <TableProjectSPV />
-      <TableTaskListSPV />
-      <ButtonBottomRight />
+      <Router>
+        <NavigationBar />
+        <Switch>
+          <Route exact path="/dashboard/supervisor/" component={MainMenu} />
+          <Route
+            exact
+            path="/dashboard/supervisor/project-list"
+            component={ProjectList}
+          />
+          <Route
+            exact
+            path="/dashboard/supervisor/project-detail"
+            component={PendingProject}
+          />
+          <Route
+            exact
+            path="/dashboard/supervisor/project-detail/:id"
+            component={ProjectDetail}
+          />
+        </Switch>
+      </Router>
     </>
   );
 };

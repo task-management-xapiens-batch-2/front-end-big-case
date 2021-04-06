@@ -25,9 +25,17 @@ const TableTaskList = ({ columnData }) => {
         headerStyle: {
           backgroundColor: "#0074d9",
           color: "#FFF",
+          width: 150,
+          minWidth: 150,
+          textAlign: "center"
         },
         rowStyle: {
           backgroundColor: "#EEE",
+          textAlign: "center",
+        },
+        cellStyle: {
+          width: 150,
+          minWidth: 150,
         },
         filtering: true,
         actionsColumnIndex: -1,

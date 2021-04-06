@@ -6,22 +6,18 @@ import Dashboard from './dashboard/Index'
 import DashboardSPV from './dashboard/supervisor/DashboardSPV'
 import DashboardPlanner from './dashboard/planner/DashboardPlanner'
 import {Provider} from 'react-redux'
-import ProjectDetail from "./dashboard/supervisor/ProjectDetail";
 
 const TaskManagement = () => {
   return (
     <Provider store={store}>
-    <div>
       <Router>
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/supervisor" component={DashboardSPV} />
-            <Route exact path="/dashboard/supervisor/project-detail/:id" component={ProjectDetail}/>
             <Route exact path="/dashboard/planner" component={DashboardPlanner} />
           </Switch>
       </Router>
-    </div>
     </Provider>
   );
 };

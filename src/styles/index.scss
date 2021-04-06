@@ -94,6 +94,18 @@ li {
   }
 }
 
+.MuiTableHead-root .MuiTableRow-root .MuiTableCell-head {
+  font-weight: bold;
+  resize: horizontal;
+  overflow-x: overlay;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+.MuiButtonBase-root {
+  margin: 0 auto !important;
+}
+
 @keyframes stroke {
   100% {
     stroke-dashoffset: 0;

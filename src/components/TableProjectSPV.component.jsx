@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { GET_PROJECT_SUPERVISOR } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const TableSPV = ({ columnData }) => {
   const history = useHistory();
@@ -21,8 +22,6 @@ const TableSPV = ({ columnData }) => {
       title="Need Review First Project List"
       actions={[
         {
-          icon: "view_column",
-          tooltip: "View Detail",
           onClick: (event, rowData) =>
             history.push({
               pathname: `/dashboard/supervisor/project-detail/${rowData.id}`,
@@ -33,13 +32,34 @@ const TableSPV = ({ columnData }) => {
         headerStyle: {
           backgroundColor: "#0074d9",
           color: "#FFF",
+          width: 150,
+          minWidth: 150,
+          textAlign: "center"
         },
         rowStyle: {
           backgroundColor: "#EEE",
+          textAlign: "center",
+        },
+        cellStyle: {
+          width: 150,
+          minWidth: 150,
         },
         filtering: true,
         actionsColumnIndex: -1,
         search: false,
+      }}
+      components={{
+        Action: props => (
+          <Button
+            onClick={(event) => props.action.onClick(event, props.data)}
+            variant="primary"
+            className="mx-auto"
+            style={{textTransform: 'none'}}
+            size="small"
+          >
+            View Detail
+          </Button>
+        ),
       }}
     />
   );

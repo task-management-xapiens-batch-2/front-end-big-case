@@ -29,11 +29,21 @@ const TableSPV = ({ columnData }) => {
         headerStyle: {
           backgroundColor: "#0074d9",
           color: "#FFF",
+          width: 150,
+          minWidth: 150,
+          textAlign: "center"
         },
         rowStyle: {
           backgroundColor: "#EEE",
+          textAlign: "center",
         },
-        actionsColumnIndex: -1
+        cellStyle: {
+          width: 150,
+          minWidth: 150,
+        },
+        filtering: true,
+        actionsColumnIndex: -1,
+        search: false,
       }}
         editable={{
         //   onRowUpdate: (newNewData, oldData) =>

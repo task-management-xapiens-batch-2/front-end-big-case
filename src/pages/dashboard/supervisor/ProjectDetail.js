@@ -99,7 +99,7 @@ const ProjectDetail = () => {
             </p>
           </div>
           <div className="d-flex justify-content-end align-items-end my-3">
-            <Button variant="warning" onClick={handleShow} className="mx-2">
+            <Button variant="warning" onClick={handleShow} className="mx-2 text-white">
               Return
             </Button>
             <Button variant="danger" className="mx-2">
@@ -114,7 +114,7 @@ const ProjectDetail = () => {
   return (
     <div className="project-detail-section m-2">
       {modalNotes}
-      <Button variant="outline-primary" onClick={() => history.goBack()}>
+      <Button variant="outline-primary" onClick={() => history.push('/dashboard/supervisor/project-detail')}>
         Back
       </Button>
       <h1 className="text-center">Detail Project</h1>
