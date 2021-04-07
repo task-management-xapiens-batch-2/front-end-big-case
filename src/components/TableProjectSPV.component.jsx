@@ -14,7 +14,10 @@ const TableSPV = ({ columnData }) => {
 
   if (loading) return <div>Loading...</div>;
 
-  const plannerData = data.findAllProjectSupervisor.map((o) => ({ ...o }));
+  const plannerData = data.findAllProjectSupervisor
+    .slice()
+    .sort(({ id: previousID }, { id: currentID }) => previousID - currentID)
+    .map((o) => ({ ...o }));
   return (
     <MaterialTable
       columns={columnData}
@@ -47,6 +50,7 @@ const TableSPV = ({ columnData }) => {
         filtering: true,
         actionsColumnIndex: -1,
         search: false,
+        sorting: true
       }}
       components={{
         Action: props => (

@@ -20,7 +20,12 @@ const ProjectDetail = () => {
   if (loading) return "Loading...";
   if (error) return "Error bos...";
 
-  const modalNotes = data.findAllProjectSupervisor.map(
+
+  const filterData = data.findAllProjectSupervisor.filter(
+    (item) => item.id == match.params.id
+  );
+
+  const modalNotes = filterData.map(
     ({ id, title, description }) => {
       return (
         <>
@@ -53,10 +58,6 @@ const ProjectDetail = () => {
         </>
       );
     }
-  );
-
-  const filterData = data.findAllProjectSupervisor.filter(
-    (item) => item.id == match.params.id
   );
 
   const getTaskDetail = filterData.map(
