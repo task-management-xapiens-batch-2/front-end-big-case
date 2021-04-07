@@ -40,7 +40,9 @@ const ProjectDetail = ({ createNewTask }) => {
   });
 
   const { error: taskError, data: taskData, loading: taskLoading } = useQuery(
-    GET_TASK_PLANNER
+    GET_TASK_PLANNER, {
+      pollInterval: 100
+    }
   );
 
   const {
