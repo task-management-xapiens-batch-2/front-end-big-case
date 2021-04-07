@@ -8,6 +8,7 @@ import {
   FormControl,
   InputGroup,
   Modal,
+  ProgressBar,
   Row,
 } from "react-bootstrap";
 import { useHistory, useRouteMatch } from "react-router-dom";
@@ -29,19 +30,20 @@ const ProjectDetail = ({ createNewTask }) => {
   const formik = useFormik({
     initialValues: createNewTask,
     onSubmit: (values) => {
-      console.log(values)
+      console.log(values);
       createTask({
         variables: {
           ...values,
-          project_id: parseInt(values.project_id)
+          project_id: parseInt(values.project_id),
         },
       });
     },
   });
 
   const { error: taskError, data: taskData, loading: taskLoading } = useQuery(
-    GET_TASK_PLANNER, {
-      pollInterval: 100
+    GET_TASK_PLANNER,
+    {
+      pollInterval: 100,
     }
   );
 
@@ -74,25 +76,43 @@ const ProjectDetail = ({ createNewTask }) => {
 
   const getTaskDetail = filterTaskData
     .sort(({ id: previousID }, { id: currentID }) => previousID - currentID)
-    .map(({ id, task }, key) => {
+    .map(({ id, task, is_check }, key) => {
       return (
         <div key={key}>
           <p className="text-capitalize">
-            {id}. {task}
+            {id}. {is_check == "true" ? <del>{task}</del> : task}
           </p>
         </div>
       );
     });
 
-  const getTaskID = taskData.findAllTaskPlanner.map(
-    ({ id, project_id }, key) => {
+  const getProgressData = filterTaskData.length;
+
+  // const removeDuplicate = (data) => data.filter((value, index) => data.indexOf(value) === index);
+
+  // removeDuplicate(taskData.findAllTaskPlanner)
+
+  console.log(getProgressData);
+
+  const getProjectId = projectData.findAllProjectPlanner
+    .slice()
+    .sort(({ id: previousID }, { id: currentID }) => previousID - currentID)
+    .map(({ id }, key) => {
       return (
         <>
-          <option value={project_id} key={key}>{project_id}</option>
+          <option value={id} key={key}>
+            {id}
+          </option>
         </>
       );
-    }
-  );
+    });
+
+  const isChecked = filterTaskData.filter(({ is_check }) => is_check == "true")
+    .length;
+
+  const now = Math.floor((isChecked / filterTaskData.length) * 100);
+
+  const progressInstance = <ProgressBar now={now} label={`${now}%`} />;
 
   return (
     <div className="project-detail-section m-2">
@@ -110,7 +130,10 @@ const ProjectDetail = ({ createNewTask }) => {
             {filterProjectData[0].description}
           </div>
           <div>
-            <h5 className="font-weight-bold">Task List:</h5>
+            <h5 className="font-weight-bold my-3">Task Progress:</h5>
+            {progressInstance}
+
+            <h5 className="font-weight-bold my-3">Task List:</h5>
             {getTaskDetail}
           </div>
           <form onSubmit={formik.handleSubmit}>
@@ -124,7 +147,7 @@ const ProjectDetail = ({ createNewTask }) => {
                     onChange={formik.handleChange}
                     custom
                   >
-                    {getTaskID}
+                    {getProjectId}
                   </Form.Control>
                 </InputGroup.Append>
                 <Form.Control

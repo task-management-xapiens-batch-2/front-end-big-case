@@ -43,41 +43,45 @@ const ProjectPlanner = () => {
 
   if (error) return <div>Error...</div>;
 
-  const getAllProjectPlanner = data.findAllProjectPlanner.map((item, key) => {
-    console.log(item);
-    return (
-      <TableBody key={key}>
-        <TableCell className="text-center">{item.id}</TableCell>
-        <TableCell className="text-center">{item.title}</TableCell>
-        <TableCell className="text-center">{item.description}</TableCell>
-        <TableCell
-          className={`${
-            item.status === "submit"
-              ? "bg-warning text-white"
-              : item.status === "approve"
-              ? "bg-success text-white"
-              : "bg-danger text-white"
-          } text-center text-capitalize`}
-        >
-          {item.status}
-        </TableCell>
-        <TableCell className="d-flex justify-content-center align-content-center">
-          <Button
-            variant="outlined"
-            color="primary"
-            className={`${item.status === "reject" ? "d-none" : ""}`}
-            onClick={() =>
-              history.push({
-                pathname: `/dashboard/planner/project-detail/${item.id}`,
-              })
-            }
+  // const sortByID = data.findAllProjectPlanner.sort(({id: previousID}, {id: currentID}) => previousID - currentID)
+
+  const getAllProjectPlanner = data.findAllProjectPlanner
+    .slice()
+    .sort(({ id: previousID }, { id: currentID }) => previousID - currentID)
+    .map(({ id, title, description, status }, key) => {
+      return (
+        <TableBody key={key}>
+          <TableCell className="text-center">{id}</TableCell>
+          <TableCell className="text-center">{title}</TableCell>
+          <TableCell className="text-center">{description}</TableCell>
+          <TableCell
+            className={`${
+              status === "submit"
+                ? "bg-warning text-white"
+                : status === "approve"
+                ? "bg-success text-white"
+                : "bg-danger text-white"
+            } text-center text-capitalize`}
           >
-            Add New Task
-          </Button>
-        </TableCell>
-      </TableBody>
-    );
-  });
+            {status}
+          </TableCell>
+          <TableCell className="d-flex justify-content-center align-content-center">
+            <Button
+              variant="outlined"
+              color="primary"
+              className={`${status === "reject" ? "d-none" : ""}`}
+              onClick={() =>
+                history.push({
+                  pathname: `/dashboard/planner/project-detail/${id}`,
+                })
+              }
+            >
+              Add New Task
+            </Button>
+          </TableCell>
+        </TableBody>
+      );
+    });
   return (
     <Paper className={classes.paper}>
       <Typography variant="h6" component="h3">
