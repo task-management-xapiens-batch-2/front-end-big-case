@@ -11,7 +11,7 @@ const initialState = {
     description: "",
     start_date: "",
     due_date: "",
-    status: "approve",
+    status: "submit",
   },
   createNewTask: {
     project_id: "",

@@ -267,9 +267,9 @@ export const UPDATE_TASK = gql`
   }
 `;
 
-export const UPDATE_APPROVAL = gql`
-  mutation UpdateApproval($id: Int, $status: String) {
-    updateApproval(id: $id, status: $status) {
+export const UPDATE_STATUS_PROJECT_SUPERVISOR = gql`
+  mutation UpdateStatusProjectSupervisor($id: Int, $status: String) {
+    updateStatusProjectSupervisor(id: $id, status: $status) {
       id
       status
     }

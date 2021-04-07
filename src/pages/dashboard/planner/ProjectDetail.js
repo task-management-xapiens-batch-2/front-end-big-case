@@ -75,12 +75,13 @@ const ProjectDetail = ({ createNewTask }) => {
   );
 
   const getTaskDetail = filterTaskData
+    .slice()
     .sort(({ id: previousID }, { id: currentID }) => previousID - currentID)
     .map(({ id, task, is_check }, key) => {
       return (
         <div key={key}>
           <p className="text-capitalize">
-            {id}. {is_check == "true" ? <del>{task}</del> : task}
+            {key + 1}. {is_check == "true" ? <del>{task}</del> : task}
           </p>
         </div>
       );
@@ -88,16 +89,13 @@ const ProjectDetail = ({ createNewTask }) => {
 
   const getProgressData = filterTaskData.length;
 
-  // const removeDuplicate = (data) => data.filter((value, index) => data.indexOf(value) === index);
-
-  // removeDuplicate(taskData.findAllTaskPlanner)
-
   console.log(getProgressData);
 
   const getProjectId = projectData.findAllProjectPlanner
     .slice()
     .sort(({ id: previousID }, { id: currentID }) => previousID - currentID)
     .map(({ id }, key) => {
+      console.log(id)
       return (
         <>
           <option value={id} key={key}>
@@ -107,8 +105,7 @@ const ProjectDetail = ({ createNewTask }) => {
       );
     });
 
-  const isChecked = filterTaskData.filter(({ is_check }) => is_check == "true")
-    .length;
+  const isChecked = filterTaskData.filter(({ is_check }) => is_check == "true").length;
 
   const now = Math.floor((isChecked / filterTaskData.length) * 100);
 

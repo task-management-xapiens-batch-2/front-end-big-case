@@ -2,6 +2,7 @@ import {
   SPV_COLUMN_DATA,
   SPV_DATA_REQUEST,
   SPV_CREATE_USER,
+  SPV_UPDATE_STATUS
 } from "../actions/actionTypes";
 import moment from "moment";
 import "moment/locale/id";
@@ -28,6 +29,9 @@ const initialState = {
     email: "",
     password: "",
     role: "",
+  },
+  updateStatusProject: {
+
   },
   columnDataProject: [
     // { title: "No", field: "id" },
