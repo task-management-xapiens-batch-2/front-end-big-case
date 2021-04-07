@@ -88,8 +88,8 @@ const ProjectDetail = () => {
               aria-describedby="basic-addon2"
             />
             <InputGroup.Append>
-              <Button variant="outline-secondary">
-                <AiOutlinePlus />
+              <Button variant="primary">
+                <AiOutlinePlus style={{color: "white"}}/>
               </Button>
             </InputGroup.Append>
           </InputGroup>
