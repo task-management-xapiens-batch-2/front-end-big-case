@@ -8,6 +8,8 @@ const ProjectDetail = () => {
   const history = useHistory();
   const match = useRouteMatch();
 
+  console.log(match.params.id)
+
   const { error, data, loading } = useQuery(GET_TASK_PLANNER);
   const [show, setShow] = useState(false);
 
@@ -17,56 +19,21 @@ const ProjectDetail = () => {
   if (loading) return "Loading...";
   if (error) return "Error bos...";
 
-  // const filterData = data.findAllTaskPlanner.filter(
-  //   (item) => item.id == match.params.id
-  // );
+  const filterData = data.findAllTaskPlanner.filter(
+    (item) => item.project_id == match.params.id
+  );
 
-  // const getTaskDetail = filterData.map(
-  //   ({
-  //     id,
-  //     title,
-  //     description,
-  //     status,
-  //     assignee,
-  //     attachment,
-  //     is_read,
-  //     start_date,
-  //     due_date,
-  //   }) => {
-  //     return (
-  //       <div key={id} className="my-5">
-  //         <Row>
-  //           <Col>
-  //             <p className="text-capitalize">Worker Name: {assignee}</p>
-  //           </Col>
-  //           <Col>
-  //             <p className="text-capitalize">Planner Name: {assignee}</p>
-  //           </Col>
-  //           <Col>
-  //             <p className="text-capitalize">Status: {status}</p>
-  //           </Col>
-  //         </Row>
-  //         <div>
-  //           <h1>{title}</h1>
-  //           <p>{description}</p>
-  //           <p>
-  //             File Attachment: {" "}
-  //             {attachment ? <a href={attachment}>Link Attachment</a> : "None"}
-  //           </p>
-  //         </div>
-  //         <div className="d-flex justify-content-end align-items-end my-3">
-  //           <Button variant="warning" onClick={handleShow} className="mx-2 text-white">
-  //             Return
-  //           </Button>
-  //           <Button variant="danger" className="mx-2">
-  //             Reject
-  //           </Button>
-  //           <Button className="mx-2">Approve</Button>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // );
+  const getTaskDetail = filterData.map(({ id, project_id, task, is_check }, key) => {
+    return (
+      <div key={key} className="my-5">
+        <Row>
+          <Col>
+            <p className="text-capitalize">Task Name: {task}</p>
+          </Col>
+        </Row>
+      </div>
+    );
+  });
   return (
     <div className="project-detail-section m-2">
       <Button variant="outline-primary" onClick={() => history.push('/dashboard/planner/')}>
@@ -75,7 +42,7 @@ const ProjectDetail = () => {
       <h1 className="text-center">Detail Project</h1>
       <Row>
         <Col lg={9} md={9} sm={9} xs={9} className="mx-auto">
-          {/* {getTaskDetail} */}
+          {getTaskDetail}
         </Col>
       </Row>
     </div>
