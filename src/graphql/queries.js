@@ -344,27 +344,17 @@ export const DELETE_PROJECT = gql`
   }
 `;
 
-export const CREATE_TASK = gql`
-  mutation CreateTask(
+export const CREATE_TASK_PLANNER = gql`
+  mutation CreateTaskPlanner(
     $project_id: Int
-    $assignee: Int
-    $title: String
-    $description: String
-    $start_date: String
-    $due_date: String
+    $task: String
   ) {
-    createTask(
-      title: $title
-      description: $description
-      start_date: $start_date
-      due_date: $due_date
+    createTaskPlanner(
+      project_id: $project_id
+      task: $task
     ) {
       project_id
-      assignee
-      title
-      description
-      start_date
-      due_date
+      task
     }
   }
 `;

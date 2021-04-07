@@ -1,8 +1,10 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import {
   Button,
   Col,
+  Dropdown,
+  Form,
   FormControl,
   InputGroup,
   Modal,
@@ -10,26 +12,44 @@ import {
 } from "react-bootstrap";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import {
+  CREATE_TASK_PLANNER,
   GET_PROJECT_PLANNER,
   GET_TASK_PLANNER,
 } from "../../../graphql/queries";
 import { AiOutlinePlus } from "react-icons/ai";
+import { connect } from "react-redux";
+import { useFormik } from "formik";
 
-const ProjectDetail = () => {
+const ProjectDetail = ({ createNewTask }) => {
   const history = useHistory();
   const match = useRouteMatch();
 
   console.log(match.params.id);
 
+  const formik = useFormik({
+    initialValues: createNewTask,
+    onSubmit: (values) => {
+      console.log(values)
+      createTask({
+        variables: {
+          ...values,
+          project_id: parseInt(values.project_id)
+        },
+      });
+    },
+  });
+
   const { error: taskError, data: taskData, loading: taskLoading } = useQuery(
     GET_TASK_PLANNER
   );
 
-  const { error: projectError, data: projectData, loading: projectLoading } = useQuery(
-    GET_PROJECT_PLANNER
-  );
+  const {
+    error: projectError,
+    data: projectData,
+    loading: projectLoading,
+  } = useQuery(GET_PROJECT_PLANNER);
 
-  // const { error: {taskError}, data: {taskData}, loading: {taskLoading} } = useQuery(GET_TASK_PLANNER);
+  const [createTask] = useMutation(CREATE_TASK_PLANNER);
 
   const [show, setShow] = useState(false);
 
@@ -62,6 +82,16 @@ const ProjectDetail = () => {
       );
     });
 
+  const getTaskID = taskData.findAllTaskPlanner.map(
+    ({ id, project_id }, key) => {
+      return (
+        <>
+          <option value={project_id} key={key}>{project_id}</option>
+        </>
+      );
+    }
+  );
+
   return (
     <div className="project-detail-section m-2">
       <Button
@@ -81,22 +111,46 @@ const ProjectDetail = () => {
             <h5 className="font-weight-bold">Task List:</h5>
             {getTaskDetail}
           </div>
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Add a new task"
-              aria-label="Add a new task"
-              aria-describedby="basic-addon2"
-            />
-            <InputGroup.Append>
-              <Button variant="primary">
-                <AiOutlinePlus style={{color: "white"}}/>
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
+          <form onSubmit={formik.handleSubmit}>
+            <Form.Group>
+              <InputGroup className="mb-3">
+                <InputGroup.Append>
+                  <Form.Control
+                    as="select"
+                    name="project_id"
+                    value={formik.values.project_id}
+                    onChange={formik.handleChange}
+                    custom
+                  >
+                    {getTaskID}
+                  </Form.Control>
+                </InputGroup.Append>
+                <Form.Control
+                  placeholder="Add a new task"
+                  aria-label="Add a new task"
+                  aria-describedby="basic-addon2"
+                  name="task"
+                  value={formik.values.task}
+                  onChange={formik.handleChange}
+                />
+                <InputGroup.Append>
+                  <Button variant="primary" type="submit">
+                    <AiOutlinePlus style={{ color: "white" }} />
+                  </Button>
+                </InputGroup.Append>
+              </InputGroup>
+            </Form.Group>
+          </form>
         </Col>
       </Row>
     </div>
   );
 };
 
-export default ProjectDetail;
+const mapStateToProps = (state) => {
+  return {
+    createNewTask: state.planner.createNewTask,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProjectDetail);

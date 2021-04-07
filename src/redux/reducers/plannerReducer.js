@@ -1,4 +1,7 @@
-import { PLANNER_CREATE_PROJECT } from "../actions/actionTypes";
+import {
+  PLANNER_CREATE_PROJECT,
+  PLANNER_CREATE_TASK,
+} from "../actions/actionTypes";
 
 const initialState = {
   createNewProject: {
@@ -10,6 +13,10 @@ const initialState = {
     due_date: "",
     status: "submit",
   },
+  createNewTask: {
+    project_id: "",
+    task: "",
+  },
 };
 
 const plannerReducer = (state = initialState, action) => {
@@ -20,6 +27,11 @@ const plannerReducer = (state = initialState, action) => {
       return {
         ...state,
         createNewProject: payload,
+      };
+    case PLANNER_CREATE_TASK:
+      return {
+        ...state,
+        createNewTask: payload,
       };
     default:
       return state;
