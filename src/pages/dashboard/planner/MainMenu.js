@@ -163,16 +163,17 @@ const Homepage = ({ fullname, createNewProject }) => {
           <Grid container spacing={3}>
             {/* Jumbotron */}
             <Grid item xs={12} md={12} lg={12}>
-              <Paper className={fixedHeightPaper}>
-                <h1>Welcome {fullname}!</h1>
-                <p>
+              <Paper className={`${fixedHeightPaper} justify-content-center`}>
+                <h1 className="text-center">Welcome {fullname}!</h1>
+                <p className="text-center">
                   Welcome to planner configuration. Here you can create a new
                   project and submit it to supervisor.
                 </p>
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ width: "200px" }}
+                  style={{ width: "200px"}}
+                  className="d-flex justify-content-center align-content-start"
                   onClick={handleShow}
 
                   //   onClick={() => deleteProject({ variables: { id: d.id } })}

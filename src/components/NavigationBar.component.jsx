@@ -13,9 +13,9 @@ import { BsBell } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {logout} from '../redux/actions/loginAction'
+import { logout } from "../redux/actions/loginAction";
 
-const NavigationBar = ({logout}) => {
+const NavigationBar = ({ logout, notPlanner }) => {
   const history = useHistory();
   return (
     <div className="navbar-section">
@@ -26,15 +26,30 @@ const NavigationBar = ({logout}) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
-          <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor">
-            Main Menu
-          </Nav.Link>
-          <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor/project-detail">
-            Pending Project
-          </Nav.Link>
-          <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor/project-list">
-            Project List
-          </Nav.Link>
+          {!notPlanner ? (
+            <>
+              <Nav.Link className="mx-2" as={Link} to="/dashboard/supervisor">
+                Main Menu
+              </Nav.Link>
+              <Nav.Link
+                className="mx-2"
+                as={Link}
+                to="/dashboard/supervisor/project-detail"
+              >
+                Pending Project
+              </Nav.Link>
+              <Nav.Link
+                className="mx-2"
+                as={Link}
+                to="/dashboard/supervisor/project-list"
+              >
+                Project List
+              </Nav.Link>
+            </>
+          ) : (
+            ""
+          )}
+
           <Button
             className="mr-sm-2 rounded-circle"
             variant="outline-primary"
@@ -46,7 +61,7 @@ const NavigationBar = ({logout}) => {
             className="mr-sm-2 rounded-circle"
             variant="outline-danger"
             onClick={() => {
-              logout()
+              logout();
               history.push("/");
               window.location.reload();
             }}
@@ -59,5 +74,4 @@ const NavigationBar = ({logout}) => {
   );
 };
 
-
-export default connect(null, {logout})(NavigationBar);
+export default connect(null, { logout })(NavigationBar);

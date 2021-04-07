@@ -102,19 +102,8 @@ export const GET_TASK_PLANNER = gql`
     findAllTaskPlanner {
       id
       project_id
-      assignee
-      title
-      description
-      start_date
-      due_date
-      attachment
-      status
-      is_read
-      notes {
-        id
-        task_id
-        note
-      }
+      task
+      is_check
     }
   }
 `;

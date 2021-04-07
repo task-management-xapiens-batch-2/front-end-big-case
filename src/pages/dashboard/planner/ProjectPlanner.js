@@ -65,8 +65,12 @@ const ProjectPlanner = () => {
           <Button
             variant="outlined"
             color="primary"
-            // style={{ marginRight: 20 }}
-            //   onClick={() => history.push(`/detail-project/${d.id}`)}
+            className={`${item.status === "reject" ? "d-none" : ""}`}
+            onClick={() =>
+              history.push({
+                pathname: `/dashboard/planner/project-detail/${item.id}`,
+              })
+            }
           >
             Add New Task
           </Button>
