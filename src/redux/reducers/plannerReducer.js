@@ -8,7 +8,7 @@ const initialState = {
     description: "",
     start_date: "",
     due_date: "",
-    status: "reject",
+    status: "submit",
   },
 };
 
