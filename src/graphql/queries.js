@@ -1,53 +1,125 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { urlConfig } from "../configs/urlConfig";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  gql,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
+<<<<<<< HEAD
 const token = localStorage.getItem("token");
 
 export const client = new ApolloClient({
+=======
+export const httpLink = createHttpLink({
+>>>>>>> e058e1e3e42c38a27adbb19b4365ab7a5b2455a0
   uri: urlConfig,
+});
+
+export const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  // const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
   headers: {
     authorization: `Bearer ${token}`,
   },
 });
 
-export const GET_USER = gql`
+export const GET_USER_FROM_ADMIN = gql`
+  query {
+    findAllUser {
+      id
+      fullname
+      username
+      email
+      password
+      role
+    }
+  }
+`;
+
+export const GET_ALL_USER = gql`
   query {
     user {
       id
       fullname
       username
       email
+      password
       role
-      spv_id
     }
   }
 `;
 
-export const GET_TASK_SUPERVISOR = gql`
+export const FIND_USER = gql`
   query {
-    findTaskSPV {
+    findUser {
       id
-      project_id
-      title
+      fullname
+      role
+    }
+  }
+`;
+
+export const GET_PROJECT_SUPERVISOR = gql`
+  query FindAllProjectSupervisor {
+    findAllProjectSupervisor {
+      id
       assignee
+      title
       description
+      status
+      attachment
+      is_read
       start_date
       due_date
-      attachment
+    }
+  }
+`;
+
+export const GET_PROJECT_PLANNER = gql`
+  query FindAllProjectPlanner {
+    findAllProjectPlanner {
+      id
+      assignee
+      title
+      description
       status
-      notes {
-        id
-        task_id
-        note
-      }
+      attachment
+      is_read
+      start_date
+      due_date
     }
   }
 `;
 
 export const GET_TASK_PLANNER = gql`
-  query {
+  query FindAllTaskPlanner {
     findAllTaskPlanner {
+      id
+      project_id
+      task
+      is_check
+    }
+  }
+`;
+
+export const GET_TASK_WORKER = gql`
+  query FindAllTaskWorker {
+    findAllTaskWorker {
       id
       project_id
       assignee
@@ -57,7 +129,15 @@ export const GET_TASK_PLANNER = gql`
       due_date
       attachment
       is_read
+<<<<<<< HEAD
       status
+=======
+      note {
+        id
+        task_id
+        note
+      }
+>>>>>>> e058e1e3e42c38a27adbb19b4365ab7a5b2455a0
     }
   }
 `;
@@ -79,6 +159,231 @@ export const FIND_ONE_PROJECT = gql`
     findOneProjectById(id: 5) {
       title
       created_by
+    }
+  }
+`;
+
+export const CREATE_USER = gql`
+  mutation CreateUser(
+    $fullname: String!
+    $username: String!
+    $email: String!
+    $password: String!
+    $role: String!
+  ) {
+    createUser(
+      fullname: $fullname
+      username: $username
+      email: $email
+      password: $password
+      role: $role
+    ) {
+      fullname
+      username
+      email
+      password
+      role
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $id: Int
+    $fullname: String
+    $username: String
+    $email: String
+    $password: String
+    $role: String
+    $spv_id: Int
+  ) {
+    updateUser(
+      id: $id
+      fullname: $fullname
+      username: $username
+      email: $email
+      password: $password
+      role: $role
+      spv_id: $spv_id
+    ) {
+      id
+      fullname
+      username
+      email
+      password
+      role
+      spv_id
+    }
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: Int) {
+    deleteUser(id: $id) {
+      id
+    }
+  }
+`;
+
+export const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($id: Int, $password: String) {
+    updatePassword(id: $id, password: $password) {
+      id
+      password
+    }
+  }
+`;
+
+export const UPDATE_TASK_WORKER = gql`
+  mutation UpdateTaskWorker($id: Int, $status: String) {
+    updateTaskWorker(id: $id, status: $status) {
+      id
+      status
+    }
+  }
+`;
+
+export const CREATE_NOTE = gql`
+  mutation CreateNote($id: Int, $note: String) {
+    createNote(id: $id, note: $note) {
+      id
+      note
+    }
+  }
+`;
+
+export const UPDATE_TASK = gql`
+  mutation UpdateTask(
+    $id: Int
+    $project_id: Int
+    $assignee: Int
+    $title: String
+    $description: String
+    $start_date: String
+    $due_date: String
+    $attachment: String
+    $status: String
+  ) {
+    updateTask(
+      id: $id
+      project_id: $project_id
+      assignee: $assignee
+      title: $title
+      description: $description
+      start_date: $start_date
+      due_date: $due_date
+      attachment: $attachment
+      status: $status
+    ) {
+      id
+      project_id
+      assignee
+      title
+      description
+      start_date
+      due_date
+      attachment
+      status
+    }
+  }
+`;
+
+export const UPDATE_STATUS_PROJECT_SUPERVISOR = gql`
+  mutation UpdateStatusProjectSupervisor($id: Int, $status: String) {
+    updateStatusProjectSupervisor(id: $id, status: $status) {
+      id
+      status
+    }
+  }
+`;
+
+export const UPDATE_IS_READ = gql`
+  mutation UpdateIsRead($id: Int) {
+    updateIsRead(id: $id) {
+      id
+    }
+  }
+`;
+
+export const STATUS_TO_DRAFT = gql`
+  mutation StatusToDraft($id: Int, $status: String) {
+    statusToDraft(id: $id, status: $status) {
+      id
+      status
+    }
+  }
+`;
+
+export const CREATE_PROJECT_PLANNER = gql`
+  mutation CreateProjectPlanner(
+  $assignee: Int
+  $title: String
+  $description: String
+  $status: String
+  $is_read: Boolean
+  $start_date: String
+  $due_date: String
+) {
+  createProjectPlanner(
+    assignee: $assignee
+    title: $title
+    description: $description
+    status: $status
+    is_read: $is_read
+    start_date: $start_date
+    due_date: $due_date
+  ) {
+    assignee
+    title
+    description
+    status
+    attachment
+    is_read
+    start_date
+    due_date
+  }
+}
+`;
+
+export const UPDATE_PROJECT = gql`
+  mutation UpdateProject($title: String, $description: String) {
+    createProject(title: $title, description: $description) {
+      id
+      created_by
+      title
+      description
+      is_complete
+    }
+  }
+`;
+
+export const DELETE_PROJECT = gql`
+  mutation DeleteProject($id: Int) {
+    deleteProject(id: $id) {
+      id
+    }
+  }
+`;
+
+export const CREATE_TASK_PLANNER = gql`
+  mutation CreateTaskPlanner(
+    $project_id: Int
+    $task: String
+  ) {
+    createTaskPlanner(
+      project_id: $project_id
+      task: $task
+    ) {
+      project_id
+      task
+    }
+  }
+`;
+
+export const DELETE_TASK = gql`
+  mutation DeleteTask($project_id: Int) {
+    deleteTask(project_id: $project_id) {
+      project_id
     }
   }
 `;

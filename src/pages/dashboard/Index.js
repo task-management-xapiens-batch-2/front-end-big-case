@@ -1,69 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../graphql/queries";
+import {getUserLoginData} from '../../redux/actions/loginAction'
 
-// import ButtonComponent from "../components/Button.component";
-import DashboardAdmin from '../dashboard/admin/DashboardAdmin'
-import DashboardPlanner from '../dashboard/planner/DashboardPlanner'
-import DashboardSupervisor from '../dashboard/supervisor/DashboardSupervisor'
+const Dashboard = ({role}) => {
+  const history = useHistory()
+  useEffect(() => {
+    getUserData();
+  }, []);
 
-const Dashboard = () => {
-  const history = useHistory();
-
-  const { data, loading, error } = useQuery(GET_USER);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error dong hihihi</div>;
-
-  const getUserData = () =>
-  data.user.map(({ id, fullname, username, email, role, spv_id }) => {
-    let fakeRole = "supervisor"
-    switch (fakeRole) {
-      case "admin":
-        <DashboardAdmin
-          id={id}
-          fullname={fullname}
-          username={username}
-          email={email}
-          role={role}
-          idSpv={spv_id}
-        />;
-        history.push("/dashboard/admin");
+  const getUserData = () => {
+    switch (role) {
+      case "supervisor":
+        history.push("/dashboard/supervisor");
         break;
       case "planner":
-        <DashboardPlanner
-          id={id}
-          fullname={fullname}
-          username={username}
-          email={email}
-          role={role}
-          idSpv={spv_id}
-        />;
         history.push("/dashboard/planner");
-        break;
-      case "supervisor":
-        <DashboardSupervisor
-          id={id}
-          fullname={fullname}
-          username={username}
-          email={email}
-          role={role}
-          idSpv={spv_id}
-        />;
-        history.push("/dashboard/supervisor");
         break;
       default:
         return role;
     }
-  });
+  };
+  return getUserData
+};
 
-  getUserData()
-  return (
-    <div>
-      
-    </div>
-  )
+const mapStateToProps = state => {
+  return {
+    role: state.login.role
+  }
 }
 
-export default Dashboard
+export default connect(mapStateToProps, {getUserLoginData})(Dashboard);

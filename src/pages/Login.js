@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import * as Yup from "yup";
 import { Formik } from "formik";
+<<<<<<< HEAD
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -48,6 +49,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+=======
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { postUserLogin } from "../redux/actions/loginAction";
+
+const formValidationSchema = Yup.object({
+  email: Yup.string("Enter your email address")
+    .email("Enter a valid email address")
+    .required("Email address is required"),
+  password: Yup.string("")
+    .min(8, "Password atleast 8 characters")
+    .required("Enter your * password, canda password"),
+});
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+const Login = ({ postUserLogin, email, password }) => {
+>>>>>>> e058e1e3e42c38a27adbb19b4365ab7a5b2455a0
   const classes = useStyles();
   const history = useHistory();
 
@@ -62,6 +99,7 @@ const Login = () => {
           Sign in
         </Typography>
         <Formik
+<<<<<<< HEAD
           initialValues={{ username: "", password: "" }}
           validationSchema={formValidationSchema}
           onSubmit={async ({ email, password }) =>
@@ -77,6 +115,14 @@ const Login = () => {
               })
               .catch((err) => alert(err))
           }
+=======
+          initialValues={{ email, password }}
+          validationSchema={formValidationSchema}
+          onSubmit={({ email, password }) => {
+            postUserLogin(email, password);
+            history.push("./dashboard");
+          }}
+>>>>>>> e058e1e3e42c38a27adbb19b4365ab7a5b2455a0
           className={classes.form}
           noValidate
         >
@@ -150,4 +196,18 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    email: state.login.email,
+    password: state.login.password,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postUserLogin: (email, password) =>
+      dispatch(postUserLogin(email, password)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
